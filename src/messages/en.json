@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "title": "Quran Memorization School",
+    "description": "A simple and clean management system for Quran memorization schools"
+  },
+  "layout": {
+    "navigation": {
+      "home": "Home",
+      "students": "Students",
+      "schedule": "Schedule",
+      "teachers": "Teachers"
+    },
+    "footer": {
+      "copyright": "© 2024 Quran Memorization School. Built with ❤️ for Islamic education."
+    }
+  },
+  "homepage": {
+    "welcome": {
+      "title": "Welcome to Quran Memorization School",
+      "subtitle": "Manage your students, teachers, and schedules with ease"
+    },
+    "stats": {
+      "totalStudents": "Total Students",
+      "activeStudents": "Active Students",
+      "activeTeachers": "Active Teachers",
+      "graduated": "Graduated"
+    },
+    "sections": {
+      "recentStudents": "Recent Students",
+      "todaySchedule": "Today's Schedule",
+      "quickActions": "Quick Actions"
+    },
+    "studentCard": {
+      "verses": "verses",
+      "verse": "verse"
+    },
+    "scheduleCard": {
+      "students": "students",
+      "student": "student",
+      "noClasses": "No classes scheduled for today"
+    },
+    "actions": {
+      "viewAllStudents": "View All Students",
+      "viewFullSchedule": "View Full Schedule",
+      "addNewStudent": "Add New Student",
+      "manageStudents": "Manage Students",
+      "viewSchedule": "View Schedule"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive"
+  }
+}

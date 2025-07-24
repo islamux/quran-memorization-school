@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "title": "مدرسة حفظ القرآن الكريم",
+    "description": "نظام إدارة بسيط ونظيف لمدارس حفظ القرآن الكريم"
+  },
+  "layout": {
+    "navigation": {
+      "home": "الرئيسية",
+      "students": "الطلاب",
+      "schedule": "الجدول",
+      "teachers": "المعلمون"
+    },
+    "footer": {
+      "copyright": "© 2024 مدرسة حفظ القرآن الكريم. صُنع بـ ❤️ للتعليم الإسلامي."
+    }
+  },
+  "homepage": {
+    "welcome": {
+      "title": "مرحباً بكم في مدرسة حفظ القرآن الكريم",
+      "subtitle": "إدارة الطلاب والمعلمين والجداول بكل سهولة"
+    },
+    "stats": {
+      "totalStudents": "إجمالي الطلاب",
+      "activeStudents": "الطلاب النشطون",
+      "activeTeachers": "المعلمون النشطون",
+      "graduated": "المتخرجون"
+    },
+    "sections": {
+      "recentStudents": "الطلاب المضافون حديثاً",
+      "todaySchedule": "جدول اليوم",
+      "quickActions": "إجراءات سريعة"
+    },
+    "studentCard": {
+      "verses": "آيات",
+      "verse": "آية"
+    },
+    "scheduleCard": {
+      "students": "طلاب",
+      "student": "طالب",
+      "noClasses": "لا توجد حصص مجدولة لليوم"
+    },
+    "actions": {
+      "viewAllStudents": "عرض جميع الطلاب",
+      "viewFullSchedule": "عرض الجدول الكامل",
+      "addNewStudent": "إضافة طالب جديد",
+      "manageStudents": "إدارة الطلاب",
+      "viewSchedule": "عرض الجدول"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "search": "بحث",
+    "filter": "تصفية",
+    "actions": "الإجراءات",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط"
+  }
+}
