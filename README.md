@@ -1,6 +1,10 @@
 # Quran Memorization School Management System
 
+*Read this in other languages: [العربية](README.ar.md)*
+
 A simple, clean, and beginner-friendly web application for managing Quran memorization schools. Built with Next.js, TypeScript, and Tailwind CSS.
+
+**Repository**: [https://github.com/islamux/quran-memorization-school](https://github.com/islamux/quran-memorization-school)
 
 ## 🌟 Features
 
@@ -219,7 +223,7 @@ This project is designed to be beginner-friendly and open for contributions:
 
 ## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the [GNU General Public License v3.0](LICENSE).
 
 ## 🙏 Acknowledgments
 
