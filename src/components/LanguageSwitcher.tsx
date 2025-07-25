@@ -12,7 +12,7 @@ export default function LanguageSwitcher() {
   const handleChange = (newLocale: string) => {
     // Remove the current locale from the pathname
     const pathWithoutLocale = pathname.replace(`/${locale}`, '');
-    
+
     // Navigate to the new locale
     router.push(`/${newLocale}${pathWithoutLocale}`);
   };
@@ -23,7 +23,8 @@ export default function LanguageSwitcher() {
       <select
         value={locale}
         onChange={(e) => handleChange(e.target.value)}
-        className="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+
       >
         <option value="en">English</option>
         <option value="ar">العربية</option>

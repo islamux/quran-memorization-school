@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   const inputClasses = `
-    block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 
+    block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 text-gray-500
     focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500
     ${error ? 'border-red-300' : 'border-gray-300'}
     ${className}
@@ -23,7 +23,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="mb-4">
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-500 mb-1">
           {label}
         </label>
       )}
@@ -54,7 +54,7 @@ export const Select: React.FC<SelectProps> = ({
   ...props
 }) => {
   const selectClasses = `
-    block w-full px-3 py-2 border rounded-md shadow-sm 
+    block w-full px-3 py-2 border rounded-md shadow-sm text-gray-500
     focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500
     ${error ? 'border-red-300' : 'border-gray-300'}
     ${className}
@@ -98,7 +98,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   ...props
 }) => {
   const textareaClasses = `
-    block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 
+    block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 text-gray-500
     focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500
     ${error ? 'border-red-300' : 'border-gray-300'}
     ${className}

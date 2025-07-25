@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <h1 className="text-xl font-bold text-green-700">
-                  📖 Quran Memorization School
+                  📖 {t('header.title')}
                 </h1>
               </div>
             </div>

@@ -1,22 +1,56 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
-import { getStudents, getTeacherById, searchStudents, formatDate } from '@/utils/dataUtils';
+import { getTeacherById, formatDate } from '@/utils/dataUtils';
+import { fetchStudents } from '@/utils/apiUtils';
 import { Student } from '@/types';
 
 const StudentsPage: React.FC = () => {
+  const params = useParams();
+  const locale = params.locale as string;
+  const t = useTranslations();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [gradeFilter, setGradeFilter] = useState('all');
+  const [allStudents, setAllStudents] = useState<Student[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const allStudents = getStudents();
+  // جلب الطلاب من قاعدة البيانات
+  useEffect(() => {
+    const loadStudents = async () => {
+      setIsLoading(true);
+      try {
+        const students = await fetchStudents();
+        setAllStudents(students);
+      } catch (error) {
+        console.error('Error loading students:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadStudents();
+  }, []);
 
   const filteredStudents = useMemo(() => {
-    let students = searchQuery ? searchStudents(searchQuery) : allStudents;
+    let students = allStudents;
+
+    // البحث في الطلاب
+    if (searchQuery) {
+      const lowercaseQuery = searchQuery.toLowerCase();
+      students = students.filter(student => 
+        student.name.toLowerCase().includes(lowercaseQuery) ||
+        student.parentName.toLowerCase().includes(lowercaseQuery) ||
+        student.grade.toLowerCase().includes(lowercaseQuery) ||
+        student.currentSurah.toLowerCase().includes(lowercaseQuery)
+      );
+    }
 
     if (statusFilter !== 'all') {
       students = students.filter(student => student.status === statusFilter);
@@ -45,14 +79,14 @@ const StudentsPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Students</h1>
-          <p className="text-gray-600">Manage and track student progress</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('studentsPage.title')}</h1>
+          <p className="text-gray-600">{t('studentsPage.subtitle')}</p>
         </div>
         <div className="mt-4 sm:mt-0">
-          <Link href="/students/new">
+          <Link href={`/${locale}/students/add-student`}>
             <Button>
               <span className="mr-2">➕</span>
-              Add New Student
+              {t('studentsPage.addNewStudent')}
             </Button>
           </Link>
         </div>
@@ -63,7 +97,7 @@ const StudentsPage: React.FC = () => {
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Input
-              placeholder="Search students..."
+              placeholder={t('studentsPage.searchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -71,17 +105,17 @@ const StudentsPage: React.FC = () => {
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               options={[
-                { value: 'all', label: 'All Status' },
-                { value: 'active', label: 'Active' },
-                { value: 'inactive', label: 'Inactive' },
-                { value: 'graduated', label: 'Graduated' },
+                { value: 'all', label: t('studentsPage.allStatus') },
+                { value: 'active', label: t('common.active') },
+                { value: 'inactive', label: t('common.inactive') },
+                { value: 'graduated', label: t('common.graduated') },
               ]}
             />
             <Select
               value={gradeFilter}
               onChange={(e) => setGradeFilter(e.target.value)}
               options={[
-                { value: 'all', label: 'All Grades' },
+                { value: 'all', label: t('studentsPage.allGrades') },
                 ...uniqueGrades.map(grade => ({ value: grade, label: grade }))
               ]}
             />
@@ -92,12 +126,18 @@ const StudentsPage: React.FC = () => {
       {/* Results Summary */}
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-600">
-          Showing {filteredStudents.length} of {allStudents.length} students
+          {isLoading ? t('studentsPage.loadingStudents') : t('studentsPage.showingStudents', { current: filteredStudents.length, total: allStudents.length })}
         </p>
       </div>
 
       {/* Students Grid */}
-      {filteredStudents.length > 0 ? (
+      {isLoading ? (
+        <Card>
+          <CardContent className="p-12 text-center">
+            <p className="text-gray-600">{t('studentsPage.loadingStudents')}</p>
+          </CardContent>
+        </Card>
+      ) : filteredStudents.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredStudents.map((student) => {
             const teacher = getTeacherById(student.teacherId);
@@ -107,41 +147,41 @@ const StudentsPage: React.FC = () => {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900">{student.name}</h3>
-                      <p className="text-sm text-gray-600">{student.grade} • Age {student.age}</p>
+                      <p className="text-sm text-gray-600">{student.grade} • {t('studentsPage.studentCard.age')} {student.age}</p>
                     </div>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(student.status)}`}>
-                      {student.status}
+                      {t(`common.${student.status}`)}
                     </span>
                   </div>
 
                   <div className="space-y-2 mb-4">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Current Surah:</span>
+                      <span className="text-gray-600">{t('studentsPage.studentCard.currentSurah')}:</span>
                       <span className="font-medium">{student.currentSurah}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Verses Memorized:</span>
+                      <span className="text-gray-600">{t('studentsPage.studentCard.versesMemorized')}:</span>
                       <span className="font-medium text-green-600">{student.memorizedVerses}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Teacher:</span>
-                      <span className="font-medium">{teacher?.name || 'Not assigned'}</span>
+                      <span className="text-gray-600">{t('studentsPage.studentCard.teacher')}:</span>
+                      <span className="font-medium">{teacher?.name || t('studentsPage.studentCard.notAssigned')}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">Enrolled:</span>
+                      <span className="text-gray-600">{t('studentsPage.studentCard.enrolled')}:</span>
                       <span className="font-medium">{formatDate(student.enrollmentDate)}</span>
                     </div>
                   </div>
 
                   <div className="flex space-x-2">
-                    <Link href={`/students/${student.id}`} className="flex-1">
+                    <Link href={`/${locale}/students/${student.id}`} className="flex-1">
                       <Button variant="outline" size="sm" className="w-full">
-                        View Details
+                        {t('studentsPage.studentCard.viewDetails')}
                       </Button>
                     </Link>
-                    <Link href={`/students/${student.id}/edit`} className="flex-1">
+                    <Link href={`/${locale}/students/${student.id}/edit`} className="flex-1">
                       <Button size="sm" className="w-full">
-                        Edit
+                        {t('studentsPage.studentCard.edit')}
                       </Button>
                     </Link>
                   </div>
@@ -154,16 +194,16 @@ const StudentsPage: React.FC = () => {
         <Card>
           <CardContent className="p-12 text-center">
             <span className="text-6xl mb-4 block">👥</span>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No students found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('studentsPage.noStudentsFound')}</h3>
             <p className="text-gray-600 mb-6">
               {searchQuery || statusFilter !== 'all' || gradeFilter !== 'all'
-                ? 'Try adjusting your search criteria'
-                : 'Get started by adding your first student'
+                ? t('studentsPage.adjustSearchCriteria')
+                : t('studentsPage.getStartedMessage')
               }
             </p>
             {!searchQuery && statusFilter === 'all' && gradeFilter === 'all' && (
-              <Link href="/students/new">
-                <Button>Add First Student</Button>
+              <Link href={`/${locale}/students/add-student`}>
+                <Button>{t('studentsPage.addFirstStudent')}</Button>
               </Link>
             )}
           </CardContent>

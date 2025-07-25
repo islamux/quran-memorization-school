@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -8,6 +9,9 @@ import { getTeachers, getStudentsByTeacher, getScheduleByTeacher } from '@/utils
 import { Teacher } from '@/types';
 
 const TeachersPage: React.FC = () => {
+  const t = useTranslations('teachersPage');
+  const tCommon = useTranslations('common');
+  const locale = useLocale();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
 
@@ -41,13 +45,13 @@ const TeachersPage: React.FC = () => {
               <p className="text-sm text-gray-600">{teacher.phone}</p>
             </div>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(teacher.status)}`}>
-              {teacher.status}
+              {tCommon(teacher.status)}
             </span>
           </div>
 
           <div className="space-y-3 mb-4">
             <div>
-              <p className="text-sm font-medium text-gray-700 mb-1">Specializations:</p>
+              <p className="text-sm font-medium text-gray-700 mb-1">{t('teacherCard.specializations')}:</p>
               <div className="flex flex-wrap gap-1">
                 {teacher.specialization.map((spec, index) => (
                   <span
@@ -62,24 +66,24 @@ const TeachersPage: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-600">Experience:</p>
-                <p className="font-medium">{teacher.experience} years</p>
+                <p className="text-gray-600">{t('teacherCard.experience')}:</p>
+                <p className="font-medium">{teacher.experience} {teacher.experience === 1 ? t('teacherCard.year') : t('teacherCard.years')}</p>
               </div>
               <div>
-                <p className="text-gray-600">Students:</p>
-                <p className="font-medium">{students.length} assigned</p>
+                <p className="text-gray-600">{t('teacherCard.students')}:</p>
+                <p className="font-medium">{students.length} {t('teacherCard.assigned')}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <p className="text-gray-600">Classes:</p>
-                <p className="font-medium">{schedule.length} per week</p>
+                <p className="text-gray-600">{t('teacherCard.classes')}:</p>
+                <p className="font-medium">{schedule.length} {t('teacherCard.perWeek')}</p>
               </div>
               <div>
-                <p className="text-gray-600">Load:</p>
+                <p className="text-gray-600">{t('teacherCard.load')}:</p>
                 <p className="font-medium">
-                  {students.length < 5 ? 'Light' : students.length < 10 ? 'Moderate' : 'Heavy'}
+                  {students.length < 5 ? t('teacherCard.light') : students.length < 10 ? t('teacherCard.moderate') : t('teacherCard.heavy')}
                 </p>
               </div>
             </div>
@@ -92,10 +96,10 @@ const TeachersPage: React.FC = () => {
               className="flex-1"
               onClick={() => setSelectedTeacher(teacher)}
             >
-              View Details
+              {t('teacherCard.viewDetails')}
             </Button>
             <Button size="sm" className="flex-1">
-              Edit Profile
+              {t('teacherCard.editProfile')}
             </Button>
           </div>
         </CardContent>
@@ -128,14 +132,14 @@ const TeachersPage: React.FC = () => {
             <div className="space-y-6">
               {/* Contact Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Contact Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('teacherDetail.contactInformation')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="text-gray-600">Email:</p>
+                    <p className="text-gray-600">{t('teacherDetail.email')}:</p>
                     <p className="font-medium">{teacher.email}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Phone:</p>
+                    <p className="text-gray-600">{t('teacherDetail.phone')}:</p>
                     <p className="font-medium">{teacher.phone}</p>
                   </div>
                 </div>
@@ -143,10 +147,10 @@ const TeachersPage: React.FC = () => {
 
               {/* Professional Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Professional Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('teacherDetail.professionalInformation')}</h3>
                 <div className="space-y-3">
                   <div>
-                    <p className="text-gray-600 text-sm">Specializations:</p>
+                    <p className="text-gray-600 text-sm">{t('teacherDetail.specializations')}:</p>
                     <div className="flex flex-wrap gap-2 mt-1">
                       {teacher.specialization.map((spec, index) => (
                         <span
@@ -160,13 +164,13 @@ const TeachersPage: React.FC = () => {
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <p className="text-gray-600">Experience:</p>
-                      <p className="font-medium">{teacher.experience} years</p>
+                      <p className="text-gray-600">{t('teacherDetail.experience')}:</p>
+                      <p className="font-medium">{teacher.experience} {teacher.experience === 1 ? t('teacherCard.year') : t('teacherCard.years')}</p>
                     </div>
                     <div>
-                      <p className="text-gray-600">Status:</p>
+                      <p className="text-gray-600">{t('teacherDetail.status')}:</p>
                       <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(teacher.status)}`}>
-                        {teacher.status}
+                        {tCommon(teacher.status)}
                       </span>
                     </div>
                   </div>
@@ -176,7 +180,7 @@ const TeachersPage: React.FC = () => {
               {/* Assigned Students */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Assigned Students ({students.length})
+                  {t('teacherDetail.assignedStudents')} ({students.length})
                 </h3>
                 {students.length > 0 ? (
                   <div className="space-y-2">
@@ -187,21 +191,21 @@ const TeachersPage: React.FC = () => {
                           <p className="text-sm text-gray-600">{student.grade} • {student.currentSurah}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-green-600">{student.memorizedVerses} verses</p>
-                          <p className="text-xs text-gray-500">{student.status}</p>
+                          <p className="text-sm font-medium text-green-600">{student.memorizedVerses} {student.memorizedVerses === 1 ? t('teacherDetail.verse') : t('teacherDetail.verses')}</p>
+                          <p className="text-xs text-gray-500">{tCommon(student.status)}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-600 text-center py-4">No students assigned</p>
+                  <p className="text-gray-600 text-center py-4">{t('teacherDetail.noStudentsAssigned')}</p>
                 )}
               </div>
 
               {/* Weekly Schedule */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  Weekly Schedule ({schedule.length} classes)
+                  {t('teacherDetail.weeklySchedule')} ({schedule.length} {schedule.length === 1 ? t('teacherDetail.class') : t('teacherDetail.classes')})
                 </h3>
                 {schedule.length > 0 ? (
                   <div className="space-y-2">
@@ -218,14 +222,14 @@ const TeachersPage: React.FC = () => {
                             {slot.startTime} - {slot.endTime}
                           </p>
                           <p className="text-xs text-gray-500">
-                            {slot.studentIds.length} student{slot.studentIds.length !== 1 ? 's' : ''}
+                            {slot.studentIds.length} {slot.studentIds.length === 1 ? t('teacherDetail.student') : t('teacherDetail.students')}
                           </p>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-600 text-center py-4">No classes scheduled</p>
+                  <p className="text-gray-600 text-center py-4">{t('teacherDetail.noClassesScheduled')}</p>
                 )}
               </div>
             </div>
@@ -240,13 +244,13 @@ const TeachersPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Teachers</h1>
-          <p className="text-gray-600">Manage teaching staff and their assignments</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
+          <p className="text-gray-600">{t('subtitle')}</p>
         </div>
         <div className="mt-4 sm:mt-0">
           <Button>
             <span className="mr-2">➕</span>
-            Add New Teacher
+            {t('addNewTeacher')}
           </Button>
         </div>
       </div>
@@ -255,7 +259,7 @@ const TeachersPage: React.FC = () => {
       <Card>
         <CardContent className="p-6">
           <Input
-            placeholder="Search teachers by name or specialization..."
+            placeholder={t('searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -265,7 +269,7 @@ const TeachersPage: React.FC = () => {
       {/* Results Summary */}
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-600">
-          Showing {filteredTeachers.length} of {allTeachers.length} teachers
+          {t('showingTeachers', { current: filteredTeachers.length, total: allTeachers.length })}
         </p>
       </div>
 
@@ -280,15 +284,15 @@ const TeachersPage: React.FC = () => {
         <Card>
           <CardContent className="p-12 text-center">
             <span className="text-6xl mb-4 block">👨‍🏫</span>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No teachers found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noTeachersFound')}</h3>
             <p className="text-gray-600 mb-6">
               {searchQuery
-                ? 'Try adjusting your search criteria'
-                : 'Get started by adding your first teacher'
+                ? t('adjustSearchCriteria')
+                : t('getStartedMessage')
               }
             </p>
             {!searchQuery && (
-              <Button>Add First Teacher</Button>
+              <Button>{t('addFirstTeacher')}</Button>
             )}
           </CardContent>
         </Card>

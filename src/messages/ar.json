@@ -1,9 +1,12 @@
 {
   "metadata": {
-    "title": "مدرسة حفظ القرآن الكريم",
+    "title": "مدرسةالبيان لتحفيظ القرآن الكريم",
     "description": "نظام إدارة بسيط ونظيف لمدارس حفظ القرآن الكريم"
   },
   "layout": {
+    "header": {
+      "title": "مدرسة البيان لتحفيظ القرآن الكريم"
+    },
     "navigation": {
       "home": "الرئيسية",
       "students": "الطلاب",
@@ -11,12 +14,12 @@
       "teachers": "المعلمون"
     },
     "footer": {
-      "copyright": "© 2024 مدرسة حفظ القرآن الكريم. صُنع بـ ❤️ للتعليم الإسلامي."
+      "copyright": "Islamux للتطبيقات الإسلامية المفتوحة المصدر - وقف لله تعالى"
     }
   },
   "homepage": {
     "welcome": {
-      "title": "مرحباً بكم في مدرسة حفظ القرآن الكريم",
+      "title": "مرحباً بكم في مدرسة البيان لتحفيظ القرآن الكريم",
       "subtitle": "إدارة الطلاب والمعلمين والجداول بكل سهولة"
     },
     "stats": {
@@ -60,6 +63,147 @@
     "actions": "الإجراءات",
     "status": "الحالة",
     "active": "نشط",
-    "inactive": "غير نشط"
+    "inactive": "غير نشط",
+    "graduated": "متخرج"
+  },
+  "studentsPage": {
+    "title": "الطلاب",
+    "subtitle": "إدارة ومتابعة تقدم الطلاب",
+    "addNewStudent": "إضافة طالب جديد",
+    "searchPlaceholder": "البحث عن الطلاب...",
+    "allStatus": "جميع الحالات",
+    "allGrades": "جميع الصفوف",
+    "showingStudents": "عرض {current} من {total} طالب",
+    "loadingStudents": "جاري تحميل الطلاب...",
+    "noStudentsFound": "لم يتم العثور على طلاب",
+    "adjustSearchCriteria": "حاول تعديل معايير البحث",
+    "getStartedMessage": "ابدأ بإضافة أول طالب",
+    "addFirstStudent": "إضافة أول طالب",
+    "studentCard": {
+      "age": "العمر",
+      "currentSurah": "السورة الحالية",
+      "versesMemorized": "الآيات المحفوظة",
+      "teacher": "المعلم",
+      "notAssigned": "غير محدد",
+      "enrolled": "تاريخ التسجيل",
+      "viewDetails": "عرض التفاصيل",
+      "edit": "تعديل"
+    }
+  },
+  "addStudentPage": {
+    "title": "إضافة طالب جديد",
+    "subtitle": "أدخل معلومات الطالب لتسجيله في المدرسة",
+    "studentInformation": "معلومات الطالب",
+    "personalInformation": "المعلومات الشخصية",
+    "parentInformation": "معلومات ولي الأمر",
+    "academicInformation": "المعلومات الأكاديمية",
+    "fields": {
+      "fullName": "الاسم الكامل *",
+      "age": "العمر *",
+      "grade": "الصف *",
+      "email": "البريد الإلكتروني (اختياري)",
+      "parentName": "اسم ولي الأمر *",
+      "parentPhone": "هاتف ولي الأمر *",
+      "startingSurah": "السورة البادئة *",
+      "assignedTeacher": "المعلم المخصص *",
+      "notes": "ملاحظات (اختياري)"
+    },
+    "placeholders": {
+      "fullName": "أدخل اسم الطالب الكامل",
+      "age": "أدخل العمر",
+      "email": "student@email.com",
+      "parentName": "أدخل اسم ولي الأمر الكامل",
+      "parentPhone": "+966-555-0123",
+      "selectTeacher": "اختر معلماً",
+      "notes": "أي ملاحظات إضافية حول الطالب..."
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "addStudent": "إضافة الطالب",
+      "addingStudent": "جاري إضافة الطالب..."
+    }
+  },
+  "teachersPage": {
+    "title": "المعلمون",
+    "subtitle": "إدارة طاقم التدريس ومهامهم",
+    "addNewTeacher": "إضافة معلم جديد",
+    "searchPlaceholder": "البحث عن المعلمين بالاسم أو التخصص...",
+    "showingTeachers": "عرض {current} من {total} معلم",
+    "noTeachersFound": "لم يتم العثور على معلمين",
+    "adjustSearchCriteria": "حاول تعديل معايير البحث",
+    "getStartedMessage": "ابدأ بإضافة أول معلم",
+    "addFirstTeacher": "إضافة أول معلم",
+    "teacherCard": {
+      "specializations": "التخصصات",
+      "experience": "الخبرة",
+      "years": "سنوات",
+      "year": "سنة",
+      "students": "الطلاب",
+      "assigned": "مسجل",
+      "classes": "الحصص",
+      "perWeek": "أسبوعياً",
+      "load": "العبء التدريسي",
+      "light": "خفيف",
+      "moderate": "متوسط",
+      "heavy": "ثقيل",
+      "viewDetails": "عرض التفاصيل",
+      "editProfile": "تعديل الملف"
+    },
+    "teacherDetail": {
+      "close": "إغلاق",
+      "contactInformation": "معلومات الاتصال",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "professionalInformation": "المعلومات المهنية",
+      "specializations": "التخصصات",
+      "experience": "الخبرة",
+      "status": "الحالة",
+      "assignedStudents": "الطلاب المسجلين",
+      "noStudentsAssigned": "لا يوجد طلاب مسجلين",
+      "verses": "آيات",
+      "verse": "آية",
+      "weeklySchedule": "الجدول الأسبوعي",
+      "classes": "حصص",
+      "class": "حصة",
+      "noClassesScheduled": "لا توجد حصص مجدولة",
+      "student": "طالب",
+      "students": "طلاب"
+    }
+  },
+  "schedulePage": {
+    "title": "جدول الحصص",
+    "subtitle": "عرض وإدارة الجداول الأسبوعية للحصص",
+    "addNewClass": "إضافة حصة جديدة",
+    "filterByTeacher": "التصفية حسب المعلم",
+    "filterByDay": "التصفية حسب اليوم",
+    "allTeachers": "جميع المعلمين",
+    "allDays": "جميع الأيام",
+    "unknownTeacher": "معلم غير معروف",
+    "days": {
+      "monday": "الإثنين",
+      "tuesday": "الثلاثاء",
+      "wednesday": "الأربعاء",
+      "thursday": "الخميس",
+      "friday": "الجمعة",
+      "saturday": "السبت",
+      "sunday": "الأحد"
+    },
+    "slotType": {
+      "individual": "فردي",
+      "group": "جماعي"
+    },
+    "students": "طلاب",
+    "student": "طالب",
+    "classes": "حصص",
+    "class": "حصة",
+    "noClassesScheduled": "لا توجد حصص مجدولة",
+    "noClassesScheduledForDay": "لا توجد حصص مجدولة ليوم {day}",
+    "scheduleSummary": {
+      "title": "ملخص الجدول",
+      "totalClasses": "إجمالي الحصص",
+      "groupClasses": "الحصص الجماعية",
+      "individualClasses": "الحصص الفردية",
+      "studentsEnrolled": "الطلاب المسجلين"
+    }
   }
 }

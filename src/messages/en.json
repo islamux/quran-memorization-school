@@ -1,9 +1,12 @@
 {
   "metadata": {
-    "title": "Quran Memorization School",
+    "title": "Al-Bayan Quran Memorization School",
     "description": "A simple and clean management system for Quran memorization schools"
   },
   "layout": {
+    "header": {
+      "title": "Al-Bayan Quran Memorization School"
+    },
     "navigation": {
       "home": "Home",
       "students": "Students",
@@ -16,7 +19,7 @@
   },
   "homepage": {
     "welcome": {
-      "title": "Welcome to Quran Memorization School",
+      "title": "Welcome to Al-Bayan Quran Memorization School",
       "subtitle": "Manage your students, teachers, and schedules with ease"
     },
     "stats": {
@@ -60,6 +63,147 @@
     "actions": "Actions",
     "status": "Status",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "graduated": "Graduated"
+  },
+  "studentsPage": {
+    "title": "Students",
+    "subtitle": "Manage and track student progress",
+    "addNewStudent": "Add New Student",
+    "searchPlaceholder": "Search students...",
+    "allStatus": "All Status",
+    "allGrades": "All Grades",
+    "showingStudents": "Showing {current} of {total} students",
+    "loadingStudents": "Loading students...",
+    "noStudentsFound": "No students found",
+    "adjustSearchCriteria": "Try adjusting your search criteria",
+    "getStartedMessage": "Get started by adding your first student",
+    "addFirstStudent": "Add First Student",
+    "studentCard": {
+      "age": "Age",
+      "currentSurah": "Current Surah",
+      "versesMemorized": "Verses Memorized",
+      "teacher": "Teacher",
+      "notAssigned": "Not assigned",
+      "enrolled": "Enrolled",
+      "viewDetails": "View Details",
+      "edit": "Edit"
+    }
+  },
+  "addStudentPage": {
+    "title": "Add New Student",
+    "subtitle": "Enter student information to enroll them in the school",
+    "studentInformation": "Student Information",
+    "personalInformation": "Personal Information",
+    "parentInformation": "Parent/Guardian Information",
+    "academicInformation": "Academic Information",
+    "fields": {
+      "fullName": "Full Name *",
+      "age": "Age *",
+      "grade": "Grade *",
+      "email": "Email (Optional)",
+      "parentName": "Parent/Guardian Name *",
+      "parentPhone": "Parent Phone *",
+      "startingSurah": "Starting Surah *",
+      "assignedTeacher": "Assigned Teacher *",
+      "notes": "Notes (Optional)"
+    },
+    "placeholders": {
+      "fullName": "Enter student's full name",
+      "age": "Enter age",
+      "email": "student@email.com",
+      "parentName": "Enter parent's full name",
+      "parentPhone": "+1-555-0123",
+      "selectTeacher": "Select a teacher",
+      "notes": "Any additional notes about the student..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "addStudent": "Add Student",
+      "addingStudent": "Adding Student..."
+    }
+  },
+  "teachersPage": {
+    "title": "Teachers",
+    "subtitle": "Manage teaching staff and their assignments",
+    "addNewTeacher": "Add New Teacher",
+    "searchPlaceholder": "Search teachers by name or specialization...",
+    "showingTeachers": "Showing {current} of {total} teachers",
+    "noTeachersFound": "No teachers found",
+    "adjustSearchCriteria": "Try adjusting your search criteria",
+    "getStartedMessage": "Get started by adding your first teacher",
+    "addFirstTeacher": "Add First Teacher",
+    "teacherCard": {
+      "specializations": "Specializations",
+      "experience": "Experience",
+      "years": "years",
+      "year": "year",
+      "students": "Students",
+      "assigned": "assigned",
+      "classes": "Classes",
+      "perWeek": "per week",
+      "load": "Load",
+      "light": "Light",
+      "moderate": "Moderate",
+      "heavy": "Heavy",
+      "viewDetails": "View Details",
+      "editProfile": "Edit Profile"
+    },
+    "teacherDetail": {
+      "close": "Close",
+      "contactInformation": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "professionalInformation": "Professional Information",
+      "specializations": "Specializations",
+      "experience": "Experience",
+      "status": "Status",
+      "assignedStudents": "Assigned Students",
+      "noStudentsAssigned": "No students assigned",
+      "verses": "verses",
+      "verse": "verse",
+      "weeklySchedule": "Weekly Schedule",
+      "classes": "classes",
+      "class": "class",
+      "noClassesScheduled": "No classes scheduled",
+      "student": "student",
+      "students": "students"
+    }
+  },
+  "schedulePage": {
+    "title": "Class Schedule",
+    "subtitle": "View and manage weekly class schedules",
+    "addNewClass": "Add New Class",
+    "filterByTeacher": "Filter by Teacher",
+    "filterByDay": "Filter by Day",
+    "allTeachers": "All Teachers",
+    "allDays": "All Days",
+    "unknownTeacher": "Unknown Teacher",
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "slotType": {
+      "individual": "Individual",
+      "group": "Group"
+    },
+    "students": "students",
+    "student": "student",
+    "classes": "classes",
+    "class": "class",
+    "noClassesScheduled": "No classes scheduled",
+    "noClassesScheduledForDay": "No classes scheduled for {day}",
+    "scheduleSummary": {
+      "title": "Schedule Summary",
+      "totalClasses": "Total Classes",
+      "groupClasses": "Group Classes",
+      "individualClasses": "Individual Classes",
+      "studentsEnrolled": "Students Enrolled"
+    }
   }
 }

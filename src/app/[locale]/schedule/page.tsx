@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { Select } from '@/components/ui/Input';
@@ -8,6 +9,8 @@ import { getWeeklySchedule, getTeacherById, getStudentById, formatTime, capitali
 import { ScheduleSlot } from '@/types';
 
 const SchedulePage: React.FC = () => {
+  const t = useTranslations('schedulePage');
+  const locale = useLocale();
   const [selectedTeacher, setSelectedTeacher] = useState('all');
   const [selectedDay, setSelectedDay] = useState('all');
 
@@ -16,7 +19,7 @@ const SchedulePage: React.FC = () => {
     weeklySchedule.flatMap(day => day.slots.map(slot => slot.teacherId))
   )).map(teacherId => {
     const teacher = getTeacherById(teacherId);
-    return { value: teacherId, label: teacher?.name || 'Unknown Teacher' };
+    return { value: teacherId, label: teacher?.name || t('unknownTeacher') };
   });
 
   const filteredSchedule = weeklySchedule.map(day => ({
@@ -48,7 +51,7 @@ const SchedulePage: React.FC = () => {
               {formatTime(slot.startTime)} - {formatTime(slot.endTime)}
             </p>
             <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getSlotTypeColor(slot.type)}`}>
-              {capitalizeFirst(slot.type)}
+              {t(`slotType.${slot.type}`)}
             </span>
           </div>
         </div>
@@ -64,7 +67,7 @@ const SchedulePage: React.FC = () => {
           <div className="flex items-start text-sm text-gray-600">
             <span className="mr-2">👥</span>
             <div>
-              <p className="font-medium">{students.length} student{students.length !== 1 ? 's' : ''}:</p>
+              <p className="font-medium">{students.length} {students.length !== 1 ? t('students') : t('student')}:</p>
               <div className="mt-1 space-y-1">
                 {students.map((student) => (
                   <div key={student?.id} className="flex items-center justify-between">
@@ -85,13 +88,13 @@ const SchedulePage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Class Schedule</h1>
-          <p className="text-gray-600">View and manage weekly class schedules</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
+          <p className="text-gray-600">{t('subtitle')}</p>
         </div>
         <div className="mt-4 sm:mt-0">
           <Button>
             <span className="mr-2">➕</span>
-            Add New Class
+            {t('addNewClass')}
           </Button>
         </div>
       </div>
@@ -101,27 +104,27 @@ const SchedulePage: React.FC = () => {
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Select
-              label="Filter by Teacher"
+              label={t('filterByTeacher')}
               value={selectedTeacher}
               onChange={(e) => setSelectedTeacher(e.target.value)}
               options={[
-                { value: 'all', label: 'All Teachers' },
+                { value: 'all', label: t('allTeachers') },
                 ...allTeachers
               ]}
             />
             <Select
-              label="Filter by Day"
+              label={t('filterByDay')}
               value={selectedDay}
               onChange={(e) => setSelectedDay(e.target.value)}
               options={[
-                { value: 'all', label: 'All Days' },
-                { value: 'monday', label: 'Monday' },
-                { value: 'tuesday', label: 'Tuesday' },
-                { value: 'wednesday', label: 'Wednesday' },
-                { value: 'thursday', label: 'Thursday' },
-                { value: 'friday', label: 'Friday' },
-                { value: 'saturday', label: 'Saturday' },
-                { value: 'sunday', label: 'Sunday' },
+                { value: 'all', label: t('allDays') },
+                { value: 'monday', label: t('days.monday') },
+                { value: 'tuesday', label: t('days.tuesday') },
+                { value: 'wednesday', label: t('days.wednesday') },
+                { value: 'thursday', label: t('days.thursday') },
+                { value: 'friday', label: t('days.friday') },
+                { value: 'saturday', label: t('days.saturday') },
+                { value: 'sunday', label: t('days.sunday') },
               ]}
             />
           </div>
@@ -136,9 +139,9 @@ const SchedulePage: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <span className="mr-2">📅</span>
-                  {capitalizeFirst(day.day)}
+                  {t(`days.${day.day}`)}
                   <span className="ml-2 text-sm font-normal text-gray-600">
-                    ({day.slots.length} class{day.slots.length !== 1 ? 'es' : ''})
+                    ({day.slots.length} {day.slots.length !== 1 ? t('classes') : t('class')})
                   </span>
                 </CardTitle>
               </CardHeader>
@@ -152,7 +155,7 @@ const SchedulePage: React.FC = () => {
                 ) : (
                   <div className="text-center py-8">
                     <span className="text-4xl mb-4 block">📅</span>
-                    <p className="text-gray-600">No classes scheduled for {day.day}</p>
+                    <p className="text-gray-600">{t('noClassesScheduledForDay', { day: t(`days.${day.day}`) })}</p>
                   </div>
                 )}
               </CardContent>
@@ -166,9 +169,9 @@ const SchedulePage: React.FC = () => {
               <CardHeader>
                 <CardTitle className="flex items-center">
                   <span className="mr-2">📅</span>
-                  {capitalizeFirst(day.day)}
+                  {t(`days.${day.day}`)}
                   <span className="ml-2 text-sm font-normal text-gray-600">
-                    ({day.slots.length} class{day.slots.length !== 1 ? 'es' : ''})
+                    ({day.slots.length} {day.slots.length !== 1 ? t('classes') : t('class')})
                   </span>
                 </CardTitle>
               </CardHeader>
@@ -182,7 +185,7 @@ const SchedulePage: React.FC = () => {
                 ) : (
                   <div className="text-center py-8">
                     <span className="text-4xl mb-4 block">📅</span>
-                    <p className="text-gray-600">No classes scheduled</p>
+                    <p className="text-gray-600">{t('noClassesScheduled')}</p>
                   </div>
                 )}
               </CardContent>
@@ -194,7 +197,7 @@ const SchedulePage: React.FC = () => {
       {/* Summary Stats */}
       <Card>
         <CardHeader>
-          <CardTitle>Schedule Summary</CardTitle>
+          <CardTitle>{t('scheduleSummary.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -202,7 +205,7 @@ const SchedulePage: React.FC = () => {
               <p className="text-2xl font-bold text-blue-600">
                 {filteredSchedule.reduce((total, day) => total + day.slots.length, 0)}
               </p>
-              <p className="text-sm text-blue-600">Total Classes</p>
+              <p className="text-sm text-blue-600">{t('scheduleSummary.totalClasses')}</p>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-lg">
               <p className="text-2xl font-bold text-green-600">
@@ -210,7 +213,7 @@ const SchedulePage: React.FC = () => {
                   total + day.slots.filter(slot => slot.type === 'group').length, 0
                 )}
               </p>
-              <p className="text-sm text-green-600">Group Classes</p>
+              <p className="text-sm text-green-600">{t('scheduleSummary.groupClasses')}</p>
             </div>
             <div className="text-center p-4 bg-purple-50 rounded-lg">
               <p className="text-2xl font-bold text-purple-600">
@@ -218,7 +221,7 @@ const SchedulePage: React.FC = () => {
                   total + day.slots.filter(slot => slot.type === 'individual').length, 0
                 )}
               </p>
-              <p className="text-sm text-purple-600">Individual Classes</p>
+              <p className="text-sm text-purple-600">{t('scheduleSummary.individualClasses')}</p>
             </div>
             <div className="text-center p-4 bg-yellow-50 rounded-lg">
               <p className="text-2xl font-bold text-yellow-600">
@@ -228,7 +231,7 @@ const SchedulePage: React.FC = () => {
                   )
                 )).length}
               </p>
-              <p className="text-sm text-yellow-600">Students Enrolled</p>
+              <p className="text-sm text-yellow-600">{t('scheduleSummary.studentsEnrolled')}</p>
             </div>
           </div>
         </CardContent>

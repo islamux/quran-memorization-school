@@ -11,6 +11,7 @@ import { getWeeklySchedule } from '@/lib/schedule';
 
 const HomePage: React.FC = () => {
   const t = useTranslations('homepage');
+  const tCommon = useTranslations('common');
   const locale = useLocale();
   const studentStats = getStudentStats();
   const activeTeachers = getActiveTeachers();
@@ -111,7 +112,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-green-600">{student.memorizedVerses} {student.memorizedVerses === 1 ? t('studentCard.verse') : t('studentCard.verses')}</p>
-                    <p className="text-xs text-gray-500">{student.status}</p>
+                    <p className="text-xs text-gray-500">{tCommon(student.status)}</p>
                   </div>
                 </div>
               ))}
@@ -175,7 +176,7 @@ const HomePage: React.FC = () => {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href={`/${locale}/students/new`}>
+            <Link href={`/${locale}/students/add-student`}>
               <Button className="w-full h-16 text-lg">
                 <span className="mr-2">➕</span>
                 {t('actions.addNewStudent')}
