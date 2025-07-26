@@ -123,6 +123,79 @@
       "addingStudent": "جاري إضافة الطالب..."
     }
   },
+  "editStudentPage": {
+    "title": "تعديل بيانات الطالب",
+    "subtitle": "تحديث المعلومات الشخصية والأكاديمية للطالب",
+    "studentInformation": "معلومات الطالب",
+    "personalInformation": "المعلومات الشخصية",
+    "parentInformation": "معلومات ولي الأمر",
+    "academicInformation": "المعلومات الأكاديمية",
+    "studentNotFound": "لم يتم العثور على الطالب",
+    "backToStudents": "العودة إلى قائمة الطلاب",
+    "fields": {
+      "fullName": "الاسم الكامل",
+      "age": "العمر",
+      "grade": "الصف الدراسي",
+      "email": "البريد الإلكتروني (اختياري)",
+      "parentName": "اسم ولي الأمر",
+      "parentPhone": "هاتف ولي الأمر",
+      "currentSurah": "السورة الحالية",
+      "assignedTeacher": "المعلم المشرف",
+      "status": "الحالة",
+      "notes": "ملاحظات (اختياري)"
+    },
+    "placeholders": {
+      "fullName": "أحمد محمد علي",
+      "age": "12",
+      "email": "student@example.com",
+      "parentName": "محمد علي عبدالله",
+      "parentPhone": "+966-555-0123",
+      "selectTeacher": "اختر معلماً",
+      "notes": "أي ملاحظات إضافية حول الطالب..."
+    },
+    "actions": {
+      "cancel": "إلغاء",
+      "updateStudent": "تحديث بيانات الطالب",
+      "updatingStudent": "جاري تحديث البيانات..."
+    }
+  },
+  "studentDetailPage": {
+    "studentNotFound": "لم يتم العثور على الطالب",
+    "backToStudents": "العودة إلى قائمة الطلاب",
+    "back": "رجوع",
+    "studentProfile": "ملف الطالب",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "enrolledOn": "تم التسجيل في",
+    "personalInformation": "المعلومات الشخصية",
+    "parentInformation": "معلومات ولي الأمر",
+    "academicInformation": "المعلومات الأكاديمية",
+    "years": "سنة",
+    "verses": "آية",
+    "notAssigned": "غير محدد",
+    "noCompletedSurahs": "لم يتم إكمال أي سورة بعد",
+    "overallProgress": "التقدم العام",
+    "progressText": "حفظ {memorized} آية من أصل {total} ({percentage}%)",
+    "notes": "ملاحظات",
+    "fields": {
+      "fullName": "الاسم الكامل",
+      "age": "العمر",
+      "grade": "الصف الدراسي",
+      "email": "البريد الإلكتروني",
+      "parentName": "اسم ولي الأمر",
+      "parentPhone": "هاتف ولي الأمر",
+      "currentSurah": "السورة الحالية",
+      "versesMemorized": "الآيات المحفوظة",
+      "teacher": "المعلم المشرف",
+      "completedSurahs": "السور المكتملة"
+    },
+    "deleteConfirmation": {
+      "title": "تأكيد الحذف",
+      "message": "هل أنت متأكد من حذف الطالب {name}؟ لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء",
+      "confirm": "حذف الطالب"
+    }
+  },
   "teachersPage": {
     "title": "المعلمون",
     "subtitle": "إدارة طاقم التدريس ومهامهم",
@@ -204,6 +277,37 @@
       "groupClasses": "الحصص الجماعية",
       "individualClasses": "الحصص الفردية",
       "studentsEnrolled": "الطلاب المسجلين"
+    }
+  },
+  "editTeacherPage": {
+    "title": "تعديل بيانات المعلم",
+    "subtitle": "تحديث معلومات المعلم ومهامه",
+    "back": "رجوع",
+    "teacherNotFound": "لم يتم العثور على المعلم",
+    "backToTeachers": "العودة إلى قائمة المعلمين",
+    "personalInformation": "المعلومات الشخصية",
+    "professionalInformation": "المعلومات المهنية",
+    "fields": {
+      "name": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "specializations": "التخصصات",
+      "experience": "سنوات الخبرة",
+      "status": "الحالة"
+    },
+    "addSpecialization": "إضافة تخصص",
+    "add": "إضافة",
+    "saveChanges": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "successMessage": "تم حفظ المعلم بنجاح!",
+    "errorMessage": "فشل في تحديث بيانات المعلم. الرجاء المحاولة مرة أخرى.",
+    "errors": {
+      "nameRequired": "اسم المعلم مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "الرجاء إدخال بريد إلكتروني صحيح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "specializationRequired": "يجب إضافة تخصص واحد على الأقل",
+      "experienceInvalid": "سنوات الخبرة يجب أن تكون رقماً موجباً"
     }
   }
 }

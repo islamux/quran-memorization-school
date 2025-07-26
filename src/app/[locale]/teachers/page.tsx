@@ -2,20 +2,24 @@
 
 import React, { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import { getTeachers, getStudentsByTeacher, getScheduleByTeacher } from '@/utils/dataUtils';
+import { useData } from '@/contexts/DataContext';
 import { Teacher } from '@/types';
 
 const TeachersPage: React.FC = () => {
   const t = useTranslations('teachersPage');
   const tCommon = useTranslations('common');
   const locale = useLocale();
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
 
-  const allTeachers = getTeachers();
+  const { teachers: allTeachers } = useData();
+  console.log('Teachers page - allTeachers:', allTeachers);
   const filteredTeachers = searchQuery
     ? allTeachers.filter(teacher =>
         teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -31,9 +35,11 @@ const TeachersPage: React.FC = () => {
       : 'bg-gray-100 text-gray-800';
   };
 
+  const { students: allStudents } = useData();
+  
   const TeacherCard = ({ teacher }: { teacher: Teacher }) => {
-    const students = getStudentsByTeacher(teacher.id);
-    const schedule = getScheduleByTeacher(teacher.id);
+    const students = allStudents.filter(student => student.teacherId === teacher.id);
+    const schedule: any[] = []; // Temporarily empty until we implement schedule in DataContext
 
     return (
       <Card className="hover:shadow-md transition-shadow">
@@ -98,7 +104,11 @@ const TeachersPage: React.FC = () => {
             >
               {t('teacherCard.viewDetails')}
             </Button>
-            <Button size="sm" className="flex-1">
+            <Button 
+              size="sm" 
+              className="flex-1"
+              onClick={() => router.push(`/${locale}/teachers/${teacher.id}/edit`)}
+            >
               {t('teacherCard.editProfile')}
             </Button>
           </div>
@@ -108,8 +118,8 @@ const TeachersPage: React.FC = () => {
   };
 
   const TeacherDetailModal = ({ teacher }: { teacher: Teacher }) => {
-    const students = getStudentsByTeacher(teacher.id);
-    const schedule = getScheduleByTeacher(teacher.id);
+    const students = allStudents.filter(student => student.teacherId === teacher.id);
+    const schedule: any[] = []; // Temporarily empty until we implement schedule in DataContext
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -248,10 +258,12 @@ const TeachersPage: React.FC = () => {
           <p className="text-gray-600">{t('subtitle')}</p>
         </div>
         <div className="mt-4 sm:mt-0">
-          <Button>
-            <span className="mr-2">➕</span>
-            {t('addNewTeacher')}
-          </Button>
+          <Link href={`/${locale}/teachers/add-teacher`}>
+            <Button>
+              <span className="mr-2">➕</span>
+              {t('addNewTeacher')}
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -292,7 +304,9 @@ const TeachersPage: React.FC = () => {
               }
             </p>
             {!searchQuery && (
-              <Button>{t('addFirstTeacher')}</Button>
+              <Link href={`/${locale}/teachers/add-teacher`}>
+                <Button>{t('addFirstTeacher')}</Button>
+              </Link>
             )}
           </CardContent>
         </Card>

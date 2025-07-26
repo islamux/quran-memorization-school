@@ -7,14 +7,17 @@ export interface Student {
   grade: string;
   parentName: string;
   parentPhone: string;
-  email?: string;
+  email: string | null;
   enrollmentDate: string;
   currentSurah: string;
   completedSurahs: string[];
   memorizedVerses: number;
   teacherId: string;
   status: 'active' | 'inactive' | 'graduated';
-  notes?: string;
+  notes: string | null;
+  isDeleted?: boolean;
+  deletedAt?: string;
+  deletedBy?: string;
 }
 
 export interface Teacher {
@@ -27,6 +30,9 @@ export interface Teacher {
   students: string[]; // Array of student IDs
   schedule: ScheduleSlot[];
   status: 'active' | 'inactive';
+  isDeleted?: boolean;
+  deletedAt?: string;
+  deletedBy?: string;
 }
 
 export interface ScheduleSlot {

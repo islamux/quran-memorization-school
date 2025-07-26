@@ -1,7 +1,7 @@
 # Project To-Do List
 
 ## Immediate Tasks
-- [ ] Fix translation issues
+- [ok] Fix translation issues
 
 ## Features to Develop
 - [ ] Develop schedule management feature
@@ -9,6 +9,8 @@
 
 ## Improvements
 - [ ] Optimize database queries 
+- [ ] تناسق الاكودا للتطبيق
+هل يتم اتباع نفس الطريقة في كل الملفات ام كل ملف يتم تطبيق حلول مختلفه بسبب نماذج الذكاء الاصطناعي المختلفة
 - [ ] Enhance UI/UX for mobile devices
 - [ ] Add Android app support 
 

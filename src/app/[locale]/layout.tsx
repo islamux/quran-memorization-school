@@ -7,6 +7,7 @@ import {getDirection, Locale, locales} from '@/i18n/config';
 import {getMessages} from '@/i18n/loadMessages';
 import '../globals.css';
 import Layout from '@/components/Layout';
+import { DataProvider } from '@/contexts/DataContext';
 
 interface Props {
   children: ReactNode;
@@ -42,9 +43,11 @@ export default async function RootLayout({children, params}: Props) {
     <html lang={locale} dir={getDirection(locale as Locale)}>
       <body className={`${locale === 'ar' ? cairo.className : inter.className}`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Layout>
-            {children}
-          </Layout>
+          <DataProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </DataProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
-import { getTeacherById, formatDate } from '@/utils/dataUtils';
-import { fetchStudents } from '@/utils/apiUtils';
+import { useData } from '@/contexts/DataContext';
+import StudentCard from '@/components/StudentCard';
 import { Student } from '@/types';
 
 const StudentsPage: React.FC = () => {
@@ -18,25 +18,7 @@ const StudentsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [gradeFilter, setGradeFilter] = useState('all');
-  const [allStudents, setAllStudents] = useState<Student[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // جلب الطلاب من قاعدة البيانات
-  useEffect(() => {
-    const loadStudents = async () => {
-      setIsLoading(true);
-      try {
-        const students = await fetchStudents();
-        setAllStudents(students);
-      } catch (error) {
-        console.error('Error loading students:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadStudents();
-  }, []);
+  const { students: allStudents } = useData();
 
   const filteredStudents = useMemo(() => {
     let students = allStudents;
@@ -126,69 +108,16 @@ const StudentsPage: React.FC = () => {
       {/* Results Summary */}
       <div className="flex items-center justify-between">
         <p className="text-sm text-gray-600">
-          {isLoading ? t('studentsPage.loadingStudents') : t('studentsPage.showingStudents', { current: filteredStudents.length, total: allStudents.length })}
+          {t('studentsPage.showingStudents', { current: filteredStudents.length, total: allStudents.length })}
         </p>
       </div>
 
       {/* Students Grid */}
-      {isLoading ? (
-        <Card>
-          <CardContent className="p-12 text-center">
-            <p className="text-gray-600">{t('studentsPage.loadingStudents')}</p>
-          </CardContent>
-        </Card>
-      ) : filteredStudents.length > 0 ? (
+      {filteredStudents.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredStudents.map((student) => {
-            const teacher = getTeacherById(student.teacherId);
-            return (
-              <Card key={student.id} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900">{student.name}</h3>
-                      <p className="text-sm text-gray-600">{student.grade} • {t('studentsPage.studentCard.age')} {student.age}</p>
-                    </div>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(student.status)}`}>
-                      {t(`common.${student.status}`)}
-                    </span>
-                  </div>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">{t('studentsPage.studentCard.currentSurah')}:</span>
-                      <span className="font-medium">{student.currentSurah}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">{t('studentsPage.studentCard.versesMemorized')}:</span>
-                      <span className="font-medium text-green-600">{student.memorizedVerses}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">{t('studentsPage.studentCard.teacher')}:</span>
-                      <span className="font-medium">{teacher?.name || t('studentsPage.studentCard.notAssigned')}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">{t('studentsPage.studentCard.enrolled')}:</span>
-                      <span className="font-medium">{formatDate(student.enrollmentDate)}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-2">
-                    <Link href={`/${locale}/students/${student.id}`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full">
-                        {t('studentsPage.studentCard.viewDetails')}
-                      </Button>
-                    </Link>
-                    <Link href={`/${locale}/students/${student.id}/edit`} className="flex-1">
-                      <Button size="sm" className="w-full">
-                        {t('studentsPage.studentCard.edit')}
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
+          {filteredStudents.map((student) => (
+            <StudentCard key={student.id} student={student} locale={locale} />
+          ))}
         </div>
       ) : (
         <Card>

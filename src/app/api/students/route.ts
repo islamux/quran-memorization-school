@@ -1,14 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { studentDB, initializeDatabase } from '@/lib/database';
 import { Student } from '@/types';
 
-// التأكد من تهيئة قاعدة البيانات
-initializeDatabase();
+// محاكاة قاعدة البيانات في الذاكرة
+let students: Student[] = [];
 
 // GET: الحصول على جميع الطلاب
 export async function GET(request: NextRequest) {
   try {
-    const students = studentDB.getAll();
     return NextResponse.json(students);
   } catch (error) {
     console.error('Error fetching students:', error);
@@ -26,7 +24,7 @@ export async function POST(request: NextRequest) {
     
     // إنشاء كائن الطالب الجديد
     const newStudent: Student = {
-      id: `student-${Date.now()}`,
+      id: `student-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       name: body.name,
       age: parseInt(body.age),
       grade: body.grade,
@@ -42,14 +40,39 @@ export async function POST(request: NextRequest) {
       notes: body.notes || null,
     };
 
-    // حفظ الطالب في قاعدة البيانات
-    studentDB.add(newStudent);
+    // إضافة الطالب إلى المصفوفة
+    students.push(newStudent);
     
     return NextResponse.json(newStudent, { status: 201 });
   } catch (error) {
     console.error('Error creating student:', error);
     return NextResponse.json(
       { error: 'Failed to create student' },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: حذف طالب
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (!id) {
+      return NextResponse.json(
+        { error: 'Student ID is required' },
+        { status: 400 }
+      );
+    }
+    
+    students = students.filter(student => student.id !== id);
+    
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting student:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete student' },
       { status: 500 }
     );
   }

@@ -123,6 +123,79 @@
       "addingStudent": "Adding Student..."
     }
   },
+  "editStudentPage": {
+    "title": "Edit Student",
+    "subtitle": "Update student's personal and academic information",
+    "studentInformation": "Student Information",
+    "personalInformation": "Personal Information",
+    "parentInformation": "Parent/Guardian Information",
+    "academicInformation": "Academic Information",
+    "studentNotFound": "Student not found",
+    "backToStudents": "Back to Students",
+    "fields": {
+      "fullName": "Full Name",
+      "age": "Age",
+      "grade": "Grade",
+      "email": "Email (Optional)",
+      "parentName": "Parent/Guardian Name",
+      "parentPhone": "Parent Phone",
+      "currentSurah": "Current Surah",
+      "assignedTeacher": "Assigned Teacher",
+      "status": "Status",
+      "notes": "Notes (Optional)"
+    },
+    "placeholders": {
+      "fullName": "Ahmed Mohamed Ali",
+      "age": "12",
+      "email": "student@example.com",
+      "parentName": "Mohamed Ali Abdullah",
+      "parentPhone": "+1-555-0123",
+      "selectTeacher": "Select a teacher",
+      "notes": "Any additional notes about the student..."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "updateStudent": "Update Student",
+      "updatingStudent": "Updating Student..."
+    }
+  },
+  "studentDetailPage": {
+    "studentNotFound": "Student not found",
+    "backToStudents": "Back to Students",
+    "back": "Back",
+    "studentProfile": "Student Profile",
+    "edit": "Edit",
+    "delete": "Delete",
+    "enrolledOn": "Enrolled on",
+    "personalInformation": "Personal Information",
+    "parentInformation": "Parent/Guardian Information",
+    "academicInformation": "Academic Information",
+    "years": "years",
+    "verses": "verses",
+    "notAssigned": "Not assigned",
+    "noCompletedSurahs": "No surahs completed yet",
+    "overallProgress": "Overall Progress",
+    "progressText": "Memorized {memorized} verses out of {total} ({percentage}%)",
+    "notes": "Notes",
+    "fields": {
+      "fullName": "Full Name",
+      "age": "Age",
+      "grade": "Grade",
+      "email": "Email",
+      "parentName": "Parent/Guardian Name",
+      "parentPhone": "Parent Phone",
+      "currentSurah": "Current Surah",
+      "versesMemorized": "Verses Memorized",
+      "teacher": "Assigned Teacher",
+      "completedSurahs": "Completed Surahs"
+    },
+    "deleteConfirmation": {
+      "title": "Confirm Delete",
+      "message": "Are you sure you want to delete {name}? This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete Student"
+    }
+  },
   "teachersPage": {
     "title": "Teachers",
     "subtitle": "Manage teaching staff and their assignments",
@@ -204,6 +277,37 @@
       "groupClasses": "Group Classes",
       "individualClasses": "Individual Classes",
       "studentsEnrolled": "Students Enrolled"
+    }
+  },
+  "editTeacherPage": {
+    "title": "Edit Teacher",
+    "subtitle": "Update teacher information and assignments",
+    "back": "Back",
+    "teacherNotFound": "Teacher not found",
+    "backToTeachers": "Back to Teachers",
+    "personalInformation": "Personal Information",
+    "professionalInformation": "Professional Information",
+    "fields": {
+      "name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "specializations": "Specializations",
+      "experience": "Years of Experience",
+      "status": "Status"
+    },
+    "addSpecialization": "Add specialization",
+    "add": "Add",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "successMessage": "Teacher updated successfully!",
+    "errorMessage": "Failed to update teacher. Please try again.",
+    "errors": {
+      "nameRequired": "Teacher name is required",
+      "emailRequired": "Email address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
+      "specializationRequired": "At least one specialization is required",
+      "experienceInvalid": "Experience must be a positive number"
     }
   }
 }

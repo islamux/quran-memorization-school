@@ -1,22 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select, Textarea } from '@/components/ui/Input';
 import { getGradeOptions, getSurahOptions } from '@/utils/dataUtils';
-import { useTeacherOptions } from '@/utils/clientDataUtils';
+import { useTeacherOptions, useStudentById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DataContext';
 import { Student } from '@/types';
 
-const NewStudentPage: React.FC = () => {
+const EditStudentPage: React.FC = () => {
   const router = useRouter();
   const params = useParams();
   const locale = params.locale as string;
+  const studentId = params.id as string;
   const t = useTranslations();
-  const { addStudent } = useData();
+  const { updateStudent } = useData();
+  const student = useStudentById(studentId);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -25,12 +27,30 @@ const NewStudentPage: React.FC = () => {
     parentName: '',
     parentPhone: '',
     email: '',
-    currentSurah: 'Al-Fatiha',
+    currentSurah: '',
     teacherId: '',
     notes: '',
+    status: 'active',
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (student) {
+      setFormData({
+        name: student.name,
+        age: student.age.toString(),
+        grade: student.grade,
+        parentName: student.parentName,
+        parentPhone: student.parentPhone,
+        email: student.email || '',
+        currentSurah: student.currentSurah,
+        teacherId: student.teacherId,
+        notes: student.notes || '',
+        status: student.status,
+      });
+    }
+  }, [student]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -82,43 +102,40 @@ const NewStudentPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    if (!validateForm() || !student) {
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // إنشاء كائن الطالب الجديد
-      const newStudent: Student = {
-        id: `student-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      // تحديث بيانات الطالب
+      const updatedStudent: Student = {
+        ...student,
         name: formData.name,
         age: parseInt(formData.age),
         grade: formData.grade,
         parentName: formData.parentName,
         parentPhone: formData.parentPhone,
         email: formData.email || null,
-        enrollmentDate: new Date().toISOString().split('T')[0],
-        currentSurah: formData.currentSurah || 'Al-Fatiha',
-        completedSurahs: ['Al-Fatiha'],
-        memorizedVerses: 7,
+        currentSurah: formData.currentSurah,
         teacherId: formData.teacherId,
-        status: 'active',
+        status: formData.status as Student['status'],
         notes: formData.notes || null,
       };
 
-      // إضافة الطالب باستخدام Context
-      addStudent(newStudent);
-      console.log('Student created successfully:', newStudent);
+      // تحديث الطالب باستخدام Context
+      updateStudent(updatedStudent);
+      console.log('Student updated successfully:', updatedStudent);
 
       // إظهار رسالة نجاح
-      alert('تم إضافة الطالب بنجاح!');
+      alert('تم تحديث بيانات الطالب بنجاح!');
 
-      // Redirect to students list
-      router.push(`/${locale}/students`);
+      // Redirect to student details
+      router.push(`/${locale}/students/${studentId}`);
     } catch (error) {
-      console.error('Error creating student:', error);
-      alert('فشل في إضافة الطالب. الرجاء المحاولة مرة أخرى.');
+      console.error('Error updating student:', error);
+      alert('فشل في تحديث بيانات الطالب. الرجاء المحاولة مرة أخرى.');
     } finally {
       setIsSubmitting(false);
     }
@@ -128,35 +145,53 @@ const NewStudentPage: React.FC = () => {
   const gradeOptions = getGradeOptions();
   const surahOptions = getSurahOptions();
 
+  if (!student) {
+    return (
+      <div className="max-w-2xl mx-auto space-y-6">
+        <Card>
+          <CardContent className="py-12 text-center">
+            <p className="text-gray-600">{t('editStudentPage.studentNotFound')}</p>
+            <Button
+              onClick={() => router.push(`/${locale}/students`)}
+              className="mt-4"
+            >
+              {t('editStudentPage.backToStudents')}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">{t('addStudentPage.title')}</h1>
-        <p className="text-gray-600">{t('addStudentPage.subtitle')}</p>
+        <h1 className="text-2xl font-bold text-gray-900">{t('editStudentPage.title')}</h1>
+        <p className="text-gray-600">{t('editStudentPage.subtitle')}</p>
       </div>
 
       {/* Form */}
       <Card>
         <CardHeader>
-          <CardTitle>{t('addStudentPage.studentInformation')}</CardTitle>
+          <CardTitle>{t('editStudentPage.studentInformation')}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Personal Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.personalInformation')}</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.personalInformation')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
-                  label={t('addStudentPage.fields.fullName')}
+                  label={t('editStudentPage.fields.fullName')}
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                   error={errors.name}
-                  placeholder={t('addStudentPage.placeholders.fullName')}
+                  placeholder={t('editStudentPage.placeholders.fullName')}
                 />
                 <Input
-                  label={t('addStudentPage.fields.age')}
+                  label={t('editStudentPage.fields.age')}
                   name="age"
                   type="number"
                   min="5"
@@ -164,12 +199,12 @@ const NewStudentPage: React.FC = () => {
                   value={formData.age}
                   onChange={handleInputChange}
                   error={errors.age}
-                  placeholder={t('addStudentPage.placeholders.age')}
+                  placeholder={t('editStudentPage.placeholders.age')}
                 />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select
-                  label={t('addStudentPage.fields.grade')}
+                  label={t('editStudentPage.fields.grade')}
                   name="grade"
                   value={formData.grade}
                   onChange={handleInputChange}
@@ -177,59 +212,72 @@ const NewStudentPage: React.FC = () => {
                   options={gradeOptions}
                 />
                 <Input
-                  label={t('addStudentPage.fields.email')}
+                  label={t('editStudentPage.fields.email')}
                   name="email"
                   type="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   error={errors.email}
-                  placeholder={t('addStudentPage.placeholders.email')}
+                  placeholder={t('editStudentPage.placeholders.email')}
                 />
               </div>
             </div>
 
             {/* Parent Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.parentInformation')}</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.parentInformation')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
-                  label={t('addStudentPage.fields.parentName')}
+                  label={t('editStudentPage.fields.parentName')}
                   name="parentName"
                   value={formData.parentName}
                   onChange={handleInputChange}
                   error={errors.parentName}
-                  placeholder={t('addStudentPage.placeholders.parentName')}
+                  placeholder={t('editStudentPage.placeholders.parentName')}
                 />
                 <Input
-                  label={t('addStudentPage.fields.parentPhone')}
+                  label={t('editStudentPage.fields.parentPhone')}
                   name="parentPhone"
                   type="tel"
                   value={formData.parentPhone}
                   onChange={handleInputChange}
                   error={errors.parentPhone}
-                  placeholder={t('addStudentPage.placeholders.parentPhone')}
+                  placeholder={t('editStudentPage.placeholders.parentPhone')}
                 />
               </div>
             </div>
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.academicInformation')}</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.academicInformation')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select
-                  label={t('addStudentPage.fields.startingSurah')}
+                  label={t('editStudentPage.fields.currentSurah')}
                   name="currentSurah"
                   value={formData.currentSurah}
                   onChange={handleInputChange}
-                  options={surahOptions.slice(0, 10)} // Show first 10 surahs for beginners
+                  options={surahOptions}
                 />
                 <Select
-                  label={t('addStudentPage.fields.assignedTeacher')}
+                  label={t('editStudentPage.fields.assignedTeacher')}
                   name="teacherId"
                   value={formData.teacherId}
                   onChange={handleInputChange}
                   error={errors.teacherId}
-                  options={[{ value: '', label: t('addStudentPage.placeholders.selectTeacher') }, ...teacherOptions]}
+                  options={[{ value: '', label: t('editStudentPage.placeholders.selectTeacher') }, ...teacherOptions]}
+                />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Select
+                  label={t('editStudentPage.fields.status')}
+                  name="status"
+                  value={formData.status}
+                  onChange={handleInputChange}
+                  options={[
+                    { value: 'active', label: t('common.active') },
+                    { value: 'inactive', label: t('common.inactive') },
+                    { value: 'graduated', label: t('common.graduated') },
+                  ]}
                 />
               </div>
             </div>
@@ -237,11 +285,11 @@ const NewStudentPage: React.FC = () => {
             {/* Notes */}
             <div>
               <Textarea
-                label={t('addStudentPage.fields.notes')}
+                label={t('editStudentPage.fields.notes')}
                 name="notes"
                 value={formData.notes}
                 onChange={handleInputChange}
-                placeholder={t('addStudentPage.placeholders.notes')}
+                placeholder={t('editStudentPage.placeholders.notes')}
                 rows={3}
               />
             </div>
@@ -254,14 +302,14 @@ const NewStudentPage: React.FC = () => {
                 onClick={() => router.back()}
                 className="flex-1"
               >
-                {t('addStudentPage.actions.cancel')}
+                {t('editStudentPage.actions.cancel')}
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1"
               >
-                {isSubmitting ? t('addStudentPage.actions.addingStudent') : t('addStudentPage.actions.addStudent')}
+                {isSubmitting ? t('editStudentPage.actions.updatingStudent') : t('editStudentPage.actions.updateStudent')}
               </Button>
             </div>
           </form>
@@ -271,4 +319,4 @@ const NewStudentPage: React.FC = () => {
   );
 };
 
-export default NewStudentPage;
+export default EditStudentPage;
