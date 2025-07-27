@@ -18,8 +18,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const navigation = [
     { name: t('navigation.home'), href: `/${locale}`, icon: '🏠' },
     { name: t('navigation.students'), href: `/${locale}/students`, icon: '👥' },
-    { name: t('navigation.schedule'), href: `/${locale}/schedule`, icon: '📅' },
     { name: t('navigation.teachers'), href: `/${locale}/teachers`, icon: '👨‍🏫' },
+    { name: t('navigation.attendance'), href: `/${locale}/attendance`, icon: '✅' },
+    { name: t('navigation.schedule'), href: `/${locale}/schedule`, icon: '📅' },
   ];
 
   const isActive = (href: string) => {

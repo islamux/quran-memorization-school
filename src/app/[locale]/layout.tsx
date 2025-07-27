@@ -7,7 +7,7 @@ import {getDirection, Locale, locales} from '@/i18n/config';
 import {getMessages} from '@/i18n/loadMessages';
 import '../globals.css';
 import Layout from '@/components/Layout';
-import { DataProvider } from '@/contexts/DataContext';
+import { DataProvider } from '@/contexts/DexieDataContext';
 
 interface Props {
   children: ReactNode;

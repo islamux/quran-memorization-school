@@ -1,5 +1,5 @@
 // إعداد قاعدة البيانات SQLite بطريقة بسيطة
-import Database from 'better-sqlite3';
+// import Database from 'better-sqlite3';
 import path from 'path';
 import { Student, Teacher, ScheduleSlot } from '@/types';
 
@@ -7,20 +7,30 @@ import { Student, Teacher, ScheduleSlot } from '@/types';
 const DB_PATH = path.join(process.cwd(), 'school.db');
 
 // إنشاء أو فتح قاعدة البيانات
-let db: Database.Database;
+let db: any = null;
 
+// تعطيل SQLite مؤقتاً
+/*
 try {
+  const Database = require('better-sqlite3');
   db = new Database(DB_PATH);
   console.log('Database connected successfully at:', DB_PATH);
 } catch (error) {
   console.error('Failed to connect to database:', error);
   // استخدام قاعدة بيانات في الذاكرة كحل احتياطي
-  db = new Database(':memory:');
-  console.log('Using in-memory database as fallback');
+  try {
+    const Database = require('better-sqlite3');
+    db = new Database(':memory:');
+    console.log('Using in-memory database as fallback');
+  } catch (e) {
+    console.error('SQLite is disabled, using localStorage only');
+  }
 }
+*/
 
 // إنشاء الجداول إذا لم تكن موجودة
 export function initializeDatabase() {
+  if (!db) return;
   // جدول الطلاب
   db.exec(`
     CREATE TABLE IF NOT EXISTS students (
@@ -94,6 +104,7 @@ export function initializeDatabase() {
 export const studentDB = {
   // الحصول على جميع الطلاب
   getAll: (): Student[] => {
+    if (!db) return [];
     const stmt = db.prepare('SELECT * FROM students ORDER BY name');
     const rows = stmt.all();
     return rows.map(row => ({
@@ -104,6 +115,7 @@ export const studentDB = {
 
   // الحصول على طالب واحد
   getById: (id: string): Student | null => {
+    if (!db) return null;
     const stmt = db.prepare('SELECT * FROM students WHERE id = ?');
     const row = stmt.get(id);
     if (!row) return null;
@@ -115,6 +127,7 @@ export const studentDB = {
 
   // إضافة طالب جديد
   add: (student: Student): void => {
+    if (!db) return;
     const stmt = db.prepare(`
       INSERT INTO students (
         id, name, age, grade, parentName, parentPhone, 
@@ -143,6 +156,7 @@ export const studentDB = {
 
   // تحديث طالب
   update: (id: string, updates: Partial<Student>): void => {
+    if (!db) return;
     const currentStudent = studentDB.getById(id);
     if (!currentStudent) return;
 
@@ -176,12 +190,14 @@ export const studentDB = {
 
   // حذف طالب
   delete: (id: string): void => {
+    if (!db) return;
     const stmt = db.prepare('DELETE FROM students WHERE id = ?');
     stmt.run(id);
   },
 
   // البحث عن طلاب
   search: (query: string): Student[] => {
+    if (!db) return [];
     const stmt = db.prepare(`
       SELECT * FROM students 
       WHERE name LIKE ? OR parentName LIKE ? OR parentPhone LIKE ?
@@ -313,6 +329,8 @@ export function importData(data: { students: Student[], teachers: Teacher[] }) {
 }
 
 // تهيئة قاعدة البيانات عند بدء التطبيق
-initializeDatabase();
+if (db) {
+  initializeDatabase();
+}
 
 export default db;
