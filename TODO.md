@@ -1,7 +1,7 @@
 # Project To-Do List
 
 ## Immediate Tasks
-- [ok] Fix translation issues
+- [x] Fix translation issues
 
 ## Features to Develop
 - [ ] Develop schedule management feature
@@ -11,6 +11,8 @@
 - [ ] Optimize database queries 
 - [ ] تناسق الاكودا للتطبيق
 هل يتم اتباع نفس الطريقة في كل الملفات ام كل ملف يتم تطبيق حلول مختلفه بسبب نماذج الذكاء الاصطناعي المختلفة
+- التاكد من عرض كارد المعلم بنفس طريقة كارد الطالب
+لاني لاحظت ان التعديل على الخبرة في المعلم في مكان مختلف وليس بنفس التنسيق كما في الطالب "السورة ..."
 - [ ] Enhance UI/UX for mobile devices
 - [ ] Add Android app support 
 
