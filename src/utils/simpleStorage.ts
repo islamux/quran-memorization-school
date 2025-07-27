@@ -1,12 +1,29 @@
 // استخدام SQLite بطريقة بسيطة تشبه localStorage
-import { studentDB, teacherDB, attendanceDB } from '@/lib/database';
 import { Student, Teacher } from '@/types';
+
+// تجنب استيراد قاعدة البيانات في جانب العميل
+let studentDB: any = null;
+let teacherDB: any = null;
+let attendanceDB: any = null;
+
+if (typeof window === 'undefined') {
+  // فقط في جانب الخادم
+  const db = require('@/lib/database');
+  studentDB = db.studentDB;
+  teacherDB = db.teacherDB;
+  attendanceDB = db.attendanceDB;
+}
 
 // دوال بسيطة تشبه التي كنت تستخدمها مع localStorage
 export const storage = {
   // الطلاب
   getStudents: (): Student[] => {
-    return studentDB.getAll();
+    if (typeof window !== 'undefined') {
+      // في جانب العميل، استخدم localStorage
+      const studentsStr = localStorage.getItem('quran_school_students');
+      return studentsStr ? JSON.parse(studentsStr) : [];
+    }
+    return studentDB?.getAll() || [];
   },
   
   addStudent: (student: Student): void => {
@@ -36,14 +53,26 @@ export const storage = {
   },
   
   // الحضور
-  markAttendance: (studentId: string, status: 'present' | 'absent' | 'late') => {
+  markAttendance: (studentId: string, status: 'present' | 'absent' | 'late', note?: string) => {
     const today = new Date().toISOString().split('T')[0];
-    attendanceDB.mark(studentId, today, status);
+    if (typeof window !== 'undefined') {
+      // في جانب العميل، استخدم localStorage
+      const attendanceKey = `attendance_${today}`;
+      const todayAttendance = JSON.parse(localStorage.getItem(attendanceKey) || '{}');
+      todayAttendance[studentId] = { status, note, timestamp: new Date().toISOString() };
+      localStorage.setItem(attendanceKey, JSON.stringify(todayAttendance));
+    } else {
+      attendanceDB?.mark(studentId, today, status, note);
+    }
   },
   
   getTodayAttendance: () => {
     const today = new Date().toISOString().split('T')[0];
-    return attendanceDB.getByDate(today);
+    if (typeof window !== 'undefined') {
+      const attendanceKey = `attendance_${today}`;
+      return JSON.parse(localStorage.getItem(attendanceKey) || '{}');
+    }
+    return attendanceDB?.getByDate(today) || {};
   }
 };
 

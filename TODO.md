@@ -1,4 +1,7 @@
 # Project To-Do List
+##
+* Always using pnpm 
+* 
 
 ## Immediate Tasks
 - [x] Fix translation issues
@@ -16,6 +19,9 @@
 - [ ] Enhance UI/UX for mobile devices
 - [ ] Add Android app support 
 
+[x] هناك ازدود في استخدام قاعدة البيانات - تم الحل
+✅ تم استبدال SQLite و localStorage بـ Dexie.js (IndexedDB)
+✅ Dexie.js توفر قاعدة بيانات محلية سريعة ومتوافقة مع Next.js
 ## Long-term Goals
 - [ ] Integrate with a payment gateway for donations
 
