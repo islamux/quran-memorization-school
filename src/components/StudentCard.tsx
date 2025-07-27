@@ -40,10 +40,11 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, locale }) => {
           </span>
         </div>
 
+        {/* studentCard in studentsPage */}
         <div className="space-y-2 mb-4">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">{t('studentsPage.studentCard.currentSurah')}:</span>
-            <span className="font-medium">{student.currentSurah}</span>
+            <span className="text-gray-500">{t('studentsPage.studentCard.currentSurah')}:</span>
+            <span className="font-medium text-gray-500">{student.currentSurah}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('studentsPage.studentCard.versesMemorized')}:</span>
@@ -51,11 +52,11 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, locale }) => {
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('studentsPage.studentCard.teacher')}:</span>
-            <span className="font-medium">{teacher?.name || t('studentsPage.studentCard.notAssigned')}</span>
+            <span className="font-medium text-gray-500">{teacher?.name || t('studentsPage.studentCard.notAssigned')}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">{t('studentsPage.studentCard.enrolled')}:</span>
-            <span className="font-medium">{formatDate(student.enrollmentDate)}</span>
+            <span className="font-medium text-gray-500">{formatDate(student.enrollmentDate)}</span>
           </div>
         </div>
 

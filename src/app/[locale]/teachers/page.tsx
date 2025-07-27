@@ -22,11 +22,11 @@ const TeachersPage: React.FC = () => {
   console.log('Teachers page - allTeachers:', allTeachers);
   const filteredTeachers = searchQuery
     ? allTeachers.filter(teacher =>
-        teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        teacher.specialization.some(spec => 
-          spec.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+      teacher.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      teacher.specialization.some(spec => 
+        spec.toLowerCase().includes(searchQuery.toLowerCase())
       )
+    )
     : allTeachers;
 
   const getStatusBadge = (status: string) => {
@@ -36,7 +36,7 @@ const TeachersPage: React.FC = () => {
   };
 
   const { students: allStudents } = useData();
-  
+
   const TeacherCard = ({ teacher }: { teacher: Teacher }) => {
     const students = allStudents.filter(student => student.teacherId === teacher.id);
     const schedule: any[] = []; // Temporarily empty until we implement schedule in DataContext
@@ -47,8 +47,8 @@ const TeachersPage: React.FC = () => {
           <div className="flex items-start justify-between mb-4">
             <div>
               <h3 className="text-lg font-semibold text-gray-900">{teacher.name}</h3>
-              <p className="text-sm text-gray-600">{teacher.email}</p>
-              <p className="text-sm text-gray-600">{teacher.phone}</p>
+              <p className="text-sm text-gray-500">{teacher.email}</p>
+              <p className="text-sm text-gray-500">{teacher.phone}</p>
             </div>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(teacher.status)}`}>
               {tCommon(teacher.status)}
@@ -69,26 +69,27 @@ const TeachersPage: React.FC = () => {
                 ))}
               </div>
             </div>
-
+            {/* teacherCard */}
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-gray-600">{t('teacherCard.experience')}:</p>
-                <p className="font-medium">{teacher.experience} {teacher.experience === 1 ? t('teacherCard.year') : t('teacherCard.years')}</p>
+                <p className="font-medium text-gray-400">{teacher.experience} {teacher.experience === 1 ? t('teacherCard.year') : t('teacherCard.years')}</p>
               </div>
               <div>
                 <p className="text-gray-600">{t('teacherCard.students')}:</p>
-                <p className="font-medium">{students.length} {t('teacherCard.assigned')}</p>
+                <p className="font-medium text-gray-400">{students.length} {t('teacherCard.assigned')}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
+
                 <p className="text-gray-600">{t('teacherCard.classes')}:</p>
-                <p className="font-medium">{schedule.length} {t('teacherCard.perWeek')}</p>
+                <p className="font-medium text-gray-400">{schedule.length} {t('teacherCard.perWeek')}</p>
               </div>
               <div>
                 <p className="text-gray-600">{t('teacherCard.load')}:</p>
-                <p className="font-medium">
+                <p className="font-medium text-gray-400">
                   {students.length < 5 ? t('teacherCard.light') : students.length < 10 ? t('teacherCard.moderate') : t('teacherCard.heavy')}
                 </p>
               </div>
@@ -128,7 +129,7 @@ const TeachersPage: React.FC = () => {
             <div className="flex items-start justify-between mb-6">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">{teacher.name}</h2>
-                <p className="text-gray-600">{teacher.email}</p>
+                <p className="text-gray-500">{teacher.email}</p>
               </div>
               <Button
                 variant="outline"
