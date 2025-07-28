@@ -10,8 +10,13 @@ export default function AttendancePage() {
   const [students, setStudents] = useState<Student[]>([]);
   const [attendance, setAttendance] = useState<{ [key: string]: { status: 'present' | 'absent' | 'late'; note?: string } }>({});
   const [saved, setSaved] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [selectedDate, setSelectedDate] = useState('');
   const [loading, setLoading] = useState(false);
+  
+  // Set initial date in useEffect to avoid hydration mismatch
+  useEffect(() => {
+    setSelectedDate(new Date().toISOString().split('T')[0]);
+  }, []);
 
   useEffect(() => {
     // جلب الطلاب النشطين فقط
@@ -99,8 +104,9 @@ export default function AttendancePage() {
             </div>
             <div className="flex items-end">
               <p className="text-sm text-gray-500">
-                {selectedDate === new Date().toISOString().split('T')[0] ? 'اليوم' : 
-                 new Date(selectedDate).toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                {selectedDate && selectedDate.length > 0 ? 
+                  new Date(selectedDate).toLocaleDateString('ar-SA', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 
+                  ''}
               </p>
             </div>
           </div>
@@ -157,10 +163,10 @@ export default function AttendancePage() {
                     <td className="p-4 text-center">
                       <input
                         type="text"
-                        placeholder="ملاحظة"
+                        placeholder="أضف ملاحظة..."
                         value={attendance[student.id]?.note || ''}
                         onChange={(e) => handleAttendance(student.id, attendance[student.id]?.status, e.target.value)}
-                        className="w-full px-2 py-1 border rounded"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700 placeholder-gray-400"
                       />
                     </td>
                   </tr>

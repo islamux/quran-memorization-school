@@ -8,7 +8,7 @@ import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { useTeacherById } from '@/utils/clientDataUtils';
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 import { ArrowLeft } from 'lucide-react';
 
 const EditTeacherPage: React.FC = () => {

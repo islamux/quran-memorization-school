@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 import { Teacher } from '@/types';
 
 const TeachersPage: React.FC = () => {

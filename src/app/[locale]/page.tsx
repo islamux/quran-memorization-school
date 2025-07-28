@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
@@ -16,13 +16,16 @@ const HomePage: React.FC = () => {
   const studentStats = getStudentStats();
   const activeTeachers = getActiveTeachers();
   const recentStudents = getActiveStudents().slice(0, 5);
-
-  const getDayName = () => {
+  
+  // Use state to handle the current day to avoid hydration mismatch
+  const [currentDay, setCurrentDay] = useState<string>('sunday');
+  
+  useEffect(() => {
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    return days[new Date().getDay()];
-  };
+    setCurrentDay(days[new Date().getDay()]);
+  }, []);
 
-  const todaySlots = getWeeklySchedule().find(day => day.day === getDayName())?.slots || [];
+  const todaySlots = getWeeklySchedule().find(day => day.day === currentDay)?.slots || [];
 
   return (
     <div className="space-y-6">

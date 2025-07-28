@@ -8,7 +8,7 @@ import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { formatDate } from '@/utils/dataUtils';
 import { useTeacherById, useStudentById } from '@/utils/clientDataUtils';
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 import { ArrowLeft, Edit, Trash2, User, Phone, Mail, Calendar, Book, GraduationCap, AlertTriangle, XCircle, Info } from 'lucide-react';
 
 const StudentDetailPage: React.FC = () => {

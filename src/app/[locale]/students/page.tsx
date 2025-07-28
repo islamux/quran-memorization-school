@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 import StudentCard from '@/components/StudentCard';
 import { Student } from '@/types';
 

@@ -183,10 +183,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  if (isLoading) {
-    return <div>جاري تحميل البيانات...</div>;
-  }
-
   return (
     <DataContext.Provider
       value={{
@@ -205,7 +201,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
         refreshData: loadData
       }}
     >
-      {children}
+      {isLoading ? (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+            <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
+          </div>
+        </div>
+      ) : (
+        children
+      )}
     </DataContext.Provider>
   );
 }

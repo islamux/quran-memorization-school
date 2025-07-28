@@ -1,6 +1,6 @@
 'use client';
 
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 
 // Hook to get teacher options for select dropdowns
 export const useTeacherOptions = () => {

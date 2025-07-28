@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button';
 import Input, { Select, Textarea } from '@/components/ui/Input';
 import { getGradeOptions, getSurahOptions } from '@/utils/dataUtils';
 import { useTeacherOptions } from '@/utils/clientDataUtils';
-import { useData } from '@/contexts/DataContext';
+import { useData } from '@/contexts/DexieDataContext';
 import { Student } from '@/types';
 
 const NewStudentPage: React.FC = () => {
