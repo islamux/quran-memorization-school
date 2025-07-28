@@ -43,7 +43,7 @@ const SchedulePage: React.FC = () => {
       <div key={slot.id} className="p-4 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <h4 className="font-semibold text-gray-900">{slot.subject}</h4>
+            <h4 className="font-semibold text-gray-900">{t(`subjects.${slot.subject}`, { defaultValue: slot.subject })}</h4>
             <p className="text-sm text-gray-600">{teacher?.name}</p>
           </div>
           <div className="text-right">

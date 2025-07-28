@@ -1,10 +1,15 @@
 # Project To-Do List
-##
-* Always using pnpm 
+## Rules
+* Always using pnpm in project.
+* Make changes, as easy as i can.
 * 
 
 ## Immediate Tasks
-- [x] Fix translation issues
+- [x] Fix translation issues.
+- []  translation names of students, teachers.
+- []  Fix errors in project : ex  src/[Locales]/students/page.tsx
+- []  Fix dublicate of data source --> mokdata,Dexie. 
+- []  Monthly, Semi-year, Yearly reports.
 
 ## Features to Develop
 - [ ] Develop schedule management feature
@@ -19,12 +24,12 @@
 - [ ] Enhance UI/UX for mobile devices
 - [ ] Add Android app support 
 
-[x] هناك ازدود في استخدام قاعدة البيانات - تم الحل
+[x] هناك ازدوج في استخدام قاعدة البيانات - تم الحل
 ✅ تم استبدال SQLite و localStorage بـ Dexie.js (IndexedDB)
 ✅ Dexie.js توفر قاعدة بيانات محلية سريعة ومتوافقة مع Next.js
-## Long-term Goals
-- [ ] Integrate with a payment gateway for donations
 
+## Long-term Goals
+    
 ---
 
 *Prioritize tasks based on project needs and progress.*

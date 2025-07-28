@@ -12,6 +12,7 @@ import { getWeeklySchedule } from '@/lib/schedule';
 const HomePage: React.FC = () => {
   const t = useTranslations('homepage');
   const tCommon = useTranslations('common');
+  const tSchedule = useTranslations('schedulePage');
   const locale = useLocale();
   const studentStats = getStudentStats();
   const activeTeachers = getActiveTeachers();
@@ -111,7 +112,7 @@ const HomePage: React.FC = () => {
                 <div key={student.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                   <div>
                     <p className="font-medium text-gray-900">{student.name}</p>
-                    <p className="text-sm text-gray-600">{student.grade} • {student.currentSurah}</p>
+                    <p className="text-sm text-gray-600">{student.grade} • {tCommon(`surahs.${student.currentSurah}`, { defaultValue: student.currentSurah })}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-green-600">{student.memorizedVerses} {student.memorizedVerses === 1 ? t('studentCard.verse') : t('studentCard.verses')}</p>
@@ -141,8 +142,8 @@ const HomePage: React.FC = () => {
                 {todaySlots.slice(0, 5).map((slot) => (
                   <div key={slot.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-medium text-gray-900">{slot.subject}</p>
-                      <p className="text-sm text-gray-600">{slot.room} • {slot.type}</p>
+                      <p className="font-medium text-gray-900">{tSchedule(`subjects.${slot.subject}`, { defaultValue: slot.subject })}</p>
+                      <p className="text-sm text-gray-600">{slot.room} • {tSchedule(`slotType.${slot.type}`)}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-blue-600">

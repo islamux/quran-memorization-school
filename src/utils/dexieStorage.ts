@@ -1,40 +1,83 @@
 'use client';
 
 import { Student, Teacher, ScheduleSlot } from '@/types';
-import { studentDB, teacherDB, scheduleDB, attendanceDB, migrateFromLocalStorage } from '@/lib/dexieDB';
+import { studentDB, teacherDB, scheduleDB, attendanceDB, migrateFromLocalStorage, clearAllData } from '@/lib/dexieDB';
 import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule } from '@/data/mockData';
 
 // متغير لتتبع حالة التهيئة
 let isInitialized = false;
+
+// إعادة تعيين حالة التهيئة عند تحميل الصفحة
+if (typeof window !== 'undefined') {
+  // عند كل تحميل للصفحة، سيتم التحقق من البيانات الافتراضية
+  isInitialized = false;
+}
 
 // دالة التهيئة
 async function initializeDatabase() {
   if (isInitialized) return;
   
   try {
-    // التحقق من وجود بيانات
-    const existingStudents = await studentDB.getAll();
-    
-    if (existingStudents.length === 0) {
-      // التحقق من وجود بيانات في localStorage
-      const hasLocalStorageData = localStorage.getItem('quran_school_students') || 
-                                  localStorage.getItem('quran_school_teachers') ||
-                                  localStorage.getItem('quran_school_schedule');
-      
-      if (hasLocalStorageData) {
-        // ترحيل البيانات من localStorage
-        await migrateFromLocalStorage();
-      } else {
-        // استخدام البيانات الأولية
-        await Promise.all(initialStudents.map(student => studentDB.add(student)));
-        await Promise.all(initialTeachers.map(teacher => teacherDB.add(teacher)));
-        await Promise.all(initialSchedule.map(slot => scheduleDB.add(slot)));
-      }
-    }
+    // التحقق من وجود البيانات الافتراضية وإضافتها إذا لم تكن موجودة
+    await ensureDefaultData();
     
     isInitialized = true;
   } catch (error) {
     console.error('خطأ في تهيئة قاعدة البيانات:', error);
+  }
+}
+
+// دالة للتأكد من وجود البيانات الافتراضية
+async function ensureDefaultData() {
+  try {
+    // التحقق من وجود كل طالب افتراضي وإضافته إذا لم يكن موجوداً
+    for (const student of initialStudents) {
+      const exists = await studentDB.getById(student.id);
+      if (!exists) {
+        await studentDB.add(student);
+        console.log(`✅ تم إضافة الطالب الافتراضي: ${student.name}`);
+      }
+    }
+    
+    // التحقق من وجود كل معلم افتراضي وإضافته إذا لم يكن موجوداً
+    for (const teacher of initialTeachers) {
+      const exists = await teacherDB.getById(teacher.id);
+      if (!exists) {
+        await teacherDB.add(teacher);
+        console.log(`✅ تم إضافة المعلم الافتراضي: ${teacher.name}`);
+      }
+    }
+    
+    // التحقق من وجود كل حصة افتراضية وإضافتها إذا لم تكن موجودة
+    for (const slot of initialSchedule) {
+      const exists = await scheduleDB.getAll();
+      const slotExists = exists.find(s => s.id === slot.id);
+      if (!slotExists) {
+        await scheduleDB.add(slot);
+        console.log(`✅ تم إضافة الحصة الافتراضية: ${slot.subject}`);
+      }
+    }
+    
+    console.log('✅ تم التحقق من البيانات الافتراضية');
+  } catch (error) {
+    console.error('خطأ في التحقق من البيانات الافتراضية:', error);
+  }
+}
+
+// دالة لإعادة تعيين البيانات إلى الافتراضية (يمكن استدعاؤها يدوياً)
+export async function resetToDefaultData() {
+  try {
+    await clearAllData();
+    
+    // تحميل البيانات الافتراضية من mockData.ts
+    await Promise.all(initialStudents.map(student => studentDB.add(student)));
+    await Promise.all(initialTeachers.map(teacher => teacherDB.add(teacher)));
+    await Promise.all(initialSchedule.map(slot => scheduleDB.add(slot)));
+    
+    console.log('✅ تم إعادة تعيين البيانات إلى الافتراضية');
+  } catch (error) {
+    console.error('خطأ في إعادة تعيين البيانات:', error);
+    throw error;
   }
 }
 
