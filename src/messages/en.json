@@ -65,7 +65,9 @@
     "status": "Status",
     "active": "Active",
     "inactive": "Inactive",
-    "graduated": "Graduated"
+    "graduated": "Graduated",
+    "status.online": "You are back online",
+    "status.offline": "You are offline. Changes will be saved locally."
   },
   "studentsPage": {
     "title": "Students",

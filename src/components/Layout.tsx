@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
+import OfflineIndicator from './OfflineIndicator';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -87,6 +88,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           ))}
         </div>
       </nav>
+
+      <OfflineIndicator />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

@@ -23,6 +23,14 @@ const cairo = Cairo({
 export const metadata: Metadata = {
   title: 'Quran Memorization School',
   description: 'A simple and clean management system for Quran memorization schools',
+  manifest: '/manifest.json',
+  themeColor: '#059669',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Quran School',
+  },
 };
 
 export async function generateStaticParams() {

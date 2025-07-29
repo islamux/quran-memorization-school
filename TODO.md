@@ -28,8 +28,10 @@
 - ✅ Dexie.js توفر قاعدة بيانات محلية سريعة ومتوافقة مع Next.js
 
 ## Long-term Goals
-    
----
+- [] PWA (Progressive Web App)
+- [] Android Native version (kotlin)    
+- [] Android ReactNative.
+- 
 
 *Prioritize tasks based on project needs and progress.*
 
