@@ -10,6 +10,7 @@ import { ScheduleSlot } from '@/types';
 
 const SchedulePage: React.FC = () => {
   const t = useTranslations('schedulePage');
+  const tCommon = useTranslations('common');
   const [selectedTeacher, setSelectedTeacher] = useState('all');
   const [selectedDay, setSelectedDay] = useState('all');
 
@@ -71,7 +72,7 @@ const SchedulePage: React.FC = () => {
                 {students.map((student) => (
                   <div key={student?.id} className="flex items-center justify-between">
                     <span>{student?.name}</span>
-                    <span className="text-xs text-gray-500">{student?.grade}</span>
+                    <span className="text-xs text-gray-500">{tCommon(`grades.${student?.grade}`, { defaultValue: student?.grade })}</span>
                   </div>
                 ))}
               </div>

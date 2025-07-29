@@ -33,7 +33,7 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, locale }) => {
         <div className="flex items-start justify-between mb-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900">{student.name}</h3>
-            <p className="text-sm text-gray-600">{student.grade} • {t('studentsPage.studentCard.age')} {student.age}</p>
+            <p className="text-sm text-gray-600">{t(`common.grades.${student.grade}`, { defaultValue: student.grade })} • {t('studentsPage.studentCard.age')} {student.age}</p>
           </div>
           <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusBadge(student.status)}`}>
             {t(`common.${student.status}`)}

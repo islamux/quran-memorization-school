@@ -66,6 +66,20 @@
     "active": "نشط",
     "inactive": "غير نشط",
     "graduated": "متخرج",
+    "grades": {
+      "1st Grade": "الصف الأول",
+      "2nd Grade": "الصف الثاني",
+      "3rd Grade": "الصف الثالث",
+      "4th Grade": "الصف الرابع",
+      "5th Grade": "الصف الخامس",
+      "6th Grade": "الصف السادس",
+      "7th Grade": "الصف السابع",
+      "8th Grade": "الصف الثامن",
+      "9th Grade": "الصف التاسع",
+      "10th Grade": "الصف العاشر",
+      "11th Grade": "الصف الحادي عشر",
+      "12th Grade": "الصف الثاني عشر"
+    },
     "surahs": {
       "Al-Fatiha": "الفاتحة",
       "Al-Baqarah": "البقرة",

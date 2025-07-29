@@ -158,7 +158,7 @@ const StudentDetailPage: React.FC = () => {
             </div>
             <div>
               <label className="text-sm text-gray-500">{t('studentDetailPage.fields.grade')}</label>
-              <p className="text-gray-900 font-medium">{student.grade}</p>
+              <p className="text-gray-900 font-medium">{t(`common.grades.${student.grade}`, { defaultValue: student.grade })}</p>
             </div>
             {student.email && (
               <div>

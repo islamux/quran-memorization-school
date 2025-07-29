@@ -23,10 +23,9 @@
 لاني لاحظت ان التعديل على الخبرة في المعلم في مكان مختلف وليس بنفس التنسيق كما في الطالب "السورة ..."
 - [ ] Enhance UI/UX for mobile devices
 - [ ] Add Android app support 
-
-[x] هناك ازدوج في استخدام قاعدة البيانات - تم الحل
-✅ تم استبدال SQLite و localStorage بـ Dexie.js (IndexedDB)
-✅ Dexie.js توفر قاعدة بيانات محلية سريعة ومتوافقة مع Next.js
+- [x] هناك ازدوج في استخدام قاعدة البيانات - تم الحل
+- ✅ تم استبدال SQLite و localStorage بـ Dexie.js (IndexedDB)
+- ✅ Dexie.js توفر قاعدة بيانات محلية سريعة ومتوافقة مع Next.js
 
 ## Long-term Goals
     

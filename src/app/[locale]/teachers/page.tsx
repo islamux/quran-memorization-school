@@ -199,7 +199,7 @@ const TeachersPage: React.FC = () => {
                       <div key={student.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                         <div>
                           <p className="font-medium text-gray-900">{student.name}</p>
-                          <p className="text-sm text-gray-600">{student.grade} • {student.currentSurah}</p>
+                          <p className="text-sm text-gray-600">{tCommon(`grades.${student.grade}`, { defaultValue: student.grade })} • {student.currentSurah}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-medium text-green-600">{student.memorizedVerses} {student.memorizedVerses === 1 ? t('teacherDetail.verse') : t('teacherDetail.verses')}</p>
