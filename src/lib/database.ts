@@ -107,7 +107,7 @@ export const studentDB = {
     if (!db) return [];
     const stmt = db.prepare('SELECT * FROM students ORDER BY name');
     const rows = stmt.all();
-    return rows.map(row => ({
+    return rows.map((row: any) => ({
       ...row,
       completedSurahs: JSON.parse(row.completedSurahs || '[]')
     }));
@@ -205,7 +205,7 @@ export const studentDB = {
     `);
     const searchTerm = `%${query}%`;
     const rows = stmt.all(searchTerm, searchTerm, searchTerm);
-    return rows.map(row => ({
+    return rows.map((row: any) => ({
       ...row,
       completedSurahs: JSON.parse(row.completedSurahs || '[]')
     }));
@@ -217,7 +217,7 @@ export const teacherDB = {
   getAll: (): Teacher[] => {
     const stmt = db.prepare('SELECT * FROM teachers ORDER BY name');
     const rows = stmt.all();
-    return rows.map(row => ({
+    return rows.map((row: any) => ({
       ...row,
       specialization: JSON.parse(row.specialization || '[]'),
       students: [], // سيتم ملؤها من جدول الطلاب
