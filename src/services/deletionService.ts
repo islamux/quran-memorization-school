@@ -153,7 +153,7 @@ class DeletionService {
     } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف الطالب: ${error.message}`
+        message: `خطأ في حذف الطالب: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`
       };
     }
   }
@@ -181,7 +181,7 @@ class DeletionService {
     } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف المعلم: ${error.message}`
+        message: `خطأ في حذف المعلم: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`
       };
     }
   }
@@ -210,7 +210,7 @@ class DeletionService {
     } catch (error) {
       return {
         success: false,
-        message: `خطأ في استرجاع الطالب: ${error.message}`
+        message: `خطأ في استرجاع الطالب: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`
       };
     }
   }
