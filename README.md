@@ -12,7 +12,10 @@ A simple, clean, and beginner-friendly web application for managing Quran memori
 - **Student Management**: Add, view, edit, and track student progress
 - **Teacher Management**: Manage teaching staff and their assignments
 - **Schedule Management**: View and organize weekly class schedules
+- **Attendance Tracking**: Mark and monitor daily student attendance with detailed reports
 - **Dashboard Overview**: Quick insights and statistics
+- **Offline Support**: Enhanced offline capabilities with Dexie.js database
+- **Multi-language Support**: Full Arabic and English interface with easy language switching
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
 ### Key Pages
@@ -21,6 +24,8 @@ A simple, clean, and beginner-friendly web application for managing Quran memori
 3. **Add/Edit Student**: User-friendly forms for student enrollment
 4. **Schedule View**: Weekly schedule with detailed class information
 5. **Teachers View**: Teacher profiles with detailed information modals
+6. **Attendance Page**: Daily attendance marking with status tracking
+7. **Attendance Reports**: Comprehensive attendance analytics and reports
 
 ## 🚀 Getting Started
 
@@ -60,14 +65,24 @@ npm start
 ```
 src/
 ├── app/                    # Next.js App Router pages
-│   ├── page.tsx           # Home dashboard
-│   ├── layout.tsx         # Root layout
-│   ├── students/          # Student management pages
-│   ├── schedule/          # Schedule pages
-│   └── teachers/          # Teacher pages
+│   ├── [locale]/          # Internationalized pages
+│   │   ├── page.tsx       # Home dashboard
+│   │   ├── students/      # Student management pages
+│   │   ├── schedule/      # Schedule pages
+│   │   ├── teachers/      # Teacher pages
+│   │   └── attendance/    # Attendance tracking pages
+│   ├── api/               # API routes
+│   └── layout.tsx         # Root layout
 ├── components/            # Reusable React components
 │   ├── Layout.tsx         # Main layout component
+│   ├── LanguageSwitcher.tsx # Language toggle component
 │   └── ui/               # UI components (Button, Card, Input)
+├── lib/                  # Core libraries
+│   ├── database.ts       # Database abstraction layer
+│   └── dexieDB.ts        # Dexie.js database implementation
+├── messages/             # Internationalization files
+│   ├── ar.json          # Arabic translations
+│   └── en.json          # English translations
 ├── types/                # TypeScript type definitions
 ├── data/                 # Mock data for development
 ├── utils/                # Utility functions and data helpers
@@ -113,6 +128,18 @@ interface Student {
 }
 ```
 
+### Attendance Model
+```typescript
+interface AttendanceRecord {
+  id?: number;
+  studentId: string;
+  date: string;
+  status: 'present' | 'absent' | 'late';
+  note?: string;
+  timestamp: string;
+}
+```
+
 ### Teacher Model
 ```typescript
 interface Teacher {
@@ -151,10 +178,19 @@ interface ScheduleSlot {
 3. **Data Models**: Extend types in `src/types/index.ts`
 4. **Styling**: Use Tailwind CSS classes for consistent design
 
+### Storage Options
+The application supports multiple storage backends:
+
+1. **Dexie.js (Default)**: IndexedDB-based storage for offline support
+2. **Local Storage**: Simple browser storage for basic needs
+3. **API Integration**: Ready for backend integration
+
+To switch storage methods, modify `src/utils/storage.ts`.
+
 ### Mock Data
 Currently uses local mock data in `src/data/mockData.ts`. To integrate with a real backend:
 
-1. Replace mock data functions in `src/utils/dataUtils.ts`
+1. Replace data functions in `src/lib/database.ts`
 2. Add API calls using fetch or your preferred HTTP client
 3. Implement proper error handling and loading states
 
@@ -172,9 +208,12 @@ For production use, consider integrating with:
 - **Component Structure**: Clean, reusable components
 - **Separation of Concerns**: Clear separation between UI, data, and business logic
 - **Consistent Naming**: Clear, descriptive variable and function names
+- **Internationalization**: Proper i18n setup with next-intl
 
 ### User Experience
 - **Responsive Design**: Mobile-first approach
+- **Multi-language Support**: Seamless switching between Arabic and English
+- **Offline Functionality**: Works without internet connection
 - **Loading States**: Proper feedback for user actions
 - **Form Validation**: Client-side validation with clear error messages
 - **Accessibility**: Semantic HTML and proper ARIA labels

@@ -125,7 +125,7 @@ const EditStudentPage: React.FC = () => {
       };
 
       // تحديث الطالب باستخدام Context
-      updateStudent(updatedStudent);
+      updateStudent(student.id, updatedStudent);
       console.log('Student updated successfully:', updatedStudent);
 
       // إظهار رسالة نجاح

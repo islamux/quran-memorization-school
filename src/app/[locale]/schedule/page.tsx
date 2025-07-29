@@ -1,16 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { Select } from '@/components/ui/Input';
-import { getWeeklySchedule, getTeacherById, getStudentById, formatTime, capitalizeFirst } from '@/utils/dataUtils';
+import { getWeeklySchedule, getTeacherById, getStudentById, formatTime } from '@/utils/dataUtils';
 import { ScheduleSlot } from '@/types';
 
 const SchedulePage: React.FC = () => {
   const t = useTranslations('schedulePage');
-  const locale = useLocale();
   const [selectedTeacher, setSelectedTeacher] = useState('all');
   const [selectedDay, setSelectedDay] = useState('all');
 

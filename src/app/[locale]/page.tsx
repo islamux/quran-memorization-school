@@ -143,7 +143,7 @@ const HomePage: React.FC = () => {
                   <div key={slot.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
                       <p className="font-medium text-gray-900">{tSchedule(`subjects.${slot.subject}`, { defaultValue: slot.subject })}</p>
-                      <p className="text-sm text-gray-600">{tSchedule(`rooms.${slot.room}`, { defaultValue: slot.room })} • {tSchedule(`slotType.${slot.type}`)}</p>
+                      <p className="text-sm text-gray-600">{tSchedule(`rooms.${slot.room || ''}`, { defaultValue: slot.room || '' })} • {tSchedule(`slotType.${slot.type}`, { defaultValue: slot.type })}</p>
                     </div>
                     <div className="text-right">
                       <p className="text-sm font-medium text-blue-600">

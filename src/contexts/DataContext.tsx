@@ -166,7 +166,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف الطالب: ${error.message}`
+        message: `خطأ في حذف الطالب: ${error instanceof Error ? error.message : 'Unknown error'}`
       };
     }
   };
@@ -229,7 +229,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف المعلم: ${error.message}`
+        message: `خطأ في حذف المعلم: ${error instanceof Error ? error.message : 'Unknown error'}`
       };
     }
   };
