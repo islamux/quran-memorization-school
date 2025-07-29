@@ -17,6 +17,9 @@ A simple, clean, and beginner-friendly web application for managing Quran memori
 - **Offline Support**: Enhanced offline capabilities with Dexie.js database
 - **Multi-language Support**: Full Arabic and English interface with easy language switching
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Progressive Web App (PWA)**: Install on Android devices as a native-like app
+- **Works Offline**: Full functionality without internet connection
+- **Auto Updates**: Automatically updates when new versions are available
 
 ### Key Pages
 1. **Home Dashboard**: Overview with statistics and quick actions
