@@ -60,7 +60,7 @@ const SchedulePage: React.FC = () => {
           {slot.room && (
             <div className="flex items-center text-sm text-gray-600">
               <span className="mr-2">📍</span>
-              <span>{slot.room}</span>
+              <span>{t(`rooms.${slot.room}`, { defaultValue: slot.room })}</span>
             </div>
           )}
           

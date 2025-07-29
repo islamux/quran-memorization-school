@@ -409,6 +409,12 @@
       "Qira'at": "قراءات",
       "Islamic Studies": "الدراسات الإسلامية",
       "Tafseer": "تفسير"
+    },
+    "rooms": {
+      "Room A": "القاعة أ",
+      "Room B": "القاعة ب",
+      "Room C": "القاعة ج",
+      "Room D": "القاعة د"
     }
   },
   "editTeacherPage": {
