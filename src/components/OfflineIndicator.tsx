@@ -50,8 +50,8 @@ export default function OfflineIndicator() {
         </span>
         <span>
           {isOnline
-            ? t('status.online', 'You are back online')
-            : t('status.offline', 'You are offline. Changes will be saved locally.')}
+            ? t('status.online')
+            : t('status.offline')}
         </span>
       </div>
     </div>

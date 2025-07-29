@@ -72,7 +72,7 @@ const SchedulePage: React.FC = () => {
                 {students.map((student) => (
                   <div key={student?.id} className="flex items-center justify-between">
                     <span>{student?.name}</span>
-                    <span className="text-xs text-gray-500">{tCommon(`grades.${student?.grade}`, { defaultValue: student?.grade })}</span>
+                    <span className="text-xs text-gray-500">{tCommon(`grades.${student?.grade}`, { defaultValue: student?.grade || '' })}</span>
                   </div>
                 ))}
               </div>

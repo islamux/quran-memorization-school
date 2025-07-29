@@ -2,13 +2,18 @@
 ## Rules
 * Always using pnpm in project.
 * Make changes, as easy as i can.
+* Make codes is simple as you can.
 * 
 
 ## Immediate Tasks
 - [x] Fix translation issues.
-- []  translation names of students, teachers.
-- []  Fix errors in project : ex  src/[Locales]/students/page.tsx
+- [x]  translation names of students, teachers.
+- [x]  Fix errors in project : ex  src/[Locales]/students/page.tsx
 - []  Fix dublicate of data source --> mokdata,Dexie. 
+- [] Delete mokdata. because it's only for testing.
+- [] Try using SQLite 
+- [] Be sure of using dixie, or not
+- [] Analyze the project from time to time .
 - []  Monthly, Semi-year, Yearly reports.
 
 ## Features to Develop
