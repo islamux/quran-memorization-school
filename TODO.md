@@ -7,8 +7,9 @@
 
 ## Immediate Tasks
 - [x] Fix translation issues.
-- [x]  translation names of students, teachers.
-- [x]  Fix errors in project : ex  src/[Locales]/students/page.tsx
+- [x] translation names of students, teachers.
+- [x] Fix errors in project : ex  src/[Locales]/students/page.tsx
+- [] When the page load : could you install the app in your device.
 - []  Fix dublicate of data source --> mokdata,Dexie. 
 - [] Delete mokdata. because it's only for testing.
 - [] Try using SQLite 
