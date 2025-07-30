@@ -28,6 +28,38 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: 'default',
     title: 'Quran School',
+    startupImage: [
+      '/icon-512x512.png'
+    ],
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    title: 'Quran Memorization School',
+    description: 'Manage students, teachers, and track Quran memorization progress',
+    url: 'https://quran-school.app',
+    siteName: 'Quran School',
+    images: [
+      {
+        url: '/icon-512x512.png',
+        width: 512,
+        height: 512,
+      }
+    ],
+    locale: 'ar_SA',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Quran Memorization School',
+    description: 'Manage students, teachers, and track Quran memorization progress',
+    images: ['/icon-512x512.png'],
+  },
+  icons: {
+    icon: '/icon-192x192.png',
+    shortcut: '/icon-192x192.png',
+    apple: '/icon-192x192.png',
   },
 };
 
