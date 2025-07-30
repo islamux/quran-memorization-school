@@ -16,9 +16,11 @@ export async function queueForSync(data: SyncData) {
     await db.syncQueue.add(data);
     
     // Register background sync
-    if ('serviceWorker' in navigator && 'sync' in ServiceWorkerRegistration.prototype) {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
       const registration = await navigator.serviceWorker.ready;
-      await registration.sync.register('sync-data');
+      if ('sync' in registration) {
+        await (registration as any).sync.register('sync-data');
+      }
     }
   } catch (error) {
     console.error('Error queuing for sync:', error);
@@ -36,10 +38,12 @@ export async function processSyncQueue() {
     for (const item of syncQueue) {
       try {
         // Send to server (implement based on your backend)
-        await syncToServer(item);
+        await syncToServer(item as SyncData);
         
         // Remove from queue after successful sync
-        await db.syncQueue.delete(item.id);
+        if (item.id) {
+          await db.syncQueue.delete(item.id);
+        }
       } catch (error) {
         console.error('Error syncing item:', item.id, error);
       }
@@ -78,7 +82,7 @@ export async function registerPeriodicSync() {
       });
       
       if (status.state === 'granted') {
-        await registration.periodicSync.register('sync-data', {
+        await (registration as any).periodicSync.register('sync-data', {
           minInterval: 60 * 60 * 1000, // 1 hour
         });
       }
