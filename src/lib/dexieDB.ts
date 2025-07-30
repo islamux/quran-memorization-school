@@ -11,22 +11,33 @@ export interface AttendanceRecord {
   timestamp: string;
 }
 
+// Sync queue interface
+export interface SyncQueueItem {
+  id?: string;
+  type: 'student' | 'attendance' | 'teacher';
+  action: 'create' | 'update' | 'delete';
+  data: any;
+  timestamp: number;
+}
+
 // إنشاء فئة قاعدة البيانات
 class QuranSchoolDB extends Dexie {
   students!: Table<Student>;
   teachers!: Table<Teacher>;
   schedule!: Table<ScheduleSlot>;
   attendance!: Table<AttendanceRecord>;
+  syncQueue!: Table<SyncQueueItem>;
 
   constructor() {
     super('QuranSchoolDB');
     
     // تعريف المخطط (Schema)
-    this.version(1).stores({
+    this.version(2).stores({
       students: 'id, name, parentPhone, teacherId, status',
       teachers: 'id, name, email, phone, status',
       schedule: 'id, teacherId, day',
-      attendance: '++id, studentId, date, [studentId+date]'
+      attendance: '++id, studentId, date, [studentId+date]',
+      syncQueue: '++id, type, action, timestamp'
     });
   }
 }
