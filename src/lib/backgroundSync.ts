@@ -1,5 +1,5 @@
 // Background sync utilities for offline data persistence
-import { openDB } from '@/lib/dexieDB';
+import { db } from '@/lib/dexieDB';
 
 interface SyncData {
   id: string;
@@ -12,10 +12,8 @@ interface SyncData {
 // Queue data for sync when offline
 export async function queueForSync(data: SyncData) {
   try {
-    const db = await openDB();
-    
     // Store in a sync queue table
-    await db.table('syncQueue').add(data);
+    await db.syncQueue.add(data);
     
     // Register background sync
     if ('serviceWorker' in navigator && 'sync' in ServiceWorkerRegistration.prototype) {
@@ -30,8 +28,7 @@ export async function queueForSync(data: SyncData) {
 // Process sync queue when online
 export async function processSyncQueue() {
   try {
-    const db = await openDB();
-    const syncQueue = await db.table('syncQueue').toArray();
+    const syncQueue = await db.syncQueue.toArray();
     
     if (syncQueue.length === 0) return;
     
@@ -42,7 +39,7 @@ export async function processSyncQueue() {
         await syncToServer(item);
         
         // Remove from queue after successful sync
-        await db.table('syncQueue').delete(item.id);
+        await db.syncQueue.delete(item.id);
       } catch (error) {
         console.error('Error syncing item:', item.id, error);
       }
