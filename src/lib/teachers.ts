@@ -1,19 +1,22 @@
-import { teachers } from '@/data/mockData';
 import { Teacher } from '@/types';
+import { getStoredTeachers } from '@/utils/dexieStorage';
 
-export function getActiveTeachers(): Teacher[] {
+export async function getActiveTeachers(): Promise<Teacher[]> {
+  const teachers = await getStoredTeachers();
   return teachers.filter(t => t.status === 'active');
 }
 
-export function getTeacherById(id: string): Teacher | undefined {
+export async function getTeacherById(id: string): Promise<Teacher | undefined> {
+  const teachers = await getStoredTeachers();
   return teachers.find(t => t.id === id);
 }
 
-export function getAllTeachers(): Teacher[] {
-  return teachers;
+export async function getAllTeachers(): Promise<Teacher[]> {
+  return await getStoredTeachers();
 }
 
-export function getTeacherStats() {
+export async function getTeacherStats() {
+  const teachers = await getStoredTeachers();
   const total = teachers.length;
   const active = teachers.filter(t => t.status === 'active').length;
   const inactive = teachers.filter(t => t.status === 'inactive').length;

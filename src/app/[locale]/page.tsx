@@ -8,25 +8,73 @@ import Button from '@/components/ui/Button';
 import { getStudentStats, getActiveStudents } from '@/lib/students';
 import { getActiveTeachers } from '@/lib/teachers';
 import { getWeeklySchedule } from '@/lib/schedule';
+import { Student, Teacher } from '@/types';
 
 const HomePage: React.FC = () => {
   const t = useTranslations('homepage');
   const tCommon = useTranslations('common');
   const tSchedule = useTranslations('schedulePage');
   const locale = useLocale();
-  const studentStats = getStudentStats();
-  const activeTeachers = getActiveTeachers();
-  const recentStudents = getActiveStudents().slice(0, 5);
+  
+  // State for async data
+  const [studentStats, setStudentStats] = useState({ total: 0, active: 0, inactive: 0, graduated: 0 });
+  const [activeTeachers, setActiveTeachers] = useState<Teacher[]>([]);
+  const [recentStudents, setRecentStudents] = useState<Student[]>([]);
+  const [todaySlots, setTodaySlots] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   
   // Use state to handle the current day to avoid hydration mismatch
   const [currentDay, setCurrentDay] = useState<string>('sunday');
+  
+  // Load data on component mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        
+        // Load all data in parallel
+        const [stats, teachers, students, weeklySchedule] = await Promise.all([
+          getStudentStats(),
+          getActiveTeachers(),
+          getActiveStudents(),
+          getWeeklySchedule()
+        ]);
+        
+        setStudentStats(stats);
+        setActiveTeachers(teachers);
+        setRecentStudents(students.slice(0, 5));
+        
+        // Set today's slots
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const today = days[new Date().getDay()];
+        const todaySchedule = weeklySchedule.find(day => day.day === today);
+        setTodaySlots(todaySchedule?.slots || []);
+      } catch (error) {
+        console.error('Error loading data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadData();
+  }, []);
   
   useEffect(() => {
     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     setCurrentDay(days[new Date().getDay()]);
   }, []);
 
-  const todaySlots = getWeeklySchedule().find(day => day.day === currentDay)?.slots || [];
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">{tCommon('loading')}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
