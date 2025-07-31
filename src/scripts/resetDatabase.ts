@@ -1,7 +1,7 @@
 // Script to reset the database and reinitialize with Arabic data
 import { clearAllData } from '@/lib/dexieDB';
 import { studentDB, teacherDB, scheduleDB } from '@/lib/dexieDB';
-import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule } from '@/data/mockData';
+import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule } from '@/data/seedData';
 
 async function resetDatabase() {
   console.log('🔄 بدء إعادة تعيين قاعدة البيانات...');

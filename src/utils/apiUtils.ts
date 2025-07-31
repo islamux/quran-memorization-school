@@ -70,7 +70,7 @@ export const fetchTeachers = async (): Promise<Teacher[]> => {
   } catch (error) {
     console.error('Error fetching teachers:', error);
     // في الوقت الحالي، نستخدم البيانات الوهمية للمعلمين
-    const { teachers } = await import('@/data/mockData');
+    const { teachers } = await import('@/data/seedData');
     return teachers;
   }
 };

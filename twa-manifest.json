@@ -1,0 +1,65 @@
+{
+  "packageId": "com.islamux.quranschool",
+  "host": "quran-memorization-school.vercel.app",
+  "name": "Quran Memorization School",
+  "launcherName": "Quran School",
+  "display": "standalone",
+  "themeColor": "#059669",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#FFFFFF",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://quran-memorization-school.vercel.app/icon-512x512.png",
+  "maskableIconUrl": "https://quran-memorization-school.vercel.app/icon-512x512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/media/islamux/Variety/JavaScriptProjects/quran-memorization-school/android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "3",
+  "appVersionCode": 3,
+  "shortcuts": [
+    {
+      "name": "Add Student",
+      "shortName": "Add Student",
+      "url": "https://quran-memorization-school.vercel.app/ar/students/add-student",
+      "chosenIconUrl": "https://quran-memorization-school.vercel.app/icon-192x192.png"
+    },
+    {
+      "name": "Attendance",
+      "shortName": "Attendance",
+      "url": "https://quran-memorization-school.vercel.app/ar/attendance",
+      "chosenIconUrl": "https://quran-memorization-school.vercel.app/icon-192x192.png"
+    },
+    {
+      "name": "Schedule",
+      "shortName": "Schedule",
+      "url": "https://quran-memorization-school.vercel.app/ar/schedule",
+      "chosenIconUrl": "https://quran-memorization-school.vercel.app/icon-192x192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://quran-memorization-school.vercel.app/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://quran-memorization-school.vercel.app/",
+  "minSdkVersion": 21,
+  "orientation": "portrait",
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "navigate-existing",
+  "appVersion": "3"
+}

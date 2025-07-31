@@ -1,5 +1,5 @@
 import { Student, Teacher, ScheduleSlot, Surah } from '@/types';
-import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule, surahs } from '@/data/mockData';
+import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule, surahs } from '@/data/seedData';
 
 const STORAGE_KEYS = {
   STUDENTS: 'quran_school_students',

@@ -1,5 +1,5 @@
 import { Student, Teacher, ScheduleSlot, Surah } from '@/types';
-import { students, teachers, scheduleSlots, surahs } from '@/data/mockData';
+import { students, teachers, scheduleSlots, surahs } from '@/data/seedData';
 
 // Student utilities
 export const getStudents = (): Student[] => {
