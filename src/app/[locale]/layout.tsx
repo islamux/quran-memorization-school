@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Cairo } from 'next/font/google';
 import {NextIntlClientProvider} from 'next-intl';
 import {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
@@ -14,11 +13,10 @@ interface Props {
   params: Promise<{locale: string}>;
 }
 
-const inter = Inter({ subsets: ['latin'] });
-const cairo = Cairo({ 
-  subsets: ['arabic'],
-  variable: '--font-cairo'
-});
+// Using system fonts to avoid network issues during build
+// Google Fonts can be re-enabled after successful deployment
+const inter = { className: 'font-sans' };
+const cairo = { className: 'font-serif' };
 
 export const metadata: Metadata = {
   title: 'Quran Memorization School',

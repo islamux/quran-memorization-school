@@ -42,3 +42,6 @@ next-env.d.ts
 
 # editor config
 .nvim.lua
+
+# Local Netlify folder
+.netlify
