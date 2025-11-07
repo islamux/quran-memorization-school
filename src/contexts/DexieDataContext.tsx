@@ -2,16 +2,7 @@
 
 import React, { createContext, useContext, ReactNode, useState, useEffect } from 'react';
 import { Student, Teacher } from '@/types';
-import { 
-  getStoredStudents, 
-  getStoredTeachers, 
-  addStudent as addStudentToDB,
-  updateStudent as updateStudentInDB,
-  deleteStudent as deleteStudentFromDB,
-  addTeacher as addTeacherToDB,
-  updateTeacher as updateTeacherInDB,
-  deleteTeacher as deleteTeacherFromDB
-} from '@/utils/dexieStorage';
+import { studentDB, teacherDB } from '@/lib/dexieDB';
 import deletionService, { DeletionOptions, DeletionResult, DeletionCheck } from '@/services/deletionService';
 
 interface DataContextType {
@@ -41,8 +32,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const loadData = async () => {
     try {
       const [studentsData, teachersData] = await Promise.all([
-        getStoredStudents(),
-        getStoredTeachers()
+        studentDB.getAll(),
+        teacherDB.getAll()
       ]);
       setAllStudents(studentsData);
       setAllTeachers(teachersData);
@@ -62,12 +53,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const teachers = allTeachers.filter(t => t.isDeleted !== true);
 
   const addStudent = async (student: Student) => {
-    await addStudentToDB(student);
+    await studentDB.add(student);
     await loadData(); // إعادة تحميل البيانات
   };
 
   const updateStudent = async (id: string, updates: Partial<Student>) => {
-    await updateStudentInDB(id, updates);
+    await studentDB.update(id, updates);
     await loadData();
   };
 
@@ -99,22 +90,22 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
       if (result.success) {
         // soft delete
-        await updateStudentInDB(id, { 
-          status: 'inactive', 
-          isDeleted: true, 
-          deletedAt: new Date().toISOString() 
+        await studentDB.update(id, {
+          status: 'inactive',
+          isDeleted: true,
+          deletedAt: new Date().toISOString()
         });
-        
+
         // إزالة الطالب من قائمة معلمه
         if (student.teacherId) {
           const teacher = allTeachers.find(t => t.id === student.teacherId);
           if (teacher) {
-            await updateTeacherInDB(teacher.id, {
+            await teacherDB.update(teacher.id, {
               students: teacher.students.filter(sid => sid !== id)
             });
           }
         }
-        
+
         await loadData();
       }
 
@@ -128,12 +119,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
   };
 
   const addTeacher = async (teacher: Teacher) => {
-    await addTeacherToDB(teacher);
+    await teacherDB.add(teacher);
     await loadData();
   };
 
   const updateTeacher = async (id: string, updates: Partial<Teacher>) => {
-    await updateTeacherInDB(id, updates);
+    await teacherDB.update(id, updates);
     await loadData();
   };
 
@@ -165,12 +156,12 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
       if (result.success) {
         // soft delete للمعلم
-        await updateTeacherInDB(id, { 
-          status: 'inactive', 
-          isDeleted: true, 
-          deletedAt: new Date().toISOString() 
+        await teacherDB.update(id, {
+          status: 'inactive',
+          isDeleted: true,
+          deletedAt: new Date().toISOString()
         });
-        
+
         await loadData();
       }
 

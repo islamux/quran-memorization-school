@@ -215,29 +215,40 @@ export const attendanceDB = {
 
 // دالة لترحيل البيانات من localStorage إلى Dexie
 export async function migrateFromLocalStorage(): Promise<void> {
+  console.log('🔄 بدء عملية ترحيل البيانات من localStorage إلى Dexie...');
+
   try {
     // ترحيل الطلاب
     const studentsStr = localStorage.getItem('quran_school_students');
     if (studentsStr) {
       const students: Student[] = JSON.parse(studentsStr);
+      const count = students.length;
       await db.students.bulkAdd(students);
-      console.log(`✅ تم ترحيل ${students.length} طالب بنجاح`);
+      console.log(`✅ تم ترحيل ${count} طالب بنجاح`);
+    } else {
+      console.log('ℹ️ لا توجد بيانات طلاب في localStorage');
     }
 
     // ترحيل المعلمين
     const teachersStr = localStorage.getItem('quran_school_teachers');
     if (teachersStr) {
       const teachers: Teacher[] = JSON.parse(teachersStr);
+      const count = teachers.length;
       await db.teachers.bulkAdd(teachers);
-      console.log(`✅ تم ترحيل ${teachers.length} معلم بنجاح`);
+      console.log(`✅ تم ترحيل ${count} معلم بنجاح`);
+    } else {
+      console.log('ℹ️ لا توجد بيانات معلمين في localStorage');
     }
 
     // ترحيل الجدول الدراسي
     const scheduleStr = localStorage.getItem('quran_school_schedule');
     if (scheduleStr) {
       const schedule: ScheduleSlot[] = JSON.parse(scheduleStr);
+      const count = schedule.length;
       await db.schedule.bulkAdd(schedule);
-      console.log(`✅ تم ترحيل ${schedule.length} حصة بنجاح`);
+      console.log(`✅ تم ترحيل ${count} حصة بنجاح`);
+    } else {
+      console.log('ℹ️ لا توجد بيانات جدول دراسي في localStorage');
     }
 
     // ترحيل الحضور
@@ -246,16 +257,21 @@ export async function migrateFromLocalStorage(): Promise<void> {
     const attendanceStr = localStorage.getItem(attendanceKey);
     if (attendanceStr) {
       const attendance = JSON.parse(attendanceStr);
-      for (const [studentId, data] of Object.entries(attendance)) {
-        const { status, note } = data as any;
+      const studentIds = Object.keys(attendance);
+      for (const studentId of studentIds) {
+        const { status, note } = attendance[studentId] as any;
         await attendanceDB.mark(studentId, status, note);
       }
-      console.log('✅ تم ترحيل بيانات الحضور بنجاح');
+      console.log(`✅ تم ترحيل بيانات الحضور لـ ${studentIds.length} طالب`);
+    } else {
+      console.log('ℹ️ لا توجد بيانات حضور في localStorage');
     }
 
     console.log('✅ اكتملت عملية الترحيل بنجاح');
   } catch (error) {
     console.error('❌ خطأ في ترحيل البيانات:', error);
+    // إعادة رمي الخطأ ليتم التعامل معه في المستوى الأعلى
+    throw new Error(`فشل في ترحيل البيانات: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`);
   }
 }
 

@@ -77,24 +77,37 @@ src/
 
 ### Database Schema (Dexie/IndexedDB)
 
-The app uses **Dexie.js** (IndexedDB) for offline-first data persistence:
+The app uses **Dexie.js** (IndexedDB) for offline-first data persistence with versioned schema (v2):
 
-**Tables**:
-- `students` - Student records with progress tracking
-- `teachers` - Teacher profiles and specializations
-- `schedule` - Class schedule slots
-- `attendance` - Daily attendance records
-- `syncQueue` - Queue for background sync when offline
+**Tables with Indexes**:
+- `students` - id, name, parentPhone, teacherId, status
+- `teachers` - id, name, email, phone, status
+- `schedule` - id, teacherId, day
+- `attendance` - id, studentId, date, [studentId+date] (composite index)
+- `syncQueue` - id, type, action, timestamp
 
-**Storage Migration**: Automatically migrates from localStorage to Dexie on first run (see `migrateFromLocalStorage()` in dexieDB.ts).
+**Schema Version 2** (line 35 in dexieDB.ts):
+```typescript
+this.version(2).stores({
+  students: 'id, name, parentPhone, teacherId, status',
+  teachers: 'id, name, email, phone, status',
+  schedule: 'id, teacherId, day',
+  attendance: '++id, studentId, date, [studentId+date]',
+  syncQueue: '++id, type, action, timestamp'
+});
+```
+
+**Storage Migration**: `migrateFromLocalStorage()` function (line 217) automatically migrates from localStorage to Dexie on first run, preserving all existing data.
 
 ### Internationalization
 
 - **Default locale**: Arabic (ar) with RTL direction
 - **Secondary locale**: English (en) with LTR direction
-- **Middleware**: `/src/middleware.ts` handles locale routing
 - **URL pattern**: `/[locale]/[page]` (e.g., `/ar/students`, `/en/teachers`)
-- **Messages**: JSON files in `messages/` directory
+- **Messages**: JSON files in `messages/` directory (ar.json, en.json)
+- **next-intl setup**: Plugin configured in `next.config.ts` with `./src/i18n/request.ts`
+- **Direction handling**: `getDirection(locale)` utility in `src/i18n/config.ts`
+- **Translation hooks**: Use `useTranslations()` and `useLocale()` in components
 
 ### PWA Configuration
 
@@ -130,19 +143,42 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 
 ### Configuration
 - `next.config.ts` - Next.js config with PWA and i18n plugins
+  - PWA runtime caching for fonts, images, and API routes
+  - next-intl integration with `./src/i18n/request.ts`
+  - ESLint warnings ignored during build (line 56)
 - `package.json` - Dependencies and scripts
+  - Core: next@15.4.2, react@19.1.0, typescript@5
+  - Database: dexie@4.0.11, better-sqlite3@12.2.0, sql.js@1.13.0
+  - UI: lucide-react@0.525.0 (icons), tailwindcss@4
+  - i18n: next-intl@4.3.4
+  - PWA: next-pwa@5.6.0
 - `tailwind.config.ts` - Tailwind configuration
 - `public/manifest.json` - PWA manifest
+- `twa-manifest.json` - Android TWA (Trusted Web Activity) configuration
+
+### Utilities & Services
+- `src/utils/dexieStorage.ts` - Low-level Dexie storage operations
+- `src/services/deletionService.ts` - Complex deletion workflows with validation
+- `src/services/` - Additional business logic services
+- `src/hooks/` - Custom React hooks for common patterns
 
 ### Core Libraries
-- `src/lib/dexieDB.ts` - Database schema and operations (315 lines, Arabic comments)
-- `src/middleware.ts` - Internationalization middleware
-- `src/i18n/config.ts` - Locale settings (Arabic default)
+- `src/lib/dexieDB.ts` - Database schema and operations with Arabic comments
+  - Exports: `db` (Dexie instance), `studentDB`, `teacherDB`, `scheduleDB`, `attendanceDB` helpers
+  - Contains migration from localStorage to Dexie
+  - Provides CRUD operations for all entities
+- `src/contexts/DexieDataContext.tsx` - React context for data management
+  - Exports: `DataProvider` and `useData()` hook
+  - Manages students and teachers with soft delete support
+  - Integrates with deletionService for complex deletion workflows
 - `src/types/index.ts` - TypeScript interfaces
+  - Student, Teacher, ScheduleSlot, Surah, Progress interfaces
+- `src/i18n/config.ts` - Locale configuration (ar, en)
 
 ### Critical Context
-- **Context API**: Use `DexieDataContext` throughout the app
-- **Common error**: "useData must be used within a DataProvider" means wrong context imported
+- **Context API**: Use `useData()` from `@/contexts/DexieDataContext` throughout the app
+- **Common error**: "useData must be used within a DataProvider" - wrap components with DataProvider
+- **DataProvider**: Provides loading state with spinner while data loads
 
 ## Development Guidelines
 
@@ -153,9 +189,20 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 - Initialize state with static values, update in `useEffect`
 
 ### Storage Patterns
-- **Dexie.js** is the primary storage (IndexedDB)
-- **LocalStorage** migration happens automatically on first run
-- Use `studentDB`, `teacherDB`, `scheduleDB`, `attendanceDB` helpers from dexieDB.ts
+- **Dexie.js** is the primary storage (IndexedDB) with versioned schema
+- **LocalStorage** migration happens automatically on first run via `migrateFromLocalStorage()`
+- Use helper exports from `dexieDB.ts`:
+  - `studentDB` - CRUD operations for students
+  - `teacherDB` - CRUD operations for teachers
+  - `scheduleDB` - Schedule management
+  - `attendanceDB` - Attendance tracking with date-based queries
+  - `db` - Direct Dexie instance for complex queries
+
+### Data Management Patterns
+- **Soft Delete**: Students/teachers marked with `isDeleted: true` instead of hard delete
+- **Deletion Service**: Complex deletion workflows in `@/services/deletionService`
+- **Status Tracking**: All entities have status field (active/inactive/graduated for students)
+- **Audit Trail**: Deleted entities track `deletedAt` and `deletedBy` fields
 
 ### Internationalization
 - Default to Arabic in code and comments
@@ -197,13 +244,23 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 - `scripts/backup-db.js` - Backup database
 - `scripts/generate-icons.js` - Generate PWA icons from SVG
 
+## TypeScript Configuration
+
+- **TypeScript 5** with strict mode enabled
+- **Path mapping**: `@/*` maps to `src/*` (configured in tsconfig.json)
+- **Type coverage**: All components, hooks, and data models are fully typed
+- **Common types**: Student, Teacher, ScheduleSlot, AttendanceRecord interfaces in `src/types/index.ts`
+- **Build validation**: `tsc --noEmit` can be used to check types without building
+
 ## Technical Debt & Notes
 
 1. **API Routes**: Currently use in-memory storage - not production ready
 2. **Mock Data**: Using local seed data - needs backend integration
 3. **Push Notifications**: Requires backend for production use
-4. **ESLint**: Configured to ignore errors during build (not recommended for production)
+4. **ESLint**: Configured to ignore errors during build (line 56 in next.config.ts) - not recommended for production
 5. **Context API**: Was recently refactored - see FIXES_SUMMARY.md for details
+6. **Database**: Multiple storage options (Dexie, SQLite, sql.js) - could be simplified
+7. **Migration**: Automatic localStorage→Dexie migration works but could be improved
 
 ## Recent Major Changes
 
