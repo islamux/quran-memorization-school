@@ -265,7 +265,7 @@ This project is designed to be beginner-friendly and open for contributions:
 
 ## 📝 License
 
-This project is open source and available under the [GNU General Public License v3.0](LICENSE).
+This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
