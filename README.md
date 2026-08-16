@@ -74,18 +74,19 @@ src/
 │   │   ├── schedule/      # Schedule pages
 │   │   ├── teachers/      # Teacher pages
 │   │   └── attendance/    # Attendance tracking pages
-│   ├── api/               # API routes
 │   └── layout.tsx         # Root layout
 ├── components/            # Reusable React components
 │   ├── Layout.tsx         # Main layout component
 │   ├── LanguageSwitcher.tsx # Language toggle component
 │   └── ui/               # UI components (Button, Card, Input)
 ├── lib/                  # Core libraries
-│   ├── database.ts       # Database abstraction layer
-│   └── dexieDB.ts        # Dexie.js database implementation
+│   └── dexieDB.ts        # Dexie.js database (IndexedDB) + Zod validation
 ├── messages/             # Internationalization files
-│   ├── ar.json          # Arabic translations
-│   └── en.json          # English translations
+│   ├── ar.json          # Arabic translations (default)
+│   ├── en.json          # English translations
+│   ├── fr.json          # French translations
+│   ├── ur.json          # Urdu translations
+│   └── id.json          # Indonesian translations
 ├── types/                # TypeScript type definitions
 ├── data/                 # Mock data for development
 ├── utils/                # Utility functions and data helpers
@@ -226,19 +227,24 @@ For production use, consider integrating with:
 - **Efficient Rendering**: Proper use of React hooks and state management
 - **Image Optimization**: Next.js automatic image optimization
 
-## 🚀 Deployment Options
+## 🚀 Deployment
 
-### Vercel (Recommended)
-```bash
-npm install -g vercel
-vercel
-```
+### Netlify (configured)
+The repo ships with `netlify.toml` (build command, publish dir `.next`, headers). Import the repo in Netlify and deploy.
 
-### Netlify
+### Vercel
 ```bash
 npm run build
-# Upload the 'out' folder to Netlify
 ```
+Vercel auto-detects Next.js — import the repo and deploy.
+
+### Traditional Hosting
+```bash
+npm run build
+npm start
+```
+
+> Full details: see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ### Traditional Hosting
 ```bash

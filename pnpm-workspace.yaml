@@ -1,2 +1,12 @@
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': true
+  '@tailwindcss/oxide': false
+  esbuild: false
+  netlify-cli: false
+  protobufjs: false
+  sharp: false
+  unix-dgram: false
+  unrs-resolver: false
 ignoredBuiltDependencies:
   - better-sqlite3

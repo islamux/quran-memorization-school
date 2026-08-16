@@ -36,7 +36,7 @@ const EditTeacherPage: React.FC = () => {
     if (teacher) {
       setFormData({
         name: teacher.name,
-        email: teacher.email,
+        email: teacher.email ?? '',
         phone: teacher.phone,
         specialization: teacher.specialization,
         experience: teacher.experience,

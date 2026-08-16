@@ -1,86 +1,86 @@
 {
   "metadata": {
-    "title": "Al-Bayan Quran Memorization School",
-    "description": "A simple and clean management system for Quran memorization schools"
+    "title": "École de Mémorisation du Coran Al-Bayan",
+    "description": "Un système de gestion simple et élégant pour les écoles de mémorisation du Coran"
   },
   "layout": {
     "header": {
-      "title": "Al-Bayan Quran Memorization School"
+      "title": "École de Mémorisation du Coran Al-Bayan"
     },
     "navigation": {
-      "home": "Home",
-      "students": "Students",
-      "schedule": "Schedule",
-      "teachers": "Teachers",
-      "attendance": "Attendance"
+      "home": "Accueil",
+      "students": "Étudiants",
+      "schedule": "Emploi du temps",
+      "teachers": "Professeurs",
+      "attendance": "Présence"
     },
     "footer": {
-      "copyright": "© 2024 Quran Memorization School. Built with ❤️ for Islamic education."
+      "copyright": "© 2024 École de Mémorisation du Coran. Construit avec ❤️ pour l'éducation islamique."
     }
   },
   "homepage": {
     "welcome": {
-      "title": "Welcome to Al-Bayan Quran Memorization School",
-      "subtitle": "Manage your students, teachers, and schedules with ease"
+      "title": "Bienvenue à l'École de Mémorisation du Coran Al-Bayan",
+      "subtitle": "Gérez vos étudiants, professeurs et emplois du temps avec facilité"
     },
     "stats": {
-      "totalStudents": "Total Students",
-      "activeStudents": "Active Students",
-      "activeTeachers": "Active Teachers",
-      "graduated": "Graduated"
+      "totalStudents": "Total des Étudiants",
+      "activeStudents": "Étudiants Actifs",
+      "activeTeachers": "Professeurs Actifs",
+      "graduated": "Diplômés"
     },
     "sections": {
-      "recentStudents": "Recent Students",
-      "todaySchedule": "Today's Schedule",
-      "quickActions": "Quick Actions"
+      "recentStudents": "Étudiants Récents",
+      "todaySchedule": "Emploi du Temps d'Aujourd'hui",
+      "quickActions": "Actions Rapides"
     },
     "studentCard": {
-      "verses": "verses",
-      "verse": "verse"
+      "verses": "versets",
+      "verse": "verset"
     },
     "scheduleCard": {
-      "students": "students",
-      "student": "student",
-      "noClasses": "No classes scheduled for today"
+      "students": "étudiants",
+      "student": "étudiant",
+      "noClasses": "Aucun cours prévu pour aujourd'hui"
     },
     "actions": {
-      "viewAllStudents": "View All Students",
-      "viewFullSchedule": "View Full Schedule",
-      "addNewStudent": "Add New Student",
-      "manageStudents": "Manage Students",
-      "viewSchedule": "View Schedule"
+      "viewAllStudents": "Voir Tous les Étudiants",
+      "viewFullSchedule": "Voir l'Emploi du Temps Complet",
+      "addNewStudent": "Ajouter un Nouvel Étudiant",
+      "manageStudents": "Gérer les Étudiants",
+      "viewSchedule": "Voir l'Emploi du Temps"
     }
   },
   "common": {
-    "loading": "Loading...",
-    "error": "Error",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "add": "Add",
-    "search": "Search",
-    "filter": "Filter",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
     "actions": "Actions",
-    "status": "Status",
-    "active": "Active",
-    "inactive": "Inactive",
-    "graduated": "Graduated",
-    "statusOnline": "You are back online",
-    "statusOffline": "You are offline. Changes will be saved locally.",
+    "status": "Statut",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "graduated": "Diplômé",
+    "statusOnline": "Vous êtes de nouveau en ligne",
+    "statusOffline": "Vous êtes hors ligne. Les modifications seront enregistrées localement.",
     "grades": {
-      "1st Grade": "1st Grade",
-      "2nd Grade": "2nd Grade",
-      "3rd Grade": "3rd Grade",
-      "4th Grade": "4th Grade",
-      "5th Grade": "5th Grade",
-      "6th Grade": "6th Grade",
-      "7th Grade": "7th Grade",
-      "8th Grade": "8th Grade",
-      "9th Grade": "9th Grade",
-      "10th Grade": "10th Grade",
-      "11th Grade": "11th Grade",
-      "12th Grade": "12th Grade"
+      "1st Grade": "1re année",
+      "2nd Grade": "2e année",
+      "3rd Grade": "3e année",
+      "4th Grade": "4e année",
+      "5th Grade": "5e année",
+      "6th Grade": "6e année",
+      "7th Grade": "7e année",
+      "8th Grade": "8e année",
+      "9th Grade": "9e année",
+      "10th Grade": "10e année",
+      "11th Grade": "11e année",
+      "12th Grade": "12e année"
     },
     "surahs": {
       "Al-Fatiha": "Al-Fatiha",
@@ -200,60 +200,60 @@
     }
   },
   "studentsPage": {
-    "title": "Students",
-    "subtitle": "Manage and track student progress",
-    "addNewStudent": "Add New Student",
-    "searchPlaceholder": "Search students...",
-    "allStatus": "All Status",
-    "allGrades": "All Grades",
-    "showingStudents": "Showing {current} of {total} students",
-    "loadingStudents": "Loading students...",
-    "noStudentsFound": "No students found",
-    "adjustSearchCriteria": "Try adjusting your search criteria",
-    "getStartedMessage": "Get started by adding your first student",
-    "addFirstStudent": "Add First Student",
+    "title": "Étudiants",
+    "subtitle": "Gérer et suivre les progrès des étudiants",
+    "addNewStudent": "Ajouter un Nouvel Étudiant",
+    "searchPlaceholder": "Rechercher des étudiants...",
+    "allStatus": "Tous les Statuts",
+    "allGrades": "Tous les Niveaux",
+    "showingStudents": "Affichage de {current} sur {total} étudiants",
+    "loadingStudents": "Chargement des étudiants...",
+    "noStudentsFound": "Aucun étudiant trouvé",
+    "adjustSearchCriteria": "Essayez d'ajuster vos critères de recherche",
+    "getStartedMessage": "Commencez par ajouter votre premier étudiant",
+    "addFirstStudent": "Ajouter le Premier Étudiant",
     "studentCard": {
-      "age": "Age",
-      "currentSurah": "Current Surah",
-      "versesMemorized": "Verses Memorized",
-      "teacher": "Teacher",
-      "notAssigned": "Not assigned",
-      "enrolled": "Enrolled",
-      "viewDetails": "View Details",
-      "edit": "Edit"
+      "age": "Âge",
+      "currentSurah": "Sourate Actuelle",
+      "versesMemorized": "Versets Mémorisés",
+      "teacher": "Professeur",
+      "notAssigned": "Non assigné",
+      "enrolled": "Inscrit le",
+      "viewDetails": "Voir les Détails",
+      "edit": "Modifier"
     }
   },
   "addStudentPage": {
-    "title": "Add New Student",
-    "subtitle": "Enter student information to enroll them in the school",
-    "studentInformation": "Student Information",
-    "personalInformation": "Personal Information",
-    "parentInformation": "Parent/Guardian Information",
-    "academicInformation": "Academic Information",
+    "title": "Ajouter un Nouvel Étudiant",
+    "subtitle": "Saisissez les informations de l'étudiant pour l'inscrire à l'école",
+    "studentInformation": "Informations sur l'Étudiant",
+    "personalInformation": "Informations Personnelles",
+    "parentInformation": "Informations sur le Parent/Tuteur",
+    "academicInformation": "Informations Académiques",
     "fields": {
-      "fullName": "Full Name *",
-      "age": "Age *",
-      "grade": "Grade *",
-      "email": "Email (Optional)",
-      "parentName": "Parent/Guardian Name *",
-      "parentPhone": "Parent Phone *",
-      "startingSurah": "Starting Surah *",
-      "assignedTeacher": "Assigned Teacher *",
-      "notes": "Notes (Optional)"
+      "fullName": "Nom Complet *",
+      "age": "Âge *",
+      "grade": "Niveau *",
+      "email": "Email (Optionnel)",
+      "parentName": "Nom du Parent/Tuteur *",
+      "parentPhone": "Téléphone du Parent *",
+      "startingSurah": "Sourate de Départ *",
+      "assignedTeacher": "Professeur Assigné *",
+      "notes": "Notes (Optionnel)"
     },
     "placeholders": {
-      "fullName": "Enter student's full name",
-      "age": "Enter age",
-      "email": "student@email.com",
-      "parentName": "Enter parent's full name",
-      "parentPhone": "+1-555-0123",
-      "selectTeacher": "Select a teacher",
-      "notes": "Any additional notes about the student..."
+      "fullName": "Entrez le nom complet de l'étudiant",
+      "age": "Entrez l'âge",
+      "email": "etudiant@email.com",
+      "parentName": "Entrez le nom complet du parent",
+      "parentPhone": "+33-1-23-45-67-89",
+      "selectTeacher": "Sélectionnez un professeur",
+      "notes": "Toutes notes supplémentaires sur l'étudiant..."
     },
     "actions": {
-      "cancel": "Cancel",
-      "addStudent": "Add Student",
-      "addingStudent": "Adding Student..."
+      "cancel": "Annuler",
+      "addStudent": "Ajouter l'Étudiant",
+      "addingStudent": "Ajout de l'Étudiant..."
     }
   },
   "editStudentPage": {
@@ -412,25 +412,25 @@
       "studentsEnrolled": "Students Enrolled"
     },
     "subjects": {
-      "Hifz": "Hifz",
+      "Hifz": "Hifz (mémorisation)",
       "Hifz - Al-Baqarah": "Hifz - Al-Baqarah",
-      "Advanced Hifz - Al-Imran": "Advanced Hifz - Al-Imran",
-      "Tajweed": "Tajweed",
-      "Tajweed Practice": "Tajweed Practice",
-      "Tajweed & Qira'at": "Tajweed & Qira'at",
-      "Individual Hifz Session": "Individual Hifz Session",
-      "Children's Hifz Class": "Children's Hifz Class",
-      "Beginner Hifz": "Beginner Hifz",
-      "Arabic Language": "Arabic Language",
+      "Advanced Hifz - Al-Imran": "Hifz avancé - Al-Imran",
+      "Tajweed": "Tajwid",
+      "Tajweed Practice": "Pratique du Tajwid",
+      "Tajweed & Qira'at": "Tajwid et Qira'at",
+      "Individual Hifz Session": "Séance de Hifz individuelle",
+      "Children's Hifz Class": "Cours de Hifz pour enfants",
+      "Beginner Hifz": "Hifz pour débutants",
+      "Arabic Language": "Langue arabe",
       "Qira'at": "Qira'at",
-      "Islamic Studies": "Islamic Studies",
-      "Tafseer": "Tafseer"
+      "Islamic Studies": "Études islamiques",
+      "Tafseer": "Tafsir"
     },
     "rooms": {
-      "Room A": "Room A",
-      "Room B": "Room B",
-      "Room C": "Room C",
-      "Room D": "Room D"
+      "Room A": "Salle A",
+      "Room B": "Salle B",
+      "Room C": "Salle C",
+      "Room D": "Salle D"
     }
   },
   "editTeacherPage": {
