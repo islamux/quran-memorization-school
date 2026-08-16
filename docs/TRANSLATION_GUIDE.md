@@ -5,7 +5,7 @@ How translations and internationalization work in the Quran Memorization School 
 ## How It Works
 
 - **Library**: [next-intl](https://next-intl-docs.vercel.app/) (v4)
-- **Locale routing**: `src/middleware.ts` — `localePrefix: 'always'`, so URLs look like `/ar/students`
+- **Locale routing**: `src/proxy.ts` — `localePrefix: 'always'`, so URLs look like `/ar/students`
 - **Locales**: defined in `src/i18n/config.ts` (`locales` array, `defaultLocale`, `getDirection`, `isRTL`)
 - **Messages**: static JSON files in `src/messages/` — `ar.json`, `en.json`, `fr.json`, `ur.json`, `id.json`
 - **Loading**: `src/i18n/request.ts` (server/route) and `src/i18n/loadMessages.ts` (`getMessages()` for layout)

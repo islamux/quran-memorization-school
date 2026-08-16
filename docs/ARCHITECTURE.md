@@ -10,14 +10,14 @@ A **Quran Memorization School Management System** — an offline-first Progressi
 
 | Layer | Choice | Notes |
 |-------|--------|-------|
-| Framework | Next.js 15 (App Router) | Uses `--turbo` dev server |
-| Language | TypeScript 5 (strict) | `tsconfig.json` strict mode |
+| Framework | Next.js 16 (App Router) | Turbopack dev, webpack production (for Serwist) |
+| Language | TypeScript 5.9 (strict) | `tsconfig.json` strict mode |
 | Styling | Tailwind CSS 4 | CSS-based config (no `tailwind.config.ts`) |
 | Storage | Dexie.js 4 (IndexedDB) | Offline-first, versioned schema |
 | Validation | Zod 4 | Runtime schemas in `src/lib/dexieDB.ts` |
 | i18n | next-intl 4 | 5 locales, default Arabic |
-| PWA | next-pwa 5 | Generates `public/sw.js` at build |
-| Icons | lucide-react | |
+| PWA | Serwist 9 | `@serwist/next` + `@serwist/cli`, generates `public/sw.js` |
+| Icons | lucide-react 1 | |
 
 > **Note:** `zod` is a direct dependency (`zod@^4`). Zod schemas live in `src/lib/dexieDB.ts` and validate all `add`/`update` operations.
 
@@ -54,10 +54,9 @@ src/
 │   ├── students.ts           # Student stats/query helpers
 │   └── teachers.ts           # Teacher stats/query helpers
 ├── messages/                 # ar.json, en.json, fr.json, ur.json, id.json
-├── middleware.ts             # next-intl locale routing middleware
+├── proxy.ts               # next-intl locale routing (Next 16 convention)
 ├── services/deletionService.ts # Soft-delete workflows & checks
 ├── types/index.ts            # Student, Teacher, ScheduleSlot, Surah, Progress
-├── types/next-pwa.d.ts       # next-pwa type shim
 └── utils/
     ├── dexieStorage.ts       # Thin convenience layer over dexieDB
     ├── dataUtils.ts          # Pure helpers over seedData (static data)
@@ -143,7 +142,7 @@ Pages (src/app/[locale]/*)
 ## Internationalization
 
 - 5 locales: `ar` (default, RTL), `en`, `fr`, `ur` (RTL), `id` — defined in `src/i18n/config.ts`
-- `src/middleware.ts` uses `next-intl` with `localePrefix: 'always'` (URLs like `/ar/students`)
+- `src/proxy.ts` uses `next-intl` with `localePrefix: 'always'` (URLs like `/ar/students`)
 - `src/i18n/request.ts` loads the message JSON per locale at runtime
 - `src/i18n/loadMessages.ts` provides typed `getMessages(locale)`
 - UI strings come from `useTranslations('...')` — never hardcoded
@@ -151,7 +150,7 @@ Pages (src/app/[locale]/*)
 
 ## PWA
 
-Configured in `next.config.ts` via `next-pwa` (`dest: 'public'`, `skipWaiting: true`, disabled in dev). The service worker `public/sw.js` is **generated at build time** — do not commit/commit-track it (it's gitignored now).
+Configured in `next.config.ts` via `@serwist/next` (`disable: process.env.NODE_ENV === 'development'`). The service worker source is `src/app/sw.ts` and `public/sw.js` is **generated at build time** using `next build --webpack` — do not commit/commit-track it (it's gitignored now).
 
 - Manifest: `public/manifest.json` (shortcuts → `/ar/students/add-student`, `/ar/attendance`, `/ar/schedule`)
 - Icons: `public/icon-192x192.png`, `public/icon-512x512.png` (+ `.svg` sources) — regenerate with `node scripts/generate-icons.js`

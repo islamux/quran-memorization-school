@@ -4,14 +4,14 @@ The app is an **offline-first PWA**. All application data lives in the browser (
 
 ## Requirements
 
-- Node.js **18.18+** (Next.js 15 requirement)
+- Node.js **20.9+** (Next.js 16 requirement; Netlify uses Node 22)
 - HTTPS in production (required for service workers / PWA)
 
 ## Build
 
 ```bash
 npm install
-npm run build      # Produces .next/ + public/sw.js (service worker)
+npm run build      # Produces .next/ + public/sw.js (service worker, uses --webpack for Serwist compatibility)
 npm start          # Serve the production build locally
 ```
 
@@ -25,7 +25,7 @@ The repo ships with `netlify.toml`:
 [build]
   command = "npm run build"
   publish = ".next"
-  environment = { NODE_VERSION = "18", NPM_FLAGS = "--legacy-peer-deps" }
+  environment = { NODE_VERSION = "22", NPM_FLAGS = "--legacy-peer-deps" }
 ```
 
 Headers are already configured for `sw.js` (correct `Service-Worker-Allowed`), the manifest, and long-lived static asset caching.
