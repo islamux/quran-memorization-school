@@ -4,7 +4,7 @@ import nextTypescript from "eslint-config-next/typescript";
 
 export default defineConfig([
   {
-    ignores: [".netlify/**", "node_modules/**", ".next/**"]
+    ignores: [".netlify/**", "node_modules/**", ".next/**", "public/sw.js", "public/workbox-*.js"]
   },
   ...nextCoreWebVitals,
   ...nextTypescript,
