@@ -2,7 +2,6 @@
 
 import {useLocale} from 'next-intl';
 import {usePathname, useRouter} from 'next/navigation';
-import {locales} from '@/i18n/config';
 
 export default function LanguageSwitcher() {
   const locale = useLocale();

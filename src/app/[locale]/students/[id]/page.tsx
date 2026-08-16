@@ -9,7 +9,8 @@ import Button from '@/components/ui/Button';
 import { formatDate } from '@/utils/dataUtils';
 import { useTeacherById, useStudentById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
-import { ArrowLeft, Edit, Trash2, User, Phone, Mail, Calendar, Book, GraduationCap, AlertTriangle, XCircle, Info } from 'lucide-react';
+import { ArrowLeft, Edit, Trash2, User, Phone, Mail, Book, GraduationCap, AlertTriangle, XCircle, Info } from 'lucide-react';
+import { DeletionCheck } from '@/services/deletionService';
 
 const StudentDetailPage: React.FC = () => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const StudentDetailPage: React.FC = () => {
   const student = useStudentById(studentId);
   const teacher = useTeacherById(student?.teacherId || '');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [deleteCheck, setDeleteCheck] = useState<any>(null);
+  const [deleteCheck, setDeleteCheck] = useState<DeletionCheck | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteClick = async () => {

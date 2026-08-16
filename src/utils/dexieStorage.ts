@@ -1,7 +1,7 @@
 'use client';
 
 import { Student, Teacher, ScheduleSlot } from '@/types';
-import { studentDB, teacherDB, scheduleDB, attendanceDB, migrateFromLocalStorage, clearAllData } from '@/lib/dexieDB';
+import { studentDB, teacherDB, scheduleDB, attendanceDB, clearAllData } from '@/lib/dexieDB';
 import { students as initialStudents, teachers as initialTeachers, scheduleSlots as initialSchedule } from '@/data/seedData';
 
 // متغير لتتبع حالة التهيئة

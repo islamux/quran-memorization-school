@@ -161,7 +161,7 @@ export function ScheduleGridSkeleton() {
 }
 
 // List skeleton for virtualized lists
-export function ListSkeleton({ count = 10, height = 80 }: { count?: number; height?: number }) {
+export function ListSkeleton({ count = 10 }: { count?: number; height?: number }) {
   return (
     <div className="space-y-3">
       {Array.from({ length: count }).map((_, i) => (

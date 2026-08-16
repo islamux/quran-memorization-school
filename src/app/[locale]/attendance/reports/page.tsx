@@ -18,7 +18,6 @@ export default function AttendanceReportsPage() {
   const [students, setStudents] = useState<Student[]>([]);
   const [reports, setReports] = useState<AttendanceReport[]>([]);
   const [selectedMonth, setSelectedMonth] = useState(new Date().toISOString().slice(0, 7));
-  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     const loadStudents = async () => {
@@ -29,49 +28,46 @@ export default function AttendanceReportsPage() {
   }, []);
 
   useEffect(() => {
+    const generateReports = async () => {
+      if (students.length === 0) return;
+      
+      try {
+        const year = parseInt(selectedMonth.split('-')[0]);
+        const month = parseInt(selectedMonth.split('-')[1]);
+        
+        const startDate = new Date(year, month - 1, 1).toISOString().split('T')[0];
+        const endDate = new Date(year, month, 0).toISOString().split('T')[0];
+        
+        const reportsData: AttendanceReport[] = await Promise.all(
+          students.map(async (student) => {
+            const attendanceRecords = await attendanceDB.getByStudent(student.id, startDate, endDate);
+            
+            const presentCount = attendanceRecords.filter(r => r.status === 'present').length;
+            const absentCount = attendanceRecords.filter(r => r.status === 'absent').length;
+            const lateCount = attendanceRecords.filter(r => r.status === 'late').length;
+            
+            const totalDays = presentCount + absentCount + lateCount;
+            const attendanceRate = totalDays > 0 ? ((presentCount + lateCount) / totalDays) * 100 : 0;
+            
+            return {
+              studentId: student.id,
+              studentName: student.name,
+              presentCount,
+              absentCount,
+              lateCount,
+              attendanceRate
+            };
+          })
+        );
+        
+        setReports(reportsData);
+      } catch (error) {
+        console.error('خطأ في توليد التقارير:', error);
+      }
+    };
+
     generateReports();
   }, [selectedMonth, students]);
-
-  const generateReports = async () => {
-    if (students.length === 0) return;
-    
-    setLoading(true);
-    try {
-      const year = parseInt(selectedMonth.split('-')[0]);
-      const month = parseInt(selectedMonth.split('-')[1]);
-      
-      const startDate = new Date(year, month - 1, 1).toISOString().split('T')[0];
-      const endDate = new Date(year, month, 0).toISOString().split('T')[0];
-      
-      const reportsData: AttendanceReport[] = await Promise.all(
-        students.map(async (student) => {
-          const attendanceRecords = await attendanceDB.getByStudent(student.id, startDate, endDate);
-          
-          const presentCount = attendanceRecords.filter(r => r.status === 'present').length;
-          const absentCount = attendanceRecords.filter(r => r.status === 'absent').length;
-          const lateCount = attendanceRecords.filter(r => r.status === 'late').length;
-          
-          const totalDays = presentCount + absentCount + lateCount;
-          const attendanceRate = totalDays > 0 ? ((presentCount + lateCount) / totalDays) * 100 : 0;
-          
-          return {
-            studentId: student.id,
-            studentName: student.name,
-            presentCount,
-            absentCount,
-            lateCount,
-            attendanceRate
-          };
-        })
-      );
-      
-      setReports(reportsData);
-    } catch (error) {
-      console.error('خطأ في توليد التقارير:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getAttendanceColor = (rate: number) => {
     if (rate >= 90) return 'text-green-700';

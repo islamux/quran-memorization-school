@@ -128,7 +128,7 @@ export const colorUtils = {
   /**
    * Check if color contrast meets WCAG AA standards
    */
-  checkContrast(foreground: string, background: string): boolean {
+  checkContrast(_foreground: string, _background: string): boolean {
     // Simplified check - in production, use a library like chroma.js
     // This is a placeholder implementation
     return true;
@@ -137,7 +137,7 @@ export const colorUtils = {
   /**
    * Get contrast ratio
    */
-  getContrastRatio(foreground: string, background: string): number {
+  getContrastRatio(_foreground: string, _background: string): number {
     // Placeholder - implement proper contrast calculation
     return 4.5; // Default to AA compliant
   }

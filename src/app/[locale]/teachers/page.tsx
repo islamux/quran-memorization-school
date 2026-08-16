@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import { useData } from '@/contexts/DexieDataContext';
-import { Teacher } from '@/types';
+import { Teacher, ScheduleSlot } from '@/types';
 
 const TeachersPage: React.FC = () => {
   const t = useTranslations('teachersPage');
@@ -39,7 +39,7 @@ const TeachersPage: React.FC = () => {
 
   const TeacherCard = ({ teacher }: { teacher: Teacher }) => {
     const students = allStudents.filter(student => student.teacherId === teacher.id);
-    const schedule: any[] = []; // Temporarily empty until we implement schedule in DataContext
+    const schedule: ScheduleSlot[] = []; // Temporarily empty until we implement schedule in DataContext
 
     return (
       <Card className="hover:shadow-md transition-shadow">
@@ -120,7 +120,7 @@ const TeachersPage: React.FC = () => {
 
   const TeacherDetailModal = ({ teacher }: { teacher: Teacher }) => {
     const students = allStudents.filter(student => student.teacherId === teacher.id);
-    const schedule: any[] = []; // Temporarily empty until we implement schedule in DataContext
+    const schedule: ScheduleSlot[] = []; // Temporarily empty until we implement schedule in DataContext
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">

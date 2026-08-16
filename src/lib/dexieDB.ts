@@ -17,7 +17,7 @@ export interface SyncQueueItem {
   id?: string;
   type: 'student' | 'attendance' | 'teacher' | 'schedule';
   action: 'create' | 'update' | 'delete';
-  data: any;
+  data: Student | Teacher | ScheduleSlot | AttendanceRecord;
   timestamp: number;
   retryCount?: number;
   lastAttempt?: number;
@@ -179,7 +179,7 @@ interface CacheEntry<T> {
 }
 
 class QueryCache {
-  private cache = new Map<string, CacheEntry<any>>();
+  private cache = new Map<string, CacheEntry<unknown>>();
   private config: CacheConfig;
 
   constructor(config: CacheConfig = DEFAULT_CACHE_CONFIG) {
@@ -188,7 +188,7 @@ class QueryCache {
     setInterval(() => this.cleanup(), 60 * 1000);
   }
 
-  private generateKey(prefix: string, params: any): string {
+  private generateKey(prefix: string, params: Record<string, unknown>): string {
     return `${prefix}:${JSON.stringify(params)}`;
   }
 
@@ -205,7 +205,7 @@ class QueryCache {
 
     // Increment hit counter
     entry.hits++;
-    return entry.data;
+    return entry.data as T;
   }
 
   set<T>(key: string, data: T): void {
@@ -336,7 +336,7 @@ export const cachedDB = {
       if (cached) return cached;
     }
 
-    let collection = db.attendance.where('studentId').equals(studentId);
+    const collection = db.attendance.where('studentId').equals(studentId);
 
     if (startDate && endDate) {
       const data = await collection
@@ -710,7 +710,7 @@ interface InitState {
   error?: string;
 }
 
-let initState: InitState = {
+const initState: InitState = {
   isInitialized: false,
   isMigrating: false,
   migrationVersion: 0
@@ -756,7 +756,7 @@ export async function migrateFromLocalStorage(): Promise<void> {
           // Validate and add timestamps
           const studentsWithTimestamps = students.map(student => ({
             ...student,
-            createdAt: (student as any).createdAt || new Date().toISOString(),
+            createdAt: student.createdAt || new Date().toISOString(),
             updatedAt: new Date().toISOString()
           })) as Student[];
           await db.students.bulkAdd(studentsWithTimestamps);
@@ -782,7 +782,7 @@ export async function migrateFromLocalStorage(): Promise<void> {
           // Validate and add timestamps
           const teachersWithTimestamps = teachers.map(teacher => ({
             ...teacher,
-            createdAt: (teacher as any).createdAt || new Date().toISOString(),
+            createdAt: teacher.createdAt || new Date().toISOString(),
             updatedAt: new Date().toISOString()
           })) as Teacher[];
           await db.teachers.bulkAdd(teachersWithTimestamps);
@@ -830,7 +830,7 @@ export async function migrateFromLocalStorage(): Promise<void> {
         if (studentIds.length > 0) {
           const batchRecords: Array<{ studentId: string; status: 'present' | 'absent' | 'late'; note?: string }> = [];
           for (const studentId of studentIds) {
-            const { status, note } = attendance[studentId] as any;
+            const { status, note } = attendance[studentId] as { status: 'present' | 'absent' | 'late'; note?: string };
             if (status && ['present', 'absent', 'late'].includes(status)) {
               batchRecords.push({ studentId, status, note });
             }
@@ -896,25 +896,25 @@ export async function checkDBHealth(): Promise<{ healthy: boolean; issues: strin
     // Test basic operations
     try {
       await db.students.count();
-    } catch (error) {
+    } catch (_error) {
       issues.push('Students table not accessible');
     }
 
     try {
       await db.teachers.count();
-    } catch (error) {
+    } catch (_error) {
       issues.push('Teachers table not accessible');
     }
 
     try {
       await db.attendance.count();
-    } catch (error) {
+    } catch (_error) {
       issues.push('Attendance table not accessible');
     }
 
     try {
       await db.schedule.count();
-    } catch (error) {
+    } catch (_error) {
       issues.push('Schedule table not accessible');
     }
   } catch (error) {

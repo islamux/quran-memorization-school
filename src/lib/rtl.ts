@@ -147,7 +147,7 @@ export const form = {
   /**
    * Middle buttons in group
    */
-  buttonMiddle: (locale: Locale) => 'rounded-none',
+  buttonMiddle: (_locale: Locale) => 'rounded-none',
 
   /**
    * Get label alignment
@@ -322,7 +322,7 @@ export function useRTL(locale: Locale) {
   };
 }
 
-export default {
+const rtlUtils = {
   rtlClasses,
   getDirClass,
   flex,
@@ -338,3 +338,5 @@ export default {
   withRTL,
   useRTL
 };
+
+export default rtlUtils;

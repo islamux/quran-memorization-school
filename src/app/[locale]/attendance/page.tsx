@@ -3,10 +3,8 @@
 import { useState, useEffect } from 'react';
 import { storage } from '@/utils/dexieStorage';
 import { Student } from '@/types';
-import { useTranslations } from 'next-intl';
 
 export default function AttendancePage() {
-  const t = useTranslations();
   const [students, setStudents] = useState<Student[]>([]);
   const [attendance, setAttendance] = useState<{ [key: string]: { status: 'present' | 'absent' | 'late'; note?: string } }>({});
   const [saved, setSaved] = useState(false);
