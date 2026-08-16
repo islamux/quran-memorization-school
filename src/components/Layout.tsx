@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useRef } from 'react';
 import { Home, Users, GraduationCap, CheckCircle, Calendar, BookOpen } from 'lucide-react';
-import LanguageSwitcher from './LanguageSwitcher';
+
 import PWAInstallPrompt from './PWAInstallPrompt';
 import OfflineIndicator from './OfflineIndicator';
 import { AutoSkipLink } from './ui/SkipLink';
@@ -47,7 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   // Apply RTL direction to body
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.documentElement.dir = isRTL(locale) ? 'rtl' : 'ltr';
+      document.documentElement.dir = isRTL() ? 'rtl' : 'ltr';
       document.documentElement.lang = locale;
     }
   }, [locale]);
@@ -91,9 +91,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 ))}
               </div>
             </nav>
-            <div className="flex items-center ml-4">
-              <LanguageSwitcher />
-            </div>
+
+
           </div>
         </div>
       </header>

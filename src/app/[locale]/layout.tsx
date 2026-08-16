@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import {NextIntlClientProvider} from 'next-intl';
 import {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
-import {getDirection, Locale, locales} from '@/i18n/config';
+import {getDirection, type Locale, locales} from '@/i18n/config';
 import {getMessages} from '@/i18n/loadMessages';
 import { Cairo } from 'next/font/google';
 import '../globals.css';
@@ -81,10 +81,10 @@ export default async function RootLayout({children, params}: Props) {
     notFound();
   }
 
-  const messages = getMessages(locale as Locale);
+  const messages = getMessages();
 
   return (
-    <html lang={locale} dir={getDirection(locale as Locale)} className={cairo.variable}>
+    <html lang={locale} dir={getDirection()} className={cairo.variable}>
       <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <DataProvider>
