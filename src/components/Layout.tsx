@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useRef } from 'react';
+import { Home, Users, GraduationCap, CheckCircle, Calendar, BookOpen } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import PWAInstallPrompt from './PWAInstallPrompt';
 import OfflineIndicator from './OfflineIndicator';
@@ -22,11 +23,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const mainRef = useRef<HTMLElement>(null);
 
   const navigation = [
-    { name: t('navigation.home'), href: `/${locale}`, icon: '🏠' },
-    { name: t('navigation.students'), href: `/${locale}/students`, icon: '👥' },
-    { name: t('navigation.teachers'), href: `/${locale}/teachers`, icon: '👨‍🏫' },
-    { name: t('navigation.attendance'), href: `/${locale}/attendance`, icon: '✅' },
-    { name: t('navigation.schedule'), href: `/${locale}/schedule`, icon: '📅' },
+    { name: t('navigation.home'), href: `/${locale}`, icon: Home },
+    { name: t('navigation.students'), href: `/${locale}/students`, icon: Users },
+    { name: t('navigation.teachers'), href: `/${locale}/teachers`, icon: GraduationCap },
+    { name: t('navigation.attendance'), href: `/${locale}/attendance`, icon: CheckCircle },
+    { name: t('navigation.schedule'), href: `/${locale}/schedule`, icon: Calendar },
   ];
 
   const isActive = (href: string) => {
@@ -66,8 +67,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <h1 className="text-xl font-bold text-green-700">
-                  📖 {t('header.title')}
+                <h1 className="text-xl font-bold text-green-700 flex items-center">
+                  <BookOpen className="w-6 h-6 mr-2" />
+                  {t('header.title')}
                 </h1>
               </div>
             </div>
@@ -83,7 +85,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
                     }`}
                   >
-                    <span className="mr-2">{item.icon}</span>
+                    <item.icon className="w-5 h-5 inline mr-2" />
                     {item.name}
                   </Link>
                 ))}
@@ -113,7 +115,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
               }`}
             >
-              <span className="mr-2">{item.icon}</span>
+              <item.icon className="w-5 h-5 inline mr-2" />
               {item.name}
             </Link>
           ))}

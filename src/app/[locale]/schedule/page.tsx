@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Plus, Calendar, MapPin, Users } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { Select } from '@/components/ui/Input';
@@ -59,13 +60,13 @@ const SchedulePage: React.FC = () => {
         <div className="space-y-2">
           {slot.room && (
             <div className="flex items-center text-sm text-gray-600">
-              <span className="mr-2">📍</span>
+              <MapPin className="w-4 h-4 mr-2" />
               <span>{t(`rooms.${slot.room}`, { defaultValue: slot.room })}</span>
             </div>
           )}
           
           <div className="flex items-start text-sm text-gray-600">
-            <span className="mr-2">👥</span>
+            <Users className="w-4 h-4 mr-2 mt-0.5" />
             <div>
               <p className="font-medium">{students.length} {students.length !== 1 ? t('students') : t('student')}:</p>
               <div className="mt-1 space-y-1">
@@ -93,7 +94,7 @@ const SchedulePage: React.FC = () => {
         </div>
         <div className="mt-4 sm:mt-0">
           <Button>
-            <span className="mr-2">➕</span>
+            <Plus className="w-5 h-5 mr-2" />
             {t('addNewClass')}
           </Button>
         </div>
@@ -138,7 +139,7 @@ const SchedulePage: React.FC = () => {
             <Card key={day.day}>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <span className="mr-2">📅</span>
+                  <Calendar className="w-5 h-5 mr-2" />
                   {t(`days.${day.day}`)}
                   <span className="ml-2 text-sm font-normal text-gray-600">
                     ({day.slots.length} {day.slots.length !== 1 ? t('classes') : t('class')})
@@ -154,7 +155,7 @@ const SchedulePage: React.FC = () => {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <span className="text-4xl mb-4 block">📅</span>
+                    <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
                     <p className="text-gray-600">{t('noClassesScheduledForDay', { day: t(`days.${day.day}`) })}</p>
                   </div>
                 )}
@@ -168,7 +169,7 @@ const SchedulePage: React.FC = () => {
             <Card key={day.day}>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <span className="mr-2">📅</span>
+                  <Calendar className="w-5 h-5 mr-2" />
                   {t(`days.${day.day}`)}
                   <span className="ml-2 text-sm font-normal text-gray-600">
                     ({day.slots.length} {day.slots.length !== 1 ? t('classes') : t('class')})
@@ -184,7 +185,7 @@ const SchedulePage: React.FC = () => {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <span className="text-4xl mb-4 block">📅</span>
+                    <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
                     <p className="text-gray-600">{t('noClassesScheduled')}</p>
                   </div>
                 )}

@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { Plus, Users } from 'lucide-react';
 import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
@@ -65,7 +66,7 @@ const StudentsPage: React.FC = () => {
         <div className="mt-4 sm:mt-0">
           <Link href={`/${locale}/students/add-student`}>
             <Button>
-              <span className="mr-2">➕</span>
+              <Plus className="w-5 h-5 mr-2" />
               {t('studentsPage.addNewStudent')}
             </Button>
           </Link>
@@ -143,7 +144,7 @@ const StudentsPage: React.FC = () => {
       ) : (
         <Card>
           <CardContent className="p-12 text-center">
-            <span className="text-6xl mb-4 block">👥</span>
+            <Users className="w-16 h-16 mx-auto mb-4 text-gray-300" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">{t('studentsPage.noStudentsFound')}</h3>
             <p className="text-gray-600 mb-6">
               {searchQuery || statusFilter !== 'all' || gradeFilter !== 'all'

@@ -2,6 +2,7 @@
 
 import {useLocale} from 'next-intl';
 import {usePathname, useRouter} from 'next/navigation';
+import {Globe} from 'lucide-react';
 import {locales, localeNames} from '@/i18n/config';
 
 export default function LanguageSwitcher() {
@@ -16,7 +17,7 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="text-sm">🌐</span>
+      <Globe className="w-5 h-5 text-gray-600" />
       <select
         value={locale}
         onChange={(e) => handleChange(e.target.value)}

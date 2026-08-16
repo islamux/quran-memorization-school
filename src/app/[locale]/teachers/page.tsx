@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Plus, GraduationCap, X } from 'lucide-react';
 import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
@@ -136,7 +137,7 @@ const TeachersPage: React.FC = () => {
                 size="sm"
                 onClick={() => setSelectedTeacher(null)}
               >
-                ✕
+                <X className="w-4 h-4" />
               </Button>
             </div>
 
@@ -261,7 +262,7 @@ const TeachersPage: React.FC = () => {
         <div className="mt-4 sm:mt-0">
           <Link href={`/${locale}/teachers/add-teacher`}>
             <Button>
-              <span className="mr-2">➕</span>
+              <Plus className="w-5 h-5 mr-2" />
               {t('addNewTeacher')}
             </Button>
           </Link>
@@ -296,7 +297,7 @@ const TeachersPage: React.FC = () => {
       ) : (
         <Card>
           <CardContent className="p-12 text-center">
-            <span className="text-6xl mb-4 block">👨‍🏫</span>
+            <GraduationCap className="w-16 h-16 mx-auto mb-4 text-gray-300" />
             <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noTeachersFound')}</h3>
             <p className="text-gray-600 mb-6">
               {searchQuery

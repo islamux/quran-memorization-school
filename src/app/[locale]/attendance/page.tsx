@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { CheckCircle } from 'lucide-react';
 import { storage } from '@/utils/dexieStorage';
 import { Student } from '@/types';
 
@@ -184,7 +185,8 @@ export default function AttendancePage() {
 
         {saved && (
           <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg text-center">
-            ✅ {t('savedSuccess')}
+            <CheckCircle className="w-5 h-5 inline mr-2" />
+            {t('savedSuccess')}
           </div>
         )}
     </div>
