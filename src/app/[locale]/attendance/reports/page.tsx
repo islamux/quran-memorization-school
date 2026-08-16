@@ -146,7 +146,7 @@ export default function AttendanceReportsPage() {
         </div>
 
         <div className="mt-6 bg-emerald-50 p-4 rounded-lg">
-          <h3 className="font-bold text-emerald-900 mb-2">{t('statsSummary')}</h3>
+          <h2 className="font-bold text-emerald-900 mb-2">{t('statsSummary')}</h2>
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
               <p className="text-gray-700 font-medium">{t('avgAttendance')}</p>

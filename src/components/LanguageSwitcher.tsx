@@ -2,6 +2,7 @@
 
 import {useLocale} from 'next-intl';
 import {usePathname, useRouter} from 'next/navigation';
+import {locales, localeNames} from '@/i18n/config';
 
 export default function LanguageSwitcher() {
   const locale = useLocale();
@@ -9,10 +10,7 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
 
   const handleChange = (newLocale: string) => {
-    // Remove the current locale from the pathname
     const pathWithoutLocale = pathname.replace(`/${locale}`, '');
-
-    // Navigate to the new locale
     router.push(`/${newLocale}${pathWithoutLocale}`);
   };
 
@@ -23,10 +21,12 @@ export default function LanguageSwitcher() {
         value={locale}
         onChange={(e) => handleChange(e.target.value)}
         className="bg-white border border-gray-300 rounded-md px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-
       >
-        <option value="en">English</option>
-        <option value="ar">العربية</option>
+        {locales.map((loc) => (
+          <option key={loc} value={loc}>
+            {localeNames[loc]}
+          </option>
+        ))}
       </select>
     </div>
   );

@@ -146,7 +146,7 @@ const NewStudentPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Personal Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.personalInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.personalInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label={t('addStudentPage.fields.fullName')}
@@ -191,7 +191,7 @@ const NewStudentPage: React.FC = () => {
 
             {/* Parent Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.parentInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.parentInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label={t('addStudentPage.fields.parentName')}
@@ -215,7 +215,7 @@ const NewStudentPage: React.FC = () => {
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.academicInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('addStudentPage.academicInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select
                   label={t('addStudentPage.fields.startingSurah')}
