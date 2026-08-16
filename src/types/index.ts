@@ -18,12 +18,14 @@ export interface Student {
   isDeleted?: boolean;
   deletedAt?: string;
   deletedBy?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Teacher {
   id: string;
   name: string;
-  email: string;
+  email: string | null;
   phone: string;
   specialization: string[];
   experience: number;
@@ -33,6 +35,8 @@ export interface Teacher {
   isDeleted?: boolean;
   deletedAt?: string;
   deletedBy?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface ScheduleSlot {

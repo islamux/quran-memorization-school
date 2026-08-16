@@ -12,12 +12,6 @@ npm start            # Start production server
 npm run lint         # Run ESLint
 ```
 
-### Database Management
-```bash
-npm run db:setup     # Setup/initialize the database
-npm run db:backup    # Backup database data
-```
-
 ### Additional Scripts
 ```bash
 node scripts/generate-icons.js  # Generate PWA icons
@@ -32,8 +26,8 @@ A **Quran Memorization School Management System** built with Next.js 15, TypeScr
 - Attendance Tracking with Reports
 - Weekly Schedule Management
 - Offline-first architecture with IndexedDB
-- Arabic (RTL) and English (LTR) support
-- PWA with push notifications and background sync
+- Multilingual: Arabic (RTL), English, French, Urdu, Indonesian
+- PWA with offline caching and auto-updates
 - Auto-updates when new versions are available
 
 ## Architecture
@@ -43,7 +37,7 @@ A **Quran Memorization School Management System** built with Next.js 15, TypeScr
 - **Language**: TypeScript 5
 - **Styling**: Tailwind CSS 4
 - **Database**: Dexie.js (IndexedDB) - offline-first
-- **Internationalization**: next-intl (Arabic default, English support)
+- **Internationalization**: next-intl (Arabic default, 5 locales)
 - **PWA**: next-pwa with service worker and caching strategies
 
 ### High-Level Structure
@@ -57,12 +51,11 @@ src/
 │   │   ├── teachers/      # Teacher management pages
 │   │   ├── schedule/      # Schedule view
 │   │   └── attendance/    # Attendance tracking + reports
-│   ├── api/               # API routes (server-side)
 │   └── layout.tsx         # Root layout
 ├── lib/                   # Core business logic
 │   ├── dexieDB.ts         # Dexie database with CRUD operations
-│   ├── backgroundSync.ts  # PWA background sync
-│   └── pushNotifications.ts # Push notification service
+│   ├── accessibility.ts   # ARIA labels and roles
+│   └── rtl.ts             # RTL-aware styling helpers
 ├── types/
 │   └── index.ts           # TypeScript type definitions
 ├── i18n/                  # Internationalization
@@ -119,9 +112,6 @@ this.version(2).stores({
 **Manifest**: `/public/manifest.json`
 - Standalone display mode
 - App shortcuts for Add Student, Attendance, Schedule
-- Configured for Android TWA (Trusted Web Activity)
-
-**Push Notifications**: Configured in `/src/lib/pushNotifications.ts`
 
 ### Data Flow
 
@@ -130,31 +120,22 @@ this.version(2).stores({
 3. **Database Layer** (`/src/lib/dexieDB.ts`) - CRUD operations
 4. **IndexedDB** - Persistent offline storage
 
-**Critical**: All pages must import from `@/contexts/DexieDataContext` (not the old DataContext). See FIXES_SUMMARY.md for context-related issues that were fixed.
-
-### API Routes
-
-Currently minimal server-side API:
-- `/src/app/api/students/route.ts` - Basic CRUD for students (in-memory storage)
-
-Note: The app primarily uses client-side Dexie for data persistence. API routes exist but are not the main data layer.
+**Critical**: All pages must import from `@/contexts/DexieDataContext` (not the old DataContext).
 
 ## Important Files
 
 ### Configuration
 - `next.config.ts` - Next.js config with PWA and i18n plugins
-  - PWA runtime caching for fonts, images, and API routes
+  - PWA runtime caching for fonts, images, and static assets
   - next-intl integration with `./src/i18n/request.ts`
   - ESLint warnings ignored during build (line 56)
 - `package.json` - Dependencies and scripts
   - Core: next@15.4.2, react@19.1.0, typescript@5
-  - Database: dexie@4.0.11, better-sqlite3@12.2.0, sql.js@1.13.0
+  - Database: dexie@4.0.11, zod validation
   - UI: lucide-react@0.525.0 (icons), tailwindcss@4
   - i18n: next-intl@4.3.4
   - PWA: next-pwa@5.6.0
-- `tailwind.config.ts` - Tailwind configuration
 - `public/manifest.json` - PWA manifest
-- `twa-manifest.json` - Android TWA (Trusted Web Activity) configuration
 
 ### Utilities & Services
 - `src/utils/dexieStorage.ts` - Low-level Dexie storage operations
@@ -173,7 +154,7 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
   - Integrates with deletionService for complex deletion workflows
 - `src/types/index.ts` - TypeScript interfaces
   - Student, Teacher, ScheduleSlot, Surah, Progress interfaces
-- `src/i18n/config.ts` - Locale configuration (ar, en)
+- `src/i18n/config.ts` - Locale configuration (ar, en, fr, ur, id)
 
 ### Critical Context
 - **Context API**: Use `useData()` from `@/contexts/DexieDataContext` throughout the app
@@ -212,15 +193,14 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 
 ### PWA Development
 - Service worker auto-updates on new deployments
-- Background sync queues failed requests
-- Push notifications support included but may need backend setup
+- Offline caching via workbox (next-pwa)
 - Test PWA features: `npm run build && npm start` (PWA disabled in dev)
 
 ## Common Issues & Solutions
 
 ### React Hydration Mismatches
 **Symptom**: Console warnings about hydration differences
-**Fix**: Check FIXES_SUMMARY.md - ensure consistent component structure in loading states
+**Fix**: Ensure consistent component structure in loading states
 
 ### Context Import Errors
 **Symptom**: "useData must be used within a DataProvider"
@@ -232,16 +212,14 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 
 ### Database Migration
 **Auto-migration**: From localStorage to Dexie happens on app startup
-**Reset database**: Use `src/utils/resetData.ts` or clear IndexedDB in browser dev tools
+**Reset database**: Use `resetToDefaultData()` from `src/utils/dexieStorage.ts` or clear IndexedDB in browser dev tools
 
 ### Build Errors
-**ESLint warnings ignored during build**: Configured in next.config.ts (line 56)
+**ESLint warnings ignored during build**: Configured in next.config.ts
 **Type errors**: Will fail build - fix TypeScript issues before deploying
 
 ## Scripts Directory
 
-- `scripts/setup-db.js` - Database initialization
-- `scripts/backup-db.js` - Backup database
 - `scripts/generate-icons.js` - Generate PWA icons from SVG
 
 ## TypeScript Configuration
@@ -250,30 +228,27 @@ Note: The app primarily uses client-side Dexie for data persistence. API routes 
 - **Path mapping**: `@/*` maps to `src/*` (configured in tsconfig.json)
 - **Type coverage**: All components, hooks, and data models are fully typed
 - **Common types**: Student, Teacher, ScheduleSlot, AttendanceRecord interfaces in `src/types/index.ts`
-- **Build validation**: `tsc --noEmit` can be used to check types without building
+- **Build validation**: `npx tsc --noEmit` can be used to check types without building
 
 ## Technical Debt & Notes
 
-1. **API Routes**: Currently use in-memory storage - not production ready
+1. **Backend**: None yet - all data is client-side Dexie/IndexedDB; a real backend would be needed for multi-device sync
 2. **Mock Data**: Using local seed data - needs backend integration
-3. **Push Notifications**: Requires backend for production use
-4. **ESLint**: Configured to ignore errors during build (line 56 in next.config.ts) - not recommended for production
-5. **Context API**: Was recently refactored - see FIXES_SUMMARY.md for details
-6. **Database**: Multiple storage options (Dexie, SQLite, sql.js) - could be simplified
-7. **Migration**: Automatic localStorage→Dexie migration works but could be improved
+3. **ESLint**: Configured to ignore errors during build in next.config.ts - not recommended for production
+4. **Context API**: Uses DexieDataContext for all data access
+5. **Database**: Dexie/IndexedDB is the single storage layer
+6. **Migration**: Automatic localStorage→Dexie migration works but could be improved
 
 ## Recent Major Changes
 
-- **PWA Support**: Added service worker, manifest, background sync, push notifications
+- **PWA Support**: Added service worker and manifest
 - **Database Migration**: From localStorage to Dexie/IndexedDB
 - **Context Refactoring**: Removed old DataContext, using DexieDataContext
-- **Android TWA**: Configured for Trusted Web Activity deployment
-
-See FIXES_SUMMARY.md and NEXT-STEP.md for detailed recent changes.
+- **i18n**: Expanded to 5 locales (ar, en, fr, ur, id)
 
 ## Deployment Notes
 
-- **Vercel**: Recommended deployment platform
+- **Netlify**: Configured via `netlify.toml` (build + headers)
 - **PWA**: Requires HTTPS in production
 - **Icons**: Generate via `scripts/generate-icons.js` if modifying
 - **Build**: `npm run build` must succeed before deployment

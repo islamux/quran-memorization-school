@@ -1,86 +1,86 @@
 {
   "metadata": {
-    "title": "Al-Bayan Quran Memorization School",
-    "description": "A simple and clean management system for Quran memorization schools"
+    "title": "Sekolah Al-Bayan Hafalan Al-Qur'an",
+    "description": "Sistem manajemen yang sederhana dan bersih untuk sekolah hafalan Al-Qur'an"
   },
   "layout": {
     "header": {
-      "title": "Al-Bayan Quran Memorization School"
+      "title": "Sekolah Al-Bayan Hafalan Al-Qur'an"
     },
     "navigation": {
-      "home": "Home",
-      "students": "Students",
-      "schedule": "Schedule",
-      "teachers": "Teachers",
-      "attendance": "Attendance"
+      "home": "Beranda",
+      "students": "Siswa",
+      "schedule": "Jadwal",
+      "teachers": "Guru",
+      "attendance": "Kehadiran"
     },
     "footer": {
-      "copyright": "© 2024 Quran Memorization School. Built with ❤️ for Islamic education."
+      "copyright": "© 2024 Sekolah Hafalan Al-Qur'an. Dibangun dengan ❤️ untuk pendidikan Islam."
     }
   },
   "homepage": {
     "welcome": {
-      "title": "Welcome to Al-Bayan Quran Memorization School",
-      "subtitle": "Manage your students, teachers, and schedules with ease"
+      "title": "Selamat Datang di Sekolah Al-Bayan Hafalan Al-Qur'an",
+      "subtitle": "Kelola siswa, guru, dan jadwal dengan mudah"
     },
     "stats": {
-      "totalStudents": "Total Students",
-      "activeStudents": "Active Students",
-      "activeTeachers": "Active Teachers",
-      "graduated": "Graduated"
+      "totalStudents": "Total Siswa",
+      "activeStudents": "Siswa Aktif",
+      "activeTeachers": "Guru Aktif",
+      "graduated": "Lulus"
     },
     "sections": {
-      "recentStudents": "Recent Students",
-      "todaySchedule": "Today's Schedule",
-      "quickActions": "Quick Actions"
+      "recentStudents": "Siswa Terbaru",
+      "todaySchedule": "Jadwal Hari Ini",
+      "quickActions": "Aksi Cepat"
     },
     "studentCard": {
-      "verses": "verses",
-      "verse": "verse"
+      "verses": "ayat",
+      "verse": "ayat"
     },
     "scheduleCard": {
-      "students": "students",
-      "student": "student",
-      "noClasses": "No classes scheduled for today"
+      "students": "siswa",
+      "student": "siswa",
+      "noClasses": "Tidak ada kelas yang dijadwalkan hari ini"
     },
     "actions": {
-      "viewAllStudents": "View All Students",
-      "viewFullSchedule": "View Full Schedule",
-      "addNewStudent": "Add New Student",
-      "manageStudents": "Manage Students",
-      "viewSchedule": "View Schedule"
+      "viewAllStudents": "Lihat Semua Siswa",
+      "viewFullSchedule": "Lihat Jadwal Lengkap",
+      "addNewStudent": "Tambah Siswa Baru",
+      "manageStudents": "Kelola Siswa",
+      "viewSchedule": "Lihat Jadwal"
     }
   },
   "common": {
-    "loading": "Loading...",
+    "loading": "Memuat...",
     "error": "Error",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
     "edit": "Edit",
-    "add": "Add",
-    "search": "Search",
+    "add": "Tambah",
+    "search": "Cari",
     "filter": "Filter",
-    "actions": "Actions",
+    "actions": "Aksi",
     "status": "Status",
-    "active": "Active",
-    "inactive": "Inactive",
-    "graduated": "Graduated",
-    "statusOnline": "You are back online",
-    "statusOffline": "You are offline. Changes will be saved locally.",
+    "active": "Aktif",
+    "inactive": "Tidak Aktif",
+    "graduated": "Lulus",
+    "statusOnline": "Anda sudah online kembali",
+    "statusOffline": "Anda sedang offline. Perubahan akan disimpan secara lokal.",
     "grades": {
-      "1st Grade": "1st Grade",
-      "2nd Grade": "2nd Grade",
-      "3rd Grade": "3rd Grade",
-      "4th Grade": "4th Grade",
-      "5th Grade": "5th Grade",
-      "6th Grade": "6th Grade",
-      "7th Grade": "7th Grade",
-      "8th Grade": "8th Grade",
-      "9th Grade": "9th Grade",
-      "10th Grade": "10th Grade",
-      "11th Grade": "11th Grade",
-      "12th Grade": "12th Grade"
+      "1st Grade": "Kelas 1",
+      "2nd Grade": "Kelas 2",
+      "3rd Grade": "Kelas 3",
+      "4th Grade": "Kelas 4",
+      "5th Grade": "Kelas 5",
+      "6th Grade": "Kelas 6",
+      "7th Grade": "Kelas 7",
+      "8th Grade": "Kelas 8",
+      "9th Grade": "Kelas 9",
+      "10th Grade": "Kelas 10",
+      "11th Grade": "Kelas 11",
+      "12th Grade": "Kelas 12"
     },
     "surahs": {
       "Al-Fatiha": "Al-Fatiha",
@@ -200,14 +200,14 @@
     }
   },
   "studentsPage": {
-    "title": "Students",
-    "subtitle": "Manage and track student progress",
-    "addNewStudent": "Add New Student",
-    "searchPlaceholder": "Search students...",
-    "allStatus": "All Status",
-    "allGrades": "All Grades",
-    "showingStudents": "Showing {current} of {total} students",
-    "loadingStudents": "Loading students...",
+    "title": "Siswa",
+    "subtitle": "Kelola dan lacak kemajuan siswa",
+    "addNewStudent": "Tambah Siswa Baru",
+    "searchPlaceholder": "Cari siswa...",
+    "allStatus": "Semua Status",
+    "allGrades": "Semua Kelas",
+    "showingStudents": "Menampilkan {current} dari {total} siswa",
+    "loadingStudents": "Memuat siswa...",
     "noStudentsFound": "No students found",
     "adjustSearchCriteria": "Try adjusting your search criteria",
     "getStartedMessage": "Get started by adding your first student",
@@ -414,23 +414,23 @@
     "subjects": {
       "Hifz": "Hifz",
       "Hifz - Al-Baqarah": "Hifz - Al-Baqarah",
-      "Advanced Hifz - Al-Imran": "Advanced Hifz - Al-Imran",
-      "Tajweed": "Tajweed",
-      "Tajweed Practice": "Tajweed Practice",
-      "Tajweed & Qira'at": "Tajweed & Qira'at",
-      "Individual Hifz Session": "Individual Hifz Session",
-      "Children's Hifz Class": "Children's Hifz Class",
-      "Beginner Hifz": "Beginner Hifz",
-      "Arabic Language": "Arabic Language",
+      "Advanced Hifz - Al-Imran": "Hifz Lanjutan - Al-Imran",
+      "Tajweed": "Tajwid",
+      "Tajweed Practice": "Latihan Tajwid",
+      "Tajweed & Qira'at": "Tajwid & Qira'at",
+      "Individual Hifz Session": "Sesi Hifz Individu",
+      "Children's Hifz Class": "Kelas Hifz Anak",
+      "Beginner Hifz": "Hifz Pemula",
+      "Arabic Language": "Bahasa Arab",
       "Qira'at": "Qira'at",
-      "Islamic Studies": "Islamic Studies",
-      "Tafseer": "Tafseer"
+      "Islamic Studies": "Studi Islam",
+      "Tafseer": "Tafsir"
     },
     "rooms": {
-      "Room A": "Room A",
-      "Room B": "Room B",
-      "Room C": "Room C",
-      "Room D": "Room D"
+      "Room A": "Ruang A",
+      "Room B": "Ruang B",
+      "Room C": "Ruang C",
+      "Room D": "Ruang D"
     }
   },
   "editTeacherPage": {

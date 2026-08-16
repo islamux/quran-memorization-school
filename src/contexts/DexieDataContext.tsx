@@ -10,6 +10,7 @@ interface DataContextType {
   teachers: Teacher[];
   allStudents: Student[]; // يتضمن المحذوفين
   allTeachers: Teacher[]; // يتضمن المحذوفين
+  loading: boolean;
   addStudent: (student: Student) => Promise<void>;
   updateStudent: (id: string, updates: Partial<Student>) => Promise<void>;
   deleteStudent: (id: string, options?: DeletionOptions) => Promise<DeletionResult>;
@@ -181,6 +182,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         teachers,
         allStudents,
         allTeachers,
+        loading: isLoading,
         addStudent,
         updateStudent,
         deleteStudent,
