@@ -11,7 +11,7 @@ export function Skeleton({ className = '', animate = true }: SkeletonProps) {
   return (
     <div
       className={`
-        bg-gray-200 dark:bg-gray-700
+        bg-gray-200
         ${animate ? 'animate-pulse' : ''}
         ${className}
       `}
@@ -22,7 +22,7 @@ export function Skeleton({ className = '', animate = true }: SkeletonProps) {
 // Student card skeleton
 export function StudentCardSkeleton() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
       <div className="flex items-center justify-between mb-4">
         <Skeleton className="h-6 w-48 rounded" />
         <Skeleton className="h-6 w-20 rounded-full" />
@@ -41,7 +41,7 @@ export function StudentCardSkeleton() {
           <Skeleton className="h-4 w-28" />
         </div>
       </div>
-      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
         <Skeleton className="h-9 w-20 rounded" />
         <Skeleton className="h-9 w-20 rounded" />
         <Skeleton className="h-9 w-24 rounded" />
@@ -53,7 +53,7 @@ export function StudentCardSkeleton() {
 // Teacher card skeleton
 export function TeacherCardSkeleton() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
       <div className="flex items-center gap-4 mb-4">
         <Skeleton className="h-16 w-16 rounded-full" />
         <div className="flex-1">
@@ -72,7 +72,7 @@ export function TeacherCardSkeleton() {
           <Skeleton className="h-6 w-14 rounded-full" />
         </div>
       </div>
-      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
         <Skeleton className="h-9 w-20 rounded" />
         <Skeleton className="h-9 w-24 rounded" />
       </div>
@@ -83,8 +83,8 @@ export function TeacherCardSkeleton() {
 // Attendance table skeleton
 export function AttendanceTableSkeleton() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="p-6 border-b border-gray-200">
         <div className="flex justify-between items-center">
           <Skeleton className="h-8 w-48" />
           <Skeleton className="h-10 w-32 rounded" />
@@ -92,7 +92,7 @@ export function AttendanceTableSkeleton() {
       </div>
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-gray-50 dark:bg-gray-900">
+          <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left">
                 <Skeleton className="h-4 w-24" />
@@ -108,7 +108,7 @@ export function AttendanceTableSkeleton() {
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody className="divide-y divide-gray-200">
             {Array.from({ length: 5 }).map((_, i) => (
               <tr key={i}>
                 <td className="px-6 py-4">
@@ -140,11 +140,11 @@ export function ScheduleGridSkeleton() {
   const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <div className="p-6 border-b border-gray-200">
         <Skeleton className="h-8 w-48" />
       </div>
-      <div className="grid grid-cols-7 divide-x divide-y divide-gray-200 dark:divide-gray-700">
+      <div className="grid grid-cols-7 divide-x divide-y divide-gray-200">
         {days.map((day) => (
           <div key={day} className="min-h-[200px] p-4">
             <Skeleton className="h-6 w-20 mb-4" />
@@ -165,7 +165,7 @@ export function ListSkeleton({ count = 10 }: { count?: number; height?: number }
   return (
     <div className="space-y-3">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+        <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
           <div className="flex items-center gap-4">
             <Skeleton className={`h-12 w-12 rounded-full`} />
             <div className="flex-1 space-y-2">
@@ -207,7 +207,7 @@ export function FormSkeleton() {
 // Dashboard stats skeleton
 export function StatsCardSkeleton() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
       <div className="flex items-center justify-between mb-4">
         <Skeleton className="h-5 w-24" />
         <Skeleton className="h-8 w-8 rounded" />

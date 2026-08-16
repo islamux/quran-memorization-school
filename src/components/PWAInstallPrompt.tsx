@@ -67,12 +67,12 @@ export default function PWAInstallPrompt() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-auto z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex items-center justify-between gap-4">
+      <div className="bg-white rounded-lg shadow-lg p-4 flex items-center justify-between gap-4">
         <div className="flex-1">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">
+          <p className="text-sm font-medium text-gray-900">
             {t('installApp') || 'Install Quran School App'}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             {t('installAppDescription') || 'Install for offline access and better experience'}
           </p>
         </div>
