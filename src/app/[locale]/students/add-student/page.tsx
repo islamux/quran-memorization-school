@@ -10,6 +10,7 @@ import { getGradeOptions, getSurahOptions } from '@/utils/dataUtils';
 import { useTeacherOptions } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
 import { Student } from '@/types';
+import { showToast } from '@/components/ui/Toast';
 
 const NewStudentPage: React.FC = () => {
   const router = useRouter();
@@ -112,13 +113,13 @@ const NewStudentPage: React.FC = () => {
       console.log('Student created successfully:', newStudent);
 
       // إظهار رسالة نجاح
-      alert('تم إضافة الطالب بنجاح!');
+      showToast(t('addStudentPage.actions.addStudent') + '!', 'success');
 
       // Redirect to students list
       router.push(`/${locale}/students`);
     } catch (error) {
       console.error('Error creating student:', error);
-      alert('فشل في إضافة الطالب. الرجاء المحاولة مرة أخرى.');
+      showToast(t('editTeacherPage.errorMessage'), 'error');
     } finally {
       setIsSubmitting(false);
     }

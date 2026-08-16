@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import { showToast } from '@/components/ui/Toast';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -45,7 +46,7 @@ export default function PWAInstallPrompt() {
       // iOS installation instructions
       const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       if (isIOS) {
-        alert('To install: Tap the share button and select "Add to Home Screen"');
+        showToast('To install: Tap the share button and select "Add to Home Screen"', 'info');
       }
       return;
     }

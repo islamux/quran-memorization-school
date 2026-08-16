@@ -463,5 +463,40 @@
       "specializationRequired": "يجب إضافة تخصص واحد على الأقل",
       "experienceInvalid": "سنوات الخبرة يجب أن تكون رقماً موجباً"
     }
+  },
+  "attendancePage": {
+    "title": "تسجيل الحضور اليومي",
+    "date": "التاريخ:",
+    "studentCount": "عدد الطلاب:",
+    "viewReports": "عرض التقارير",
+    "studentName": "اسم الطالب",
+    "present": "حاضر",
+    "absent": "غائب",
+    "late": "متأخر",
+    "notes": "ملاحظات",
+    "notePlaceholder": "أضف ملاحظة...",
+    "loadingAttendance": "جاري تحميل بيانات الحضور...",
+    "save": "حفظ الحضور",
+    "savedSuccess": "تم حفظ الحضور بنجاح",
+    "noStudents": "لا يوجد طلاب",
+      "reports": {
+      "title": "تقارير الحضور",
+      "backToAttendance": "رجوع للحضور",
+      "selectMonth": "اختر الشهر:",
+      "enrolledStudents": "الطلاب المسجلين",
+      "studentName": "اسم الطالب",
+      "presentDays": "أيام الحضور",
+      "absentDays": "أيام الغياب",
+      "lateDays": "أيام التأخر",
+      "attendanceRate": "نسبة الحضور",
+      "status": "الحالة",
+      "excellent": "ممتاز",
+      "good": "جيد",
+      "needsFollowUp": "يحتاج متابعة",
+      "statsSummary": "ملخص الإحصائيات",
+      "avgAttendance": "متوسط نسبة الحضور",
+      "excellentStudents": "طلاب بحضور ممتاز",
+      "needsFollowUpStudents": "طلاب يحتاجون متابعة"
+    }
   }
 }

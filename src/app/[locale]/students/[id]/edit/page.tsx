@@ -10,6 +10,7 @@ import { getGradeOptions, getSurahOptions } from '@/utils/dataUtils';
 import { useTeacherOptions, useStudentById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
 import { Student } from '@/types';
+import { showToast } from '@/components/ui/Toast';
 
 const EditStudentPage: React.FC = () => {
   const router = useRouter();
@@ -129,13 +130,13 @@ const EditStudentPage: React.FC = () => {
       console.log('Student updated successfully:', updatedStudent);
 
       // إظهار رسالة نجاح
-      alert('تم تحديث بيانات الطالب بنجاح!');
+      showToast(t('editStudentPage.actions.updateStudent') + '!', 'success');
 
       // Redirect to student details
       router.push(`/${locale}/students/${studentId}`);
     } catch (error) {
       console.error('Error updating student:', error);
-      alert('فشل في تحديث بيانات الطالب. الرجاء المحاولة مرة أخرى.');
+      showToast(t('editTeacherPage.errorMessage'), 'error');
     } finally {
       setIsSubmitting(false);
     }

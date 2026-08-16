@@ -463,5 +463,40 @@
       "specializationRequired": "At least one specialization is required",
       "experienceInvalid": "Experience must be a positive number"
     }
+  },
+  "attendancePage": {
+    "title": "Daily Attendance",
+    "date": "Date:",
+    "studentCount": "Student Count:",
+    "viewReports": "View Reports",
+    "studentName": "Student Name",
+    "present": "Present",
+    "absent": "Absent",
+    "late": "Late",
+    "notes": "Notes",
+    "notePlaceholder": "Add a note...",
+    "loadingAttendance": "Loading attendance data...",
+    "save": "Save Attendance",
+    "savedSuccess": "Attendance saved successfully",
+    "noStudents": "No students found",
+      "reports": {
+      "title": "Attendance Reports",
+      "backToAttendance": "Back to Attendance",
+      "selectMonth": "Select Month:",
+      "enrolledStudents": "Enrolled Students",
+      "studentName": "Student Name",
+      "presentDays": "Present Days",
+      "absentDays": "Absent Days",
+      "lateDays": "Late Days",
+      "attendanceRate": "Attendance Rate",
+      "status": "Status",
+      "excellent": "Excellent",
+      "good": "Good",
+      "needsFollowUp": "Needs Follow-up",
+      "statsSummary": "Statistics Summary",
+      "avgAttendance": "Average Attendance Rate",
+      "excellentStudents": "Students with Excellent Attendance",
+      "needsFollowUpStudents": "Students Needing Follow-up"
+    }
   }
 }
