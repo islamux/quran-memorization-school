@@ -6,6 +6,8 @@ import { Plus, Calendar, MapPin, Users } from 'lucide-react';
 import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { Select } from '@/components/ui/Input';
+import PageHeader from '@/components/ui/PageHeader';
+import EmptyState from '@/components/ui/EmptyState';
 import { getWeeklySchedule, getTeacherById, getStudentById, formatTime } from '@/utils/dataUtils';
 import { ScheduleSlot } from '@/types';
 
@@ -87,18 +89,16 @@ const SchedulePage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
-          <p className="text-gray-600">{t('subtitle')}</p>
-        </div>
-        <div className="mt-4 sm:mt-0">
+      <PageHeader
+        title={t('title')}
+        subtitle={t('subtitle')}
+        action={
           <Button>
             <Plus className="w-5 h-5 mr-2" />
             {t('addNewClass')}
           </Button>
-        </div>
-      </div>
+        }
+      />
 
       {/* Filters */}
       <Card>
@@ -154,10 +154,10 @@ const SchedulePage: React.FC = () => {
                       .map(renderSlot)}
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                    <p className="text-gray-600">{t('noClassesScheduledForDay', { day: t(`days.${day.day}`) })}</p>
-                  </div>
+                  <EmptyState
+                    icon={Calendar}
+                    title={t('noClassesScheduledForDay', { day: t(`days.${day.day}`) })}
+                  />
                 )}
               </CardContent>
             </Card>
@@ -184,10 +184,10 @@ const SchedulePage: React.FC = () => {
                       .map(renderSlot)}
                   </div>
                 ) : (
-                  <div className="text-center py-8">
-                    <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                    <p className="text-gray-600">{t('noClassesScheduled')}</p>
-                  </div>
+                  <EmptyState
+                    icon={Calendar}
+                    title={t('noClassesScheduled')}
+                  />
                 )}
               </CardContent>
             </Card>

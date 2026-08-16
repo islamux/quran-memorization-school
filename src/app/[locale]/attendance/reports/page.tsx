@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import PageHeader from '@/components/ui/PageHeader';
+import Badge from '@/components/ui/Badge';
 import { storage } from '@/utils/dexieStorage';
 import { attendanceDB } from '@/lib/dexieDB';
 import { Student } from '@/types';
@@ -79,15 +81,17 @@ export default function AttendanceReportsPage() {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">{t('title')}</h1>
-          <a
-            href="../attendance"
-            className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            ← {t('backToAttendance')}
-          </a>
-        </div>
+        <PageHeader
+          title={t('title')}
+          action={
+            <a
+              href="../attendance"
+              className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+            >
+              ← {t('backToAttendance')}
+            </a>
+          }
+        />
         
         <div className="bg-white rounded-lg shadow p-4 mb-6">
           <div className="flex items-center justify-between">
@@ -130,13 +134,13 @@ export default function AttendanceReportsPage() {
                   </td>
                   <td className="p-4 text-center">
                     {report.attendanceRate >= 90 && (
-                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">{t('excellent')}</span>
+                      <Badge variant="success">{t('excellent')}</Badge>
                     )}
                     {report.attendanceRate >= 75 && report.attendanceRate < 90 && (
-                      <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">{t('good')}</span>
+                      <Badge variant="warning">{t('good')}</Badge>
                     )}
                     {report.attendanceRate < 75 && (
-                      <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">{t('needsFollowUp')}</span>
+                      <Badge variant="error">{t('needsFollowUp')}</Badge>
                     )}
                   </td>
                 </tr>

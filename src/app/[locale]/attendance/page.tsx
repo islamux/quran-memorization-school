@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { CheckCircle } from 'lucide-react';
+import PageHeader from '@/components/ui/PageHeader';
 import { storage } from '@/utils/dexieStorage';
 import { Student } from '@/types';
 
@@ -76,15 +77,17 @@ export default function AttendancePage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">{t('title')}</h1>
-          <a
-            href="./attendance/reports"
-            className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
-          >
-            {t('viewReports')}
-          </a>
-        </div>
+        <PageHeader
+          title={t('title')}
+          action={
+            <a
+              href="./attendance/reports"
+              className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700"
+            >
+              {t('viewReports')}
+            </a>
+          }
+        />
         
         <div className="bg-white rounded-lg shadow p-4 mb-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -164,7 +167,7 @@ export default function AttendancePage() {
                         placeholder={t('notePlaceholder')}
                         value={attendance[student.id]?.note || ''}
                         onChange={(e) => handleAttendance(student.id, attendance[student.id]?.status, e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-gray-700 placeholder-gray-400"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-gray-700 placeholder-gray-400"
                       />
                     </td>
                   </tr>
