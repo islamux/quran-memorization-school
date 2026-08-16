@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { CheckCircle, AlertTriangle } from 'lucide-react';
 
 export default function OfflineIndicator() {
   const [isOnline, setIsOnline] = useState(true);
@@ -45,9 +46,11 @@ export default function OfflineIndicator() {
       }`}
     >
       <div className="flex items-center">
-        <span className="text-xl mr-2">
-          {isOnline ? '✅' : '⚠️'}
-        </span>
+        {isOnline ? (
+          <CheckCircle className="w-5 h-5 mr-2" />
+        ) : (
+          <AlertTriangle className="w-5 h-5 mr-2" />
+        )}
         <span>
           {isOnline
             ? t('status.online')

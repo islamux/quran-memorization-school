@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Plus, GraduationCap, X } from 'lucide-react';
 import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
+import PageHeader from '@/components/ui/PageHeader';
+import EmptyState from '@/components/ui/EmptyState';
 import { useData } from '@/contexts/DexieDataContext';
 import { Teacher, ScheduleSlot } from '@/types';
 
@@ -136,7 +139,7 @@ const TeachersPage: React.FC = () => {
                 size="sm"
                 onClick={() => setSelectedTeacher(null)}
               >
-                ✕
+                <X className="w-4 h-4" />
               </Button>
             </div>
 
@@ -253,20 +256,18 @@ const TeachersPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
-          <p className="text-gray-600">{t('subtitle')}</p>
-        </div>
-        <div className="mt-4 sm:mt-0">
+      <PageHeader
+        title={t('title')}
+        subtitle={t('subtitle')}
+        action={
           <Link href={`/${locale}/teachers/add-teacher`}>
             <Button>
-              <span className="mr-2">➕</span>
+              <Plus className="w-5 h-5 mr-2" />
               {t('addNewTeacher')}
             </Button>
           </Link>
-        </div>
-      </div>
+        }
+      />
 
       {/* Search */}
       <Card>
@@ -294,23 +295,22 @@ const TeachersPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <Card>
-          <CardContent className="p-12 text-center">
-            <span className="text-6xl mb-4 block">👨‍🏫</span>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noTeachersFound')}</h3>
-            <p className="text-gray-600 mb-6">
-              {searchQuery
-                ? t('adjustSearchCriteria')
-                : t('getStartedMessage')
-              }
-            </p>
-            {!searchQuery && (
+        <EmptyState
+          icon={GraduationCap}
+          title={t('noTeachersFound')}
+          description={
+            searchQuery
+              ? t('adjustSearchCriteria')
+              : t('getStartedMessage')
+          }
+          action={
+            !searchQuery ? (
               <Link href={`/${locale}/teachers/add-teacher`}>
                 <Button>{t('addFirstTeacher')}</Button>
               </Link>
-            )}
-          </CardContent>
-        </Card>
+            ) : undefined
+          }
+        />
       )}
 
       {/* Teacher Detail Modal */}

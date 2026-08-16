@@ -4,9 +4,12 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { Plus, Users } from 'lucide-react';
 import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
+import PageHeader from '@/components/ui/PageHeader';
+import EmptyState from '@/components/ui/EmptyState';
 import { useData } from '@/contexts/DexieDataContext';
 import dynamic from 'next/dynamic';
 import { VirtualizedList } from '@/components/ui/VirtualizedList';
@@ -57,20 +60,18 @@ const StudentsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t('studentsPage.title')}</h1>
-          <p className="text-gray-600">{t('studentsPage.subtitle')}</p>
-        </div>
-        <div className="mt-4 sm:mt-0">
+      <PageHeader
+        title={t('studentsPage.title')}
+        subtitle={t('studentsPage.subtitle')}
+        action={
           <Link href={`/${locale}/students/add-student`}>
             <Button>
-              <span className="mr-2">➕</span>
+              <Plus className="w-5 h-5 mr-2" />
               {t('studentsPage.addNewStudent')}
             </Button>
           </Link>
-        </div>
-      </div>
+        }
+      />
 
       {/* Filters */}
       <Card>
@@ -141,23 +142,22 @@ const StudentsPage: React.FC = () => {
           </div>
         )
       ) : (
-        <Card>
-          <CardContent className="p-12 text-center">
-            <span className="text-6xl mb-4 block">👥</span>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('studentsPage.noStudentsFound')}</h3>
-            <p className="text-gray-600 mb-6">
-              {searchQuery || statusFilter !== 'all' || gradeFilter !== 'all'
-                ? t('studentsPage.adjustSearchCriteria')
-                : t('studentsPage.getStartedMessage')
-              }
-            </p>
-            {!searchQuery && statusFilter === 'all' && gradeFilter === 'all' && (
+        <EmptyState
+          icon={Users}
+          title={t('studentsPage.noStudentsFound')}
+          description={
+            searchQuery || statusFilter !== 'all' || gradeFilter !== 'all'
+              ? t('studentsPage.adjustSearchCriteria')
+              : t('studentsPage.getStartedMessage')
+          }
+          action={
+            !searchQuery && statusFilter === 'all' && gradeFilter === 'all' ? (
               <Link href={`/${locale}/students/add-student`}>
                 <Button>{t('studentsPage.addFirstStudent')}</Button>
               </Link>
-            )}
-          </CardContent>
-        </Card>
+            ) : undefined
+          }
+        />
       )}
     </div>
   );
