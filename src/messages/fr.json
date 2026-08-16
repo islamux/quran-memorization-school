@@ -463,5 +463,40 @@
       "specializationRequired": "At least one specialization is required",
       "experienceInvalid": "Experience must be a positive number"
     }
+  },
+  "attendancePage": {
+    "title": "Présence Quotidienne",
+    "date": "Date :",
+    "studentCount": "Nombre d'étudiants :",
+    "viewReports": "Voir les Rapports",
+    "studentName": "Nom de l'Étudiant",
+    "present": "Présent",
+    "absent": "Absent",
+    "late": "En retard",
+    "notes": "Notes",
+    "notePlaceholder": "Ajouter une note...",
+    "loadingAttendance": "Chargement des données de présence...",
+    "save": "Enregistrer la Présence",
+    "savedSuccess": "Présence enregistrée avec succès",
+    "noStudents": "Aucun étudiant trouvé",
+      "reports": {
+      "title": "Rapports de Présence",
+      "backToAttendance": "Retour à la Présence",
+      "selectMonth": "Sélectionner le mois :",
+      "enrolledStudents": "Étudiants inscrits",
+      "studentName": "Nom de l'Étudiant",
+      "presentDays": "Jours de Présence",
+      "absentDays": "Jours d'Absence",
+      "lateDays": "Jours de Retard",
+      "attendanceRate": "Taux de Présence",
+      "status": "Statut",
+      "excellent": "Excellent",
+      "good": "Bien",
+      "needsFollowUp": "Nécessite un Suivi",
+      "statsSummary": "Résumé des Statistiques",
+      "avgAttendance": "Taux de Présence Moyen",
+      "excellentStudents": "Étudiants avec une Présence Excellente",
+      "needsFollowUpStudents": "Étudiants Nécessitant un Suivi"
+    }
   }
 }

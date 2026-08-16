@@ -4,19 +4,22 @@ import {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
 import {getDirection, Locale, locales} from '@/i18n/config';
 import {getMessages} from '@/i18n/loadMessages';
+import { Cairo } from 'next/font/google';
 import '../globals.css';
 import Layout from '@/components/Layout';
 import { DataProvider } from '@/contexts/DexieDataContext';
+
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '600', '700'],
+  variable: '--font-cairo',
+  display: 'swap',
+});
 
 interface Props {
   children: ReactNode;
   params: Promise<{locale: string}>;
 }
-
-// Using system fonts to avoid network issues during build
-// Google Fonts can be re-enabled after successful deployment
-const inter = { className: 'font-sans' };
-const cairo = { className: 'font-serif' };
 
 export const metadata: Metadata = {
   title: 'Quran Memorization School',
@@ -64,7 +67,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
   themeColor: '#059669',
 };
 
@@ -74,17 +76,16 @@ export async function generateStaticParams() {
 
 export default async function RootLayout({children, params}: Props) {
   const { locale } = await params;
-  
-  // Validate that the incoming `locale` parameter is valid
+
   if (!locales.includes(locale as Locale)) {
     notFound();
   }
-  
+
   const messages = getMessages(locale as Locale);
 
   return (
-    <html lang={locale} dir={getDirection(locale as Locale)}>
-      <body className={`${locale === 'ar' ? cairo.className : inter.className}`}>
+    <html lang={locale} dir={getDirection(locale as Locale)} className={cairo.variable}>
+      <body className={cairo.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <DataProvider>
             <Layout>
@@ -96,4 +97,3 @@ export default async function RootLayout({children, params}: Props) {
     </html>
   );
 }
-

@@ -10,6 +10,7 @@ import { getGradeOptions, getSurahOptions } from '@/utils/dataUtils';
 import { useTeacherOptions, useStudentById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
 import { Student } from '@/types';
+import { showToast } from '@/components/ui/Toast';
 
 const EditStudentPage: React.FC = () => {
   const router = useRouter();
@@ -129,13 +130,13 @@ const EditStudentPage: React.FC = () => {
       console.log('Student updated successfully:', updatedStudent);
 
       // إظهار رسالة نجاح
-      alert('تم تحديث بيانات الطالب بنجاح!');
+      showToast(t('editStudentPage.actions.updateStudent') + '!', 'success');
 
       // Redirect to student details
       router.push(`/${locale}/students/${studentId}`);
     } catch (error) {
       console.error('Error updating student:', error);
-      alert('فشل في تحديث بيانات الطالب. الرجاء المحاولة مرة أخرى.');
+      showToast(t('editTeacherPage.errorMessage'), 'error');
     } finally {
       setIsSubmitting(false);
     }
@@ -180,7 +181,7 @@ const EditStudentPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Personal Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.personalInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.personalInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label={t('editStudentPage.fields.fullName')}
@@ -225,7 +226,7 @@ const EditStudentPage: React.FC = () => {
 
             {/* Parent Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.parentInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.parentInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label={t('editStudentPage.fields.parentName')}
@@ -249,7 +250,7 @@ const EditStudentPage: React.FC = () => {
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.academicInformation')}</h3>
+              <h2 className="text-lg font-medium text-gray-900 mb-4">{t('editStudentPage.academicInformation')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Select
                   label={t('editStudentPage.fields.currentSurah')}

@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { Users, CheckCircle, GraduationCap, Calendar, Plus } from 'lucide-react';
 import Card, { CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { getStudentStats, getActiveStudents } from '@/lib/students';
 import { getActiveTeachers } from '@/lib/teachers';
 import { getWeeklySchedule } from '@/lib/schedule';
-import { Student, Teacher } from '@/types';
+import { Student, Teacher, ScheduleSlot } from '@/types';
 
 const HomePage: React.FC = () => {
   const t = useTranslations('homepage');
@@ -20,11 +21,8 @@ const HomePage: React.FC = () => {
   const [studentStats, setStudentStats] = useState({ total: 0, active: 0, inactive: 0, graduated: 0 });
   const [activeTeachers, setActiveTeachers] = useState<Teacher[]>([]);
   const [recentStudents, setRecentStudents] = useState<Student[]>([]);
-  const [todaySlots, setTodaySlots] = useState<any[]>([]);
+  const [todaySlots, setTodaySlots] = useState<ScheduleSlot[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Use state to handle the current day to avoid hydration mismatch
-  const [currentDay, setCurrentDay] = useState<string>('sunday');
   
   // Load data on component mount
   useEffect(() => {
@@ -58,11 +56,6 @@ const HomePage: React.FC = () => {
     
     loadData();
   }, []);
-  
-  useEffect(() => {
-    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    setCurrentDay(days[new Date().getDay()]);
-  }, []);
 
 
   if (loading) {
@@ -94,7 +87,7 @@ const HomePage: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
-                <span className="text-2xl">👥</span>
+                <Users className="w-6 h-6 text-blue-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">{t('stats.totalStudents')}</p>
@@ -108,7 +101,7 @@ const HomePage: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
-                <span className="text-2xl">✅</span>
+                <CheckCircle className="w-6 h-6 text-green-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">{t('stats.activeStudents')}</p>
@@ -122,7 +115,7 @@ const HomePage: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
-                <span className="text-2xl">👨‍🏫</span>
+                <GraduationCap className="w-6 h-6 text-purple-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">{t('stats.activeTeachers')}</p>
@@ -136,7 +129,7 @@ const HomePage: React.FC = () => {
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-yellow-100 rounded-lg">
-                <span className="text-2xl">🎓</span>
+                <GraduationCap className="w-6 h-6 text-yellow-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">{t('stats.graduated')}</p>
@@ -206,7 +199,7 @@ const HomePage: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-8">
-                <span className="text-4xl mb-4 block">📅</span>
+                <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
                 <p className="text-gray-600">{t('scheduleCard.noClasses')}</p>
               </div>
             )}
@@ -230,19 +223,19 @@ const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link href={`/${locale}/students/add-student`}>
               <Button className="w-full h-16 text-lg">
-                <span className="mr-2">➕</span>
+                <Plus className="w-6 h-6 mr-2" />
                 {t('actions.addNewStudent')}
               </Button>
             </Link>
             <Link href={`/${locale}/students`}>
               <Button variant="outline" className="w-full h-16 text-lg">
-                <span className="mr-2">👥</span>
+                <Users className="w-6 h-6 mr-2" />
                 {t('actions.manageStudents')}
               </Button>
             </Link>
             <Link href={`/${locale}/schedule`}>
               <Button variant="outline" className="w-full h-16 text-lg">
-                <span className="mr-2">📅</span>
+                <Calendar className="w-6 h-6 mr-2" />
                 {t('actions.viewSchedule')}
               </Button>
             </Link>

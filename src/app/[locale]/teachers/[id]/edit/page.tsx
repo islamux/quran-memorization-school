@@ -10,6 +10,7 @@ import Input from '@/components/ui/Input';
 import { useTeacherById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
 import { ArrowLeft } from 'lucide-react';
+import { showToast } from '@/components/ui/Toast';
 
 const EditTeacherPage: React.FC = () => {
   const router = useRouter();
@@ -81,11 +82,11 @@ const EditTeacherPage: React.FC = () => {
 
     try {
       updateTeacher(teacher.id, formData);
-      alert(t('editTeacherPage.successMessage'));
+      showToast(t('editTeacherPage.successMessage'), 'success');
       router.push(`/${locale}/teachers`);
     } catch (error) {
       console.error('Error updating teacher:', error);
-      alert(t('editTeacherPage.errorMessage'));
+      showToast(t('editTeacherPage.errorMessage'), 'error');
     }
   };
 

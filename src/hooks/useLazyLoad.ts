@@ -72,7 +72,7 @@ export function usePrefetch() {
     // Prefetch after 200ms of hover
     prefetchTimeout.current = setTimeout(() => {
       if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(() => {
+        (window as unknown as { requestIdleCallback: (callback: () => void) => void }).requestIdleCallback(() => {
           const link = document.createElement('link');
           link.rel = 'prefetch';
           link.href = href;

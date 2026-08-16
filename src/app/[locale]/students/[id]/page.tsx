@@ -9,7 +9,9 @@ import Button from '@/components/ui/Button';
 import { formatDate } from '@/utils/dataUtils';
 import { useTeacherById, useStudentById } from '@/utils/clientDataUtils';
 import { useData } from '@/contexts/DexieDataContext';
-import { ArrowLeft, Edit, Trash2, User, Phone, Mail, Calendar, Book, GraduationCap, AlertTriangle, XCircle, Info } from 'lucide-react';
+import { ArrowLeft, Edit, Trash2, User, Phone, Mail, Book, GraduationCap, AlertTriangle, XCircle, Info } from 'lucide-react';
+import { DeletionCheck } from '@/services/deletionService';
+import { showToast } from '@/components/ui/Toast';
 
 const StudentDetailPage: React.FC = () => {
   const router = useRouter();
@@ -21,7 +23,7 @@ const StudentDetailPage: React.FC = () => {
   const student = useStudentById(studentId);
   const teacher = useTeacherById(student?.teacherId || '');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [deleteCheck, setDeleteCheck] = useState<any>(null);
+  const [deleteCheck, setDeleteCheck] = useState<DeletionCheck | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDeleteClick = async () => {
@@ -44,15 +46,15 @@ const StudentDetailPage: React.FC = () => {
         });
         
         if (result.success) {
-          alert(result.message);
+          showToast(result.message, 'success');
           router.push(`/${locale}/students`);
         } else {
-          alert(result.message);
+          showToast(result.message, 'error');
           setShowDeleteConfirm(false);
         }
       } catch (error) {
         console.error('Error deleting student:', error);
-        alert('فشل في حذف الطالب. الرجاء المحاولة مرة أخرى.');
+        showToast(t('editTeacherPage.errorMessage'), 'error');
       } finally {
         setIsDeleting(false);
       }

@@ -111,10 +111,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
       }
 
       return result;
-    } catch (error: any) {
+    } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف الطالب: ${error.message}`
+        message: `خطأ في حذف الطالب: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`
       };
     }
   };
@@ -167,10 +167,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
       }
 
       return result;
-    } catch (error: any) {
+    } catch (error) {
       return {
         success: false,
-        message: `خطأ في حذف المعلم: ${error.message}`
+        message: `خطأ في حذف المعلم: ${error instanceof Error ? error.message : 'خطأ غير معروف'}`
       };
     }
   };
