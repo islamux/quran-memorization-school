@@ -4,15 +4,15 @@ import {ReactNode} from 'react';
 import {notFound} from 'next/navigation';
 import {getDirection, type Locale, locales} from '@/i18n/config';
 import {getMessages} from '@/i18n/loadMessages';
-import { Cairo } from 'next/font/google';
+import { Noto_Naskh_Arabic } from 'next/font/google';
 import '../globals.css';
 import Layout from '@/components/Layout';
 import { DataProvider } from '@/contexts/DexieDataContext';
 
-const cairo = Cairo({
+const notoNaskh = Noto_Naskh_Arabic({
   subsets: ['arabic', 'latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-cairo',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-noto-naskh',
   display: 'swap',
 });
 
@@ -84,8 +84,8 @@ export default async function RootLayout({children, params}: Props) {
   const messages = getMessages();
 
   return (
-    <html lang={locale} dir={getDirection()} className={cairo.variable}>
-      <body className={cairo.className}>
+    <html lang={locale} dir={getDirection()} className={notoNaskh.variable}>
+      <body className={notoNaskh.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <DataProvider>
             <Layout>
