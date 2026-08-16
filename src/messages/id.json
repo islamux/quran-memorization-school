@@ -463,5 +463,40 @@
       "specializationRequired": "At least one specialization is required",
       "experienceInvalid": "Experience must be a positive number"
     }
+  },
+  "attendancePage": {
+    "title": "Kehadiran Harian",
+    "date": "Tanggal:",
+    "studentCount": "Jumlah Siswa:",
+    "viewReports": "Lihat Laporan",
+    "studentName": "Nama Siswa",
+    "present": "Hadir",
+    "absent": "Tidak Hadir",
+    "late": "Terlambat",
+    "notes": "Catatan",
+    "notePlaceholder": "Tambah catatan...",
+    "loadingAttendance": "Memuat data kehadiran...",
+    "save": "Simpan Kehadiran",
+    "savedSuccess": "Kehadiran berhasil disimpan",
+    "noStudents": "Tidak ada siswa ditemukan",
+      "reports": {
+      "title": "Laporan Kehadiran",
+      "backToAttendance": "Kembali ke Kehadiran",
+      "selectMonth": "Pilih Bulan:",
+      "enrolledStudents": "Siswa Terdaftar",
+      "studentName": "Nama Siswa",
+      "presentDays": "Hari Hadir",
+      "absentDays": "Hari Tidak Hadir",
+      "lateDays": "Hari Terlambat",
+      "attendanceRate": "Tingkat Kehadiran",
+      "status": "Status",
+      "excellent": "Sangat Baik",
+      "good": "Baik",
+      "needsFollowUp": "Perlu Tindak Lanjut",
+      "statsSummary": "Ringkasan Statistik",
+      "avgAttendance": "Rata-rata Tingkat Kehadiran",
+      "excellentStudents": "Siswa dengan Kehadiran Sangat Baik",
+      "needsFollowUpStudents": "Siswa yang Perlu Tindak Lanjut"
+    }
   }
 }

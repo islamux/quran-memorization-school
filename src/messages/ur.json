@@ -463,5 +463,40 @@
       "specializationRequired": "At least one specialization is required",
       "experienceInvalid": "Experience must be a positive number"
     }
+  },
+  "attendancePage": {
+    "title": "روزانہ حاضری",
+    "date": "تاریخ:",
+    "studentCount": "طلبا کی تعداد:",
+    "viewReports": "رپورٹیں دیکھیں",
+    "studentName": "طالبعلم کا نام",
+    "present": "حاضر",
+    "absent": "غائب",
+    "late": "دیر سے آنے والا",
+    "notes": "نوٹس",
+    "notePlaceholder": "نوٹ شامل کریں...",
+    "loadingAttendance": "حاضری کا ڈیٹا لوڈ ہو رہا ہے...",
+    "save": "حاضری محفوظ کریں",
+    "savedSuccess": "حاضری کامیابی سے محفوظ ہو گئی",
+    "noStudents": "کوئی طالبعلم نہیں ملا",
+      "reports": {
+      "title": "حاضری کی رپورٹیں",
+      "backToAttendance": "حاضری پر واپس",
+      "selectMonth": "مہینہ منتخب کریں:",
+      "enrolledStudents": "регистри طلبا",
+      "studentName": "طالبعلم کا نام",
+      "presentDays": "حاضری کے دن",
+      "absentDays": "غیر حاضری کے دن",
+      "lateDays": "دیر کے دن",
+      "attendanceRate": "حاضری کا فیصد",
+      "status": "حالت",
+      "excellent": "بہترین",
+      "good": "اچھا",
+      "needsFollowUp": "پیروی درکار ہے",
+      "statsSummary": "اعداد و شمار کا خلاصہ",
+      "avgAttendance": "اوسط حاضری کا فیصد",
+      "excellentStudents": "بہترین حاضری والے طلبا",
+      "needsFollowUpStudents": "پیروی والے طلبا"
+    }
   }
 }

@@ -245,7 +245,7 @@ export function VirtualizedGrid<T>({
         <div className="p-4">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="bg-gray-100 dark:bg-gray-800 rounded-lg" style={{ height: itemHeight }} />
+              <div key={i} className="bg-gray-100 rounded-lg" style={{ height: itemHeight }} />
             ))}
           </div>
         </div>

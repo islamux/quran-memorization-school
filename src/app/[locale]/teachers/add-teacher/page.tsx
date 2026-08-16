@@ -11,6 +11,7 @@ import { useData } from '@/contexts/DexieDataContext';
 import { ArrowLeft } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { Teacher } from '@/types';
+import { showToast } from '@/components/ui/Toast';
 
 const AddTeacherPage: React.FC = () => {
   const router = useRouter();
@@ -86,12 +87,12 @@ const AddTeacherPage: React.FC = () => {
       
       // Wait a bit to ensure localStorage is updated
       setTimeout(() => {
-        alert(t('editTeacherPage.successMessage'));
+        showToast(t('editTeacherPage.successMessage'), 'success');
         router.push(`/${locale}/teachers`);
       }, 100);
     } catch (error) {
       console.error('Error adding teacher:', error);
-      alert(t('editTeacherPage.errorMessage'));
+      showToast(t('editTeacherPage.errorMessage'), 'error');
     } finally {
       setIsSubmitting(false);
     }

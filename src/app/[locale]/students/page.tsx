@@ -4,12 +4,10 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useInViewport } from '@/hooks/useLazyLoad';
-import Card, { CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import Card, { CardContent } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Input, { Select } from '@/components/ui/Input';
 import { useData } from '@/contexts/DexieDataContext';
-import { Student } from '@/types';
 import dynamic from 'next/dynamic';
 import { VirtualizedList } from '@/components/ui/VirtualizedList';
 import { StudentCardSkeleton } from '@/components/ui/LoadingSkeleton';
@@ -53,15 +51,6 @@ const StudentsPage: React.FC = () => {
 
     return students;
   }, [searchQuery, statusFilter, gradeFilter, allStudents]);
-
-  const getStatusBadge = (status: string) => {
-    const colors = {
-      active: 'bg-green-100 text-green-800',
-      inactive: 'bg-gray-100 text-gray-800',
-      graduated: 'bg-blue-100 text-blue-800',
-    };
-    return colors[status as keyof typeof colors] || colors.active;
-  };
 
   const uniqueGrades = Array.from(new Set(allStudents.map(s => s.grade))).sort();
 

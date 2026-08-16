@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button';
 import { getStudentStats, getActiveStudents } from '@/lib/students';
 import { getActiveTeachers } from '@/lib/teachers';
 import { getWeeklySchedule } from '@/lib/schedule';
-import { Student, Teacher } from '@/types';
+import { Student, Teacher, ScheduleSlot } from '@/types';
 
 const HomePage: React.FC = () => {
   const t = useTranslations('homepage');
@@ -20,11 +20,8 @@ const HomePage: React.FC = () => {
   const [studentStats, setStudentStats] = useState({ total: 0, active: 0, inactive: 0, graduated: 0 });
   const [activeTeachers, setActiveTeachers] = useState<Teacher[]>([]);
   const [recentStudents, setRecentStudents] = useState<Student[]>([]);
-  const [todaySlots, setTodaySlots] = useState<any[]>([]);
+  const [todaySlots, setTodaySlots] = useState<ScheduleSlot[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  // Use state to handle the current day to avoid hydration mismatch
-  const [currentDay, setCurrentDay] = useState<string>('sunday');
   
   // Load data on component mount
   useEffect(() => {
@@ -57,11 +54,6 @@ const HomePage: React.FC = () => {
     };
     
     loadData();
-  }, []);
-  
-  useEffect(() => {
-    const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    setCurrentDay(days[new Date().getDay()]);
   }, []);
 
 

@@ -10,7 +10,7 @@ export interface DeletionOptions {
 export interface DeletionResult {
   success: boolean;
   message: string;
-  archivedData?: any;
+  archivedData?: { student?: Student; teacher?: Teacher; archivedAt: string; relatedData: Record<string, unknown> };
   affectedRecords?: string[];
 }
 
@@ -21,6 +21,7 @@ export interface DeletionCheck {
   relatedData: {
     type: string;
     count: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     items: any[];
   }[];
 }
@@ -148,7 +149,7 @@ class DeletionService {
         success: true,
         message: 'تم حذف الطالب بنجاح',
         archivedData,
-        affectedRecords: check.relatedData.flatMap(d => d.items.map(i => i.id))
+        affectedRecords: check.relatedData.flatMap(d => d.items.map((i: { id?: string }) => i.id ?? ''))
       };
     } catch (error) {
       return {
@@ -161,7 +162,7 @@ class DeletionService {
   // حذف المعلم مع الخيارات
   async deleteTeacher(
     teacher: Teacher,
-    options: DeletionOptions = { softDelete: true }
+    _options: DeletionOptions = { softDelete: true }
   ): Promise<DeletionResult> {
     try {
       const check = await this.checkTeacherDeletion(teacher);
@@ -216,22 +217,22 @@ class DeletionService {
   }
 
   // دوال مساعدة (يجب تنفيذها حسب نظام قاعدة البيانات)
-  private async getActiveClassesForStudent(studentId: string): Promise<any[]> {
+  private async getActiveClassesForStudent(_studentId: string): Promise<unknown[]> {
     // محاكاة - يجب استبدالها بقاعدة بيانات حقيقية
     return [];
   }
 
-  private async getPendingPayments(studentId: string): Promise<any[]> {
+  private async getPendingPayments(_studentId: string): Promise<unknown[]> {
     // محاكاة
     return [];
   }
 
-  private async getRecentAssessments(studentId: string): Promise<any[]> {
+  private async getRecentAssessments(_studentId: string): Promise<unknown[]> {
     // محاكاة
     return [];
   }
 
-  private async archiveStudentData(student: Student): Promise<any> {
+  private async archiveStudentData(student: Student): Promise<{ student: Student; archivedAt: string; relatedData: Record<string, unknown> }> {
     // حفظ نسخة من البيانات في مكان آمن
     return {
       student,
@@ -240,15 +241,16 @@ class DeletionService {
     };
   }
 
-  private async notifyDeletion(type: string, entity: any): Promise<void> {
+  private async notifyDeletion(type: string, entity: Student | Teacher): Promise<void> {
     // إرسال إشعارات للمستخدمين المرتبطين
     console.log(`Notifying deletion of ${type}: ${entity.name}`);
   }
 
-  private async getDeletedStudent(studentId: string): Promise<Student | null> {
+  private async getDeletedStudent(_studentId: string): Promise<Student | null> {
     // محاكاة
     return null;
   }
 }
 
-export default new DeletionService();
+const deletionService = new DeletionService();
+export default deletionService;

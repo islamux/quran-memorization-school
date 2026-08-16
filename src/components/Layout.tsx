@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useRef } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -10,7 +9,7 @@ import PWAInstallPrompt from './PWAInstallPrompt';
 import OfflineIndicator from './OfflineIndicator';
 import { AutoSkipLink } from './ui/SkipLink';
 import { isRTL, type Locale } from '@/i18n/config';
-import { ARIA_LABELS, ARIA_ROLES, focusUtils, generateId } from '@/lib/accessibility';
+import { ARIA_LABELS, ARIA_ROLES } from '@/lib/accessibility';
 
 interface LayoutProps {
   children: React.ReactNode;

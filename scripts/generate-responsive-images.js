@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-require-imports */
 
 /**
  * Script to generate responsive images
@@ -31,7 +32,6 @@ if (!fs.existsSync(OUTPUT_DIR)) {
  */
 function generateImages(imagePath, imageName) {
   const baseName = path.parse(imageName).name;
-  const ext = path.parse(imageName).ext;
 
   console.log(`🖼️  Processing: ${imageName}`);
 
@@ -90,7 +90,7 @@ function main() {
   // Check if Sharp is installed
   try {
     execSync('npx sharp-cli --version', { stdio: 'ignore' });
-  } catch (error) {
+  } catch (_error) {
     console.log('📦 Installing Sharp CLI...');
     execSync('npm install sharp-cli --save-dev', { stdio: 'inherit' });
   }
